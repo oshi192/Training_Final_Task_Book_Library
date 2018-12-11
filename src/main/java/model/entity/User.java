@@ -7,16 +7,16 @@ public class User {
     private String password;
     private String name;
     private String surname;
-    private String role;
+    private Role role;
 
     public enum Role {
-        USER, ADMIN, UNKNOWN
+        USER, ADMIN, GUEST
     }
 
     public User() {
     }
 
-    public User(int id, String email, String phone_number, String password, String name, String surname, String role) {
+    public User(int id, String email, String phone_number, String password, String name, String surname, Role role) {
         this.id = id;
         this.email = email;
         this.phone_number = phone_number;
@@ -74,11 +74,11 @@ public class User {
         this.surname = surname;
     }
 
-    public String getRole() {
+    public Role getRole() {
         return role;
     }
 
-    public void setRole(String role) {
+    public void setRole(Role role) {
         this.role = role;
     }
 

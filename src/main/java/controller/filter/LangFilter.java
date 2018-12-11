@@ -22,6 +22,7 @@ public class LangFilter implements Filter {
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         System.out.println("------- starting Lang filter -------");
+        servletResponse.setContentType("text/html");
         servletRequest.setCharacterEncoding(ENCODING);
         servletResponse.setCharacterEncoding(ENCODING);
         HttpServletRequest req = (HttpServletRequest) servletRequest;
@@ -30,14 +31,14 @@ public class LangFilter implements Filter {
         String lang = servletRequest.getParameter(LANG_PARAM);
 
         if (Objects.isNull(locale)) {
-            System.out.println("locale is null");
+            System.out.println("\tlocale is null");
             locale = req.getLocale();
         }
 
         if (StringUtils.isNoneBlank(lang)) {
-            System.out.println("lang is none blank");
+            System.out.println("\tlang is none blank");
             if (!lang.equals(locale.getLanguage())) {
-                System.out.println("seting new locale");
+                System.out.println("\tseting new locale");
                 locale = new Locale(lang);
             }
         }

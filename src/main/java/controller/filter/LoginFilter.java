@@ -25,7 +25,7 @@ public class LoginFilter implements Filter {
 
         boolean loggedIn = session != null && session.getAttribute("user") != null;
         boolean loginRequest = request.getRequestURI().equals(loginURI);
-        System.out.println("loggedIn "+loggedIn+" loginRequest "+"  session != null "+( session != null));
+        System.out.println("\tloggedIn "+loggedIn+" loginRequest "+"  session != null "+( session != null));
         System.out.println("------- ending login filter -------");
 
         if (loggedIn || loginRequest) {

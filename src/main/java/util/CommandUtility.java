@@ -20,7 +20,7 @@ public class CommandUtility {
         session.setAttribute("role", role);
     }
 
-    public static String findUserAndGetRole(String email,String pass){
+    public static Role findUserAndGetRole(String email,String pass){
         try {
             JDBCUserDao userDao = new JDBCUserDao(ConnectionPoolHolder.getDataSource().getConnection());
             User user = userDao.findByEmail(email).get();
@@ -29,7 +29,7 @@ public class CommandUtility {
             //todo logger and my exception
             e.printStackTrace();
         }
-        return "none";
+        return Role.GUEST ;
     }
 
 }

@@ -13,7 +13,6 @@ import java.util.Objects;
 public class AccessMapper {
     private static HashMap<String, List<Role>> rights;
     private static AccessMapper instance;
-    private static final String PARAM_NAME_ACTION = "action";
 
     private AccessMapper() {
         rights = setRights();
@@ -24,13 +23,13 @@ public class AccessMapper {
 
         rights = new HashMap<>();
         // Authentification & user management operations//
-        rights.put("login", Arrays.asList(Role.UNKNOWN));
+        rights.put("login", Arrays.asList(Role.GUEST));
         rights.put("logout", Arrays.asList(Role.USER, Role.ADMIN));
-        rights.put("register", Arrays.asList(Role.UNKNOWN));
+        rights.put("register", Arrays.asList(Role.GUEST));
         // Navigation
-        rights.put("homepage", Arrays.asList(Role.UNKNOWN, Role.USER, Role.ADMIN));
-        rights.put("book-list", Arrays.asList(Role.UNKNOWN, Role.USER, Role.ADMIN));
-        rights.put("errorpage", Arrays.asList(Role.UNKNOWN, Role.USER, Role.ADMIN));
+        rights.put("", Arrays.asList(Role.GUEST, Role.USER, Role.ADMIN));
+        rights.put("book-list", Arrays.asList(Role.GUEST, Role.USER, Role.ADMIN));
+        rights.put("errorpage", Arrays.asList(Role.GUEST, Role.USER, Role.ADMIN));
         rights.put("book-list-admin", Arrays.asList(Role.ADMIN));
         rights.put("taken-books-admin", Arrays.asList(Role.ADMIN));
         return rights;
@@ -46,7 +45,8 @@ public class AccessMapper {
 
     public boolean checkRights(HttpServletRequest request, Role role) {
         String page = request.getRequestURI();
-        page = page.replaceAll(".*/app/", "");
+        page = page.replaceAll(".*/library/", "");
+        System.out.println(">>>>page:["+page+"]");
         if (Objects.isNull(page)) {
             return true;
         }
