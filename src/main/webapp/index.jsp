@@ -11,8 +11,8 @@
 </head>
 
 <body class="w3-light-grey">
-<div class="w3-container w3-blue-grey w3-opacity w3-left-align">
-    <h1>Some Books</h1>
+<div class="w3-container w3-blue-grey w3-opacity w3-center-align">
+<jsp:include page="jsp/header.jsp"/>
 </div>
 
 <div class="w3-container w3-center">

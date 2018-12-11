@@ -68,7 +68,7 @@
                 <version>2.2</version>
                 <configuration>
                     <port>8888</port>
-                    <path>/app</path>
+                    <path>/library</path>
                 </configuration>
             </plugin>
             <plugin>

@@ -40,7 +40,7 @@ public class AddServlet extends HttpServlet {
             throws ServletException, IOException {
         System.out.println("processRequest");
         String path = request.getRequestURI();
-        path = path.replaceAll(".*/app/", "");
+        path = path.replaceAll(".*/library/", "");
         Command command = CommandMannager.getCommands().getOrDefault(path, (rq,rs) -> "/index.jsp");
         System.out.println(command.getClass().getName());
         String page = command.execute(request,response);
