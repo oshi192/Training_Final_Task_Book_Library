@@ -38,8 +38,6 @@
                 <td><c:out value="${BookAndAuthors.bookName}"/></td>
                 <td><c:out value="${BookAndAuthors.authors}"/></td>
                 <td><c:out value="${BookAndAuthors.bookSection}"/></td>
-
-
             </tr>
         </c:forEach>
     </table>

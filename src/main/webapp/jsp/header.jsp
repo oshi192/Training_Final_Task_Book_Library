@@ -38,8 +38,8 @@
 
                 <c:otherwise>
                     ${msg:getMessage("logged")}
-                    <a href="library?action=personal-cabinet">
-                            ${user.login}
+                    <a href="${pageContext.request.contextPath}/cabinet">
+                            ${user.email}
                     </a>
 
                     <a href="${pageContext.request.contextPath}/logout"> ${msg:getMessage("logout")}</a>

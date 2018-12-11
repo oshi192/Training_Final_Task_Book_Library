@@ -28,6 +28,7 @@ public class AccessMapper {
         rights.put("register", Arrays.asList(Role.GUEST));
         // Navigation
         rights.put("", Arrays.asList(Role.GUEST, Role.USER, Role.ADMIN));
+        rights.put("submit-login", Arrays.asList(Role.GUEST));
         rights.put("book-list", Arrays.asList(Role.GUEST, Role.USER, Role.ADMIN));
         rights.put("errorpage", Arrays.asList(Role.GUEST, Role.USER, Role.ADMIN));
         rights.put("book-list-admin", Arrays.asList(Role.ADMIN));

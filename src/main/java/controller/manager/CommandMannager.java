@@ -17,6 +17,7 @@ public class CommandMannager {
         commands.put("homepage", new HomepageCommand());
         commands.put("login-submit", new LoginSubmitCommand());
         commands.put("book-list", new BookSearchCommand());
+        commands.put("submit-login", new LoginSubmitCommand());
     }
 
     private CommandMannager() {

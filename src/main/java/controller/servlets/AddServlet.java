@@ -45,6 +45,11 @@ public class AddServlet extends HttpServlet {
         System.out.println(command.getClass().getName());
         String page = command.execute(request,response);
         System.out.println("path: " + path + " >> page: " + page + " ");
-        request.getRequestDispatcher(page).forward(request, response);
+        if(page.contains("redirect:/")){
+            page.replaceAll("redirect:/","");
+            response.sendRedirect(page);
+        }else {
+            request.getRequestDispatcher(page).forward(request, response);
+        }
     }
 }

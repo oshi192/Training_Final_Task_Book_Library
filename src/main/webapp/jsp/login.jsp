@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
+<%@ taglib prefix="msg" uri="msg" %>
 <html>
 <head>
     <title>Login page</title>
@@ -11,11 +11,12 @@
 <div id="container">
 
     <div class="panel">
+<jsp:include page="header.jsp"/>
 
 
 
         <div class="form main-form">
-            <form method="POST" action="${pageContext.request.contextPath}">
+            <form method="POST" action="${pageContext.request.contextPath}/submit-login">
 
                 <table class="plain-text">
                     <tr>
@@ -33,7 +34,8 @@
                     <tr>
                         <td>email</td>
                         <td><input name="email" type="text"
-                                   pattern="[a-z0-9_-]{1,15}@[a-z0-9_-]{1,15}(\.[a-z0-9_-]{2,6})*\.[a-z]{2,6}$"></td>
+                                   pattern="[a-z0-9_-]{1,15}@[a-z0-9_-]{1,15}(\.[a-z0-9_-]{2,6})*\.[a-z]{2,6}$"
+                                   title="${msg:getMessage("library")}"></td>
                     </tr>
 
                     <tr>
