@@ -1,9 +1,8 @@
 package model.dao.impl;
 
-import model.dao.BookAndAuthors;
-import model.dao.mapper.AuthorMapper;
+import model.dao.IBookAndAuthors;
+import model.entity.BookAndAuthors;
 import model.dao.mapper.BookMapper;
-import model.entity.Author;
 import model.entity.Book;
 import model.entity.User;
 
@@ -14,26 +13,25 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class JDBCBookAndAuthors implements BookAndAuthors {
+public class JDBCBookAndAuthors implements IBookAndAuthors {
     private Connection connection;
-    private static final String FIND_ALL_BY_BOOK_ID= "SELECT author.* FROM author join authors2book on " +
-            "author.author_id = authors2book.author_id where authors2book.books_book_id = ?;";
+    private static final String FIND_ALL= "SELECT * FROM books;";
     private static final String COUNT = "SELECT COUNT(id) as count FROM books";
 
     public JDBCBookAndAuthors(Connection connection) {
         this.connection = connection;
     }
 
-    @Override
-    public List<Author> findAllAuthorsByBookId(int bookId) {
-        List<Author> result = new ArrayList<>();
-        try(PreparedStatement ps = connection.prepareCall(FIND_ALL_BY_BOOK_ID)){
-            ps.setInt( 1, bookId);
+    public List<BookAndAuthors> findAllbookAndAuthor() {
+        List<BookAndAuthors> result = new ArrayList<>();
+        JDBCAuthorDao authorDao = new JDBCAuthorDao(connection);
+        try(PreparedStatement ps = connection.prepareCall(FIND_ALL)){
             ResultSet rs;
             rs = ps.executeQuery();
-            AuthorMapper mapper = new AuthorMapper();
+            BookMapper mapper = new BookMapper();
             while (rs.next()){
-                result.add(mapper.extractFromResultSet(rs));
+                Book book = mapper.extractFromResultSet(rs);
+                result.add(new BookAndAuthors(book,authorDao.findAllAuthorsByBookId(book.getId())));
             }
         }catch (Exception ex){
             //todo my exception
@@ -42,8 +40,9 @@ public class JDBCBookAndAuthors implements BookAndAuthors {
         return result;
     }
 
+
     @Override
-    public void create(BookAndAuthors entity) {
+    public void create(IBookAndAuthors entity) {
 
     }
 
@@ -53,12 +52,12 @@ public class JDBCBookAndAuthors implements BookAndAuthors {
     }
 
     @Override
-    public List<BookAndAuthors> findAll(int shift) {
+    public List<IBookAndAuthors> findAll(int shift) {
         return null;
     }
 
     @Override
-    public void update(BookAndAuthors entity) {
+    public void update(IBookAndAuthors entity) {
 
     }
 

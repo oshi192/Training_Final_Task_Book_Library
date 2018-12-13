@@ -23,7 +23,7 @@ public class CommandUtility {
     public static Role findUserAndGetRole(String email,String pass){
         try {
             JDBCUserDao userDao = new JDBCUserDao(ConnectionPoolHolder.getDataSource().getConnection());
-            User user = userDao.findByEmail(email).get();
+            User user = userDao.findByEmail(email);
             if(user.getPassword().equals(pass))return user.getRole();
         } catch (SQLException e) {
             //todo logger and my exception

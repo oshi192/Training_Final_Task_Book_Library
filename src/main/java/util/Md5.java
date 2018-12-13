@@ -1,10 +1,16 @@
 package util;
 
+
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 public class Md5 {
-
+//    public static void main(String[] args) {
+//        String page="redirect:login";
+//        System.out.println(page);
+//
+//        System.out.println(page.replaceAll("redirect:",""));
+//    }
     public static String md5Password(String password) {
 
         try {

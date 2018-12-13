@@ -59,7 +59,7 @@ public class LogInCommand implements Command {
             User user = null;
             try {
                 user = new JDBCUserDao(ConnectionPoolHolder.getDataSource().getConnection())
-                        .findByEmail(email).get();
+                        .findByEmail(email);
                 System.out.println("user"+user);
             } catch (SQLException e) {
                 System.out.println("cannot connect to db:");

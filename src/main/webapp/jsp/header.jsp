@@ -10,15 +10,15 @@
 
         <div class="element-panel">
             <div class="lang lang-ua">
-                <a href="?lang=ua"><img src="/images/blank.gif" class="flag img-ua" alt="Ukr"/></a>
+                <a href="?lang=ua"><img src="${pageContext.request.contextPath}/images/blank.gif" class="flag img-ua" alt="Ukr"/></a>
             </div>
 
             <div class="lang lang-ru">
-                <a href="?lang=ru"><img src="/images/blank.gif" class="flag img-ru" alt="Ru"/></a>
+                <a href="?lang=ru"><img src="${pageContext.request.contextPath}/images/blank.gif" class="flag img-ru" alt="Ru"/></a>
             </div>
 
             <div class="lang lang-en">
-                <a href="?lang=en"><img src="/images/blank.gif" class="flag img-en" alt="En"/></a>
+                <a href="?lang=en"><img src="${pageContext.request.contextPath}/images/blank.gif" class="flag img-en" alt="En"/></a>
             </div>
         </div>
 
@@ -33,13 +33,13 @@
                     ${msg:getMessage("info-msg")}
                     <a href="${pageContext.request.contextPath}/login" class="w3-btn w3-hover-light-blue w3-round-large">${msg:getMessage("login")} </a>
                     ${msg:getMessage("or")}
-                    <a href="${pageContext.request.contextPath}/register" class="w3-btn w3-hover-light-blue w3-round-large"> ${msg:getMessage("register")}</a>
+                    <a href="${pageContext.request.contextPath}/registration" class="w3-btn w3-hover-light-blue w3-round-large"> ${msg:getMessage("register")}</a>
                 </c:when>
 
                 <c:otherwise>
                     ${msg:getMessage("logged")}
                     <a href="${pageContext.request.contextPath}/cabinet">
-                            ${user.email}
+                            ${user.email}" "
                     </a>
 
                     <a href="${pageContext.request.contextPath}/logout"> ${msg:getMessage("logout")}</a>

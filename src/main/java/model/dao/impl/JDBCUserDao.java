@@ -3,6 +3,7 @@ package model.dao.impl;
 import model.dao.UserDao;
 import model.dao.mapper.UserMapper;
 import model.entity.User;
+import util.Md5;
 
 import java.sql.*;
 import java.util.*;
@@ -15,15 +16,15 @@ public class JDBCUserDao implements UserDao {
     }
 
     @Override
-    public Optional<User> findByEmail(String email) {
-        Optional<User> result = Optional.empty();
+    public User findByEmail(String email) {
+        User result = null;
         try(PreparedStatement ps = connection.prepareCall("SELECT * FROM users WHERE email = ?")){
             ps.setString( 1, email);
             ResultSet rs;
             rs = ps.executeQuery();
             UserMapper mapper = new UserMapper();
             if (rs.next()){
-                result = Optional.of(mapper.extractFromResultSet(rs));
+                result = mapper.extractFromResultSet(rs);
             }
         }catch (Exception ex){
             //todo my exception
@@ -33,8 +34,19 @@ public class JDBCUserDao implements UserDao {
     }
 
     @Override
-    public void create(User entity) {
-
+    public void create(User user) {
+        try(PreparedStatement ps = connection.prepareStatement
+                ("insert into library.users values(DEFAULT, ?,?, ?, ?, ?, ?);")){
+            ps.setString(1, user.getEmail());
+            ps.setString( 2, user.getPhone_number());
+            ps.setString( 3, user.getName());
+            ps.setString( 4, user.getSurname());
+            ps.setString( 5, user.getPassword());
+            ps.setString( 6, user.getRole().name());
+            ps.execute();
+        }catch (Exception ex){
+            throw new RuntimeException(ex);
+        }
     }
 
     @Override

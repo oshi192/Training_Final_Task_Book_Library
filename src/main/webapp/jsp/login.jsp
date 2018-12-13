@@ -11,10 +11,6 @@
 <div id="container">
 
     <div class="panel">
-<jsp:include page="header.jsp"/>
-
-
-
         <div class="form main-form">
             <form method="POST" action="${pageContext.request.contextPath}/submit-login">
 
@@ -27,6 +23,11 @@
                         <td colspan="2" class="error-message">
                             <c:if test='${errorMessage!=""}'>
                                 <c:out value="${errorMessage}"/>
+                            </c:if>
+                        </td>
+                        <td colspan="2" class="message">
+                            <c:if test='${message!=""}'>
+                                <c:out value="${message}"/>
                             </c:if>
                         </td>
                     </tr>

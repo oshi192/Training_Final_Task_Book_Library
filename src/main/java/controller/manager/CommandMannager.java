@@ -13,11 +13,13 @@ public class CommandMannager {
         commands.put("login", new LogInCommand());
         commands.put("exception", new ExceptionCommand());
 //        commands.put("book-list", new BookListCommand());
-        commands.put("register", new RegisterCommand());
+        commands.put("registration", new RegistrationCommand());
         commands.put("homepage", new HomepageCommand());
+        commands.put("", new HomepageCommand());
         commands.put("login-submit", new LoginSubmitCommand());
         commands.put("book-list", new BookSearchCommand());
         commands.put("submit-login", new LoginSubmitCommand());
+        commands.put("submit-registration", new RegistrationSubmitCommand());
     }
 
     private CommandMannager() {

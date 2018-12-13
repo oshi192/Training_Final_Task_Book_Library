@@ -1,10 +1,14 @@
 package model.dao.impl;
 
 import model.dao.AuthorDao;
+import model.dao.mapper.AuthorMapper;
 import model.entity.Author;
 import model.entity.User;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,7 +19,8 @@ public class JDBCAuthorDao implements AuthorDao {
     private static final String UPDATE_AUTHOR_QUERY = "UPDATE author SET first_name = ?, second_name = ?, patronymic_name = ? WHERE id = ?";
     private static final String DELETE_AUTHOR_QUERY = "DELETE FROM author WHERE id = ?";
     private static final String GET_COUNT = "SELECT COUNT(id) as count FROM author";
-
+    private static final String FIND_ALL_BY_BOOK_ID = "SELECT author.* FROM author join authors2book on " +
+            "author.author_id = authors2book.author_id where authors2book.books_book_id = ?;";
     private static final String FIND_AUTHOR_BY_ID = "SELECT * FROM author WHERE id = ?";
     private static final String FIND_AUTHORS_BY_ID_ARRAY = "SELECT * FROM author WHERE id IN ?";
     private static final String FIND_AUTHOR_BY_BOOK_ID = "SELECT * FROM author RIGHT JOIN book_author ON book_author.author_id = author.id WHERE book_author.book_id = ?";
@@ -64,7 +69,7 @@ public class JDBCAuthorDao implements AuthorDao {
 
     @Override
     public void update(Author author) {
-        executeQuery(connection,UPDATE_AUTHOR_QUERY, preparedStatement -> {
+        executeQuery(connection, UPDATE_AUTHOR_QUERY, preparedStatement -> {
             preparedStatement.setString(1, author.getFirstName());
             preparedStatement.setString(2, author.getSecondName());
             preparedStatement.setString(3, author.getPatronymicName());
@@ -82,5 +87,22 @@ public class JDBCAuthorDao implements AuthorDao {
     @Override
     public void close() {
 
+    }
+
+    public List<Author> findAllAuthorsByBookId(int bookId) {
+        List<Author> result = new ArrayList<>();
+        try (PreparedStatement ps = connection.prepareCall(FIND_ALL_BY_BOOK_ID)) {
+            ps.setInt(1, bookId);
+            ResultSet rs;
+            rs = ps.executeQuery();
+            AuthorMapper mapper = new AuthorMapper();
+            while (rs.next()) {
+                result.add(mapper.extractFromResultSet(rs));
+            }
+        } catch (Exception ex) {
+            //todo my exception
+            throw new RuntimeException(ex);
+        }
+        return result;
     }
 }

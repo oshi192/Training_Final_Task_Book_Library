@@ -25,7 +25,8 @@ public class AccessMapper {
         // Authentification & user management operations//
         rights.put("login", Arrays.asList(Role.GUEST));
         rights.put("logout", Arrays.asList(Role.USER, Role.ADMIN));
-        rights.put("register", Arrays.asList(Role.GUEST));
+        rights.put("registration", Arrays.asList(Role.GUEST));
+        rights.put("submit-registration", Arrays.asList(Role.GUEST));
         // Navigation
         rights.put("", Arrays.asList(Role.GUEST, Role.USER, Role.ADMIN));
         rights.put("submit-login", Arrays.asList(Role.GUEST));

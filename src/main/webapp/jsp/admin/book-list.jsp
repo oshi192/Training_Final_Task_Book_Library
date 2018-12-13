@@ -1,23 +1,47 @@
-<!DOCTYPE html>
-<html lang="en">
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>book-list-admin</title>
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <!--<link rel="stylesheet" href="css/mainStyle.css">-->
+    <title>Title</title>
+    <style>
+        table {
+            border-collapse: collapse;
+        }
+        .filter{
+        max-width:100px;
+        }
+        table, th, td {
+        border: 1px solid black;
+        }
+    </style>
 </head>
+<body>
+<form method="post" action="">
+    <h2>admin book list</h2>
+    <table>
+        <tr>
+          <td><input type="submit" value="go" name="button"></td>
+          <td></td>
+          <td><input class="filter" type="number" name="filter_prcntInOneMonthUAH_start"><input class="filter" type="number" name="filter_prcntInOneMonthUAH_end"></td>
+          <td><input class="filter" type="number" name="filter_prcntInSixMonthUAH_start"><input class="filter" type="number" name="filter_prcntInSixMonthUAH_end"></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td><a href="?bookSortBy=bankNameD">Book name</a></td>
+          <td><a href="?DsortBy=prcntInOneMonthUAH">authors</a></td>
+          <td><a href="?DsortBy=prcntInSixMonthUAH">bookSection</a></td>
 
-<body class="w3-light-grey">
-<div class="w3-container w3-blue-grey w3-opacity w3-left-align">
-    <h1>Book-list-admin</h1>
-</div>
-
-<div class="w3-container w3-center">
-    <div class="w3-bar w3-padding-large w3-padding-24">
-        <a href="${pageContext.request.contextPath}/register" class="w3-btn w3-hover-light-blue w3-round-large">allUsers&takenBooks</button>
-        <a href="${pageContext.request.contextPath}/logout.jsp" class="w3-btn w3-hover-light-blue w3-round-large">log out</a>
-        <a href="${pageContext.request.contextPath}/" class="w3-btn w3-hover-green w3-round-large" >mainPage</button>
-    </div>
-</div>
+        </tr>
+        <c:forEach var="BookAndAuthors" items="${requestScope.BooksAndAuthors}">
+            <tr>
+                <td><input type="button" name="book_id" value="${BookAndAuthors.book.bookId}"></td>
+                <td><c:out value="${BookAndAuthors.book.bookName}"/></td>
+                <td><c:out value="${BookAndAuthors.authors}"/></td>
+                <td><c:out value="${BookAndAuthors.book.bookSection}"/></td>
+            </tr>
+        </c:forEach>
+    </table>
+        <input type="submit" value="Sent" name="choose" method="post"><br>
+    </form>
 </body>
 </html>

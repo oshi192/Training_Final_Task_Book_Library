@@ -5,14 +5,22 @@ import java.util.List;
 
 public class BookAndAuthors {
     Book book;
-    List<Author>authors=new ArrayList<>();
+    String authors;
 
     public BookAndAuthors() {
     }
 
     public BookAndAuthors(Book book, List<Author> authors) {
         this.book = book;
-        this.authors = authors;
+        this.authors = listAuthorsToString(authors);
+    }
+
+    public String listAuthorsToString(List<Author> authors) {
+        String res="";
+        for (Author a:authors){
+            res+=a.toString();
+        }
+        return res;
     }
 
     public Book getBook() {
@@ -23,11 +31,11 @@ public class BookAndAuthors {
         this.book = book;
     }
 
-    public List<Author> getAuthors() {
+    public String getAuthors() {
         return authors;
     }
 
-    public void setAuthors(List<Author> authors) {
+    public void setAuthors(String authors) {
         this.authors = authors;
     }
 }

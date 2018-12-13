@@ -47,4 +47,11 @@ public class Author {
     public void setPatronymicName(String patronymicName) {
         this.patronymicName = patronymicName;
     }
+
+    @Override
+    public String toString() {
+        return firstName +
+                " " + patronymicName +
+                " " +secondName  +", ";
+    }
 }

@@ -36,17 +36,15 @@ public class LoginSubmitCommand implements Command {
         String passwordRaw = request.getParameter(PASSWORD_HEADER);
         System.out.println(username+" |"+passwordRaw+"|"+Md5.md5Password(passwordRaw));
         User user = checkUser(username, passwordRaw, request);
-
         if (Objects.nonNull(user)) {
 
             request.getSession().setAttribute("user", user);
-            System.out.println("\tset user in session: "+user.toString());
-            page =new BookListCommand().execute(request,response);
+            System.out.println("\tset user in session: ");
+            page = new CabinetCommand().execute(request,response);
             System.out.println("\tgo to page "+page);
             request.setAttribute(ATTR_NAME_ERROR_MESSAGE, "");
         } else {
-            page = Configuration.getProperty(
-                    Configuration.LOGIN_PAGE_PATH);
+            page = Configuration.getProperty(Configuration.LOGIN_PAGE_PATH);
         }
         return page;
     }
@@ -55,8 +53,7 @@ public class LoginSubmitCommand implements Command {
         Connection connection = null;
         try {
             connection = ConnectionPoolHolder.getDataSource().getConnection();
-            User user = new JDBCUserDao(connection).findByEmail(email).get();
-            String ATTR_NAME_ERROR_MESSAGE = "errorMessage";
+            User user = new JDBCUserDao(connection).findByEmail(email);
             if (Objects.isNull(user)) {
                 request.setAttribute(ATTR_NAME_ERROR_MESSAGE, "No user found");
                 return user;
