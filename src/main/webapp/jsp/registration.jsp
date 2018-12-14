@@ -34,6 +34,13 @@
                                    value="${requestScope.newUser.getEmail()}"></td>
                     </tr>
                     <tr>
+                                            <td>email</td>
+                                            <td><input name="phone-number" type="text"
+                                                       pattern="${msg:getMessage("regex-phone")}"
+                                                       title="${msg:getMessage("hint-phone")}"
+                                                       value="${requestScope.newUser.getPhoneNumber()}"></td>
+                                        </tr>
+                    <tr>
                         <td>password</td>
                         <td><input name="password" type="password"
                                    pattern="${msg:getMessage("regex-password")}"

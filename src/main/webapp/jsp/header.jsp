@@ -12,11 +12,6 @@
             <div class="lang lang-ua">
                 <a href="?lang=ua"><img src="${pageContext.request.contextPath}/images/blank.gif" class="flag img-ua" alt="Ukr"/></a>
             </div>
-
-            <div class="lang lang-ru">
-                <a href="?lang=ru"><img src="${pageContext.request.contextPath}/images/blank.gif" class="flag img-ru" alt="Ru"/></a>
-            </div>
-
             <div class="lang lang-en">
                 <a href="?lang=en"><img src="${pageContext.request.contextPath}/images/blank.gif" class="flag img-en" alt="En"/></a>
             </div>

@@ -3,7 +3,6 @@ package model.dao.impl;
 import model.dao.AuthorDao;
 import model.dao.mapper.AuthorMapper;
 import model.entity.Author;
-import model.entity.User;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -58,7 +57,7 @@ public class JDBCAuthorDao implements AuthorDao {
     }
 
     @Override
-    public Optional<User> findById(int id) {
+    public Author findById(int id) {
         return null;
     }
 
@@ -99,6 +98,7 @@ public class JDBCAuthorDao implements AuthorDao {
             while (rs.next()) {
                 result.add(mapper.extractFromResultSet(rs));
             }
+            System.out.println("resultlist"+result);
         } catch (Exception ex) {
             //todo my exception
             throw new RuntimeException(ex);

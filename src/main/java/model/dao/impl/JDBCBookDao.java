@@ -2,10 +2,8 @@ package model.dao.impl;
 
 import model.dao.BookDao;
 import model.dao.mapper.BookMapper;
-import model.dao.mapper.UserMapper;
 import model.entity.Author;
 import model.entity.Book;
-import model.entity.User;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -40,7 +38,7 @@ this.connection=connection;
     }
 
     @Override
-    public Optional<User> findById(int id) {
+    public Book findById(int id) {
         return null;
     }
 

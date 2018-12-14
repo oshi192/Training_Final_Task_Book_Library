@@ -1,11 +1,11 @@
 start transaction;
 use library;
-insert into `library`.`users` values(DEFAULT, "johnsnow@gmail.com", "0960969090", "John", "Snow", "password1D", "USER");
-insert into `library`.`users` values(DEFAULT, "admin@gmail.com", "0961234567", "Василь", "Пупкін", "Admin1234", "ADMIN");
-insert into `library`.`users` values(DEFAULT, "kornik@gmail.com", "0909876543", "Михаил", "Корников", "qwerty123QWERTY", "ADMIN");
-insert into `library`.`users` values(DEFAULT, "stepanJ@imail.com", "0443243434", "Степан", "Портак", "12345678Qq", "USER");
-insert into `library`.`users` values(DEFAULT, "kenya@gmail.com", "0503323434", "Інокентій", "Пастернак", "Password1", "USER");
-insert into `library`.`users` values(DEFAULT, "gregor@gmail.com", "0930302099", "Грегорій", "Лінус", "Gsdikj213", "USER");
+insert into `library`.`users` values(1, "johnsnow@gmail.com", "0960969090", "John", "Snow", "password1D", "USER");
+insert into `library`.`users` values(2, "admin@gmail.com", "0961234567", "Василь", "Пупкін", "Admin1234", "ADMIN");
+insert into `library`.`users` values(3, "kornik@gmail.com", "0909876543", "Михаил", "Корников", "qwerty123QWERTY", "ADMIN");
+insert into `library`.`users` values(4, "stepanJ@imail.com", "0443243434", "Степан", "Портак", "12345678Qq", "USER");
+insert into `library`.`users` values(5, "kenya@gmail.com", "0503323434", "Інокентій", "Пастернак", "Password1", "USER");
+insert into `library`.`users` values(6, "gregor@gmail.com", "0930302099", "Грегорій", "Лінус", "Gsdikj213", "USER");
 commit;
 start transaction;
 use library;

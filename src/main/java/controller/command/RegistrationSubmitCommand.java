@@ -21,6 +21,7 @@ public class RegistrationSubmitCommand implements Command {
         String confirmPassword = request.getParameter("confirm-password");
         String firstName = request.getParameter("first-name");
         String surname = request.getParameter("surname");
+        String phone = request.getParameter("phone-number");
 
         User user = new User();
         user.setRole(User.Role.USER);
@@ -28,6 +29,7 @@ public class RegistrationSubmitCommand implements Command {
         user.setName(firstName);
         user.setSurname(surname);
         user.setEmail(email);
+        user.setPhoneNumber(phone);
         System.out.println("user from registration page: " + user.toString());
         if (Objects.nonNull(password) && password.equals(confirmPassword)) {
             try {

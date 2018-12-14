@@ -50,8 +50,7 @@ public class Author {
 
     @Override
     public String toString() {
-        return firstName +
-                " " + patronymicName +
-                " " +secondName  +", ";
+        return firstName + ((patronymicName.equalsIgnoreCase("null"))?"":(" " + patronymicName ))+
+                " " +secondName ;
     }
 }

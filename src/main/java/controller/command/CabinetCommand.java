@@ -1,7 +1,7 @@
 package controller.command;
 
-import model.dao.impl.JDBCBookAndAuthors;
-import model.entity.BookAndAuthors;
+import model.dao.impl.JDBCTakenBookDao;
+import model.entity.TakenBook;
 import model.entity.User;
 import util.ConnectionPoolHolder;
 
@@ -12,18 +12,17 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class CabinetCommand implements Command {
+
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
         HttpSession session = request.getSession(false);
         User user = (User) session.getAttribute("user");
-        String page = ("/" + user.getRole().name().toLowerCase()).replaceAll("/guest", "");
-        try {
-            List<BookAndAuthors> list= new JDBCBookAndAuthors(ConnectionPoolHolder.getDataSource().getConnection())
-                    .findAllbookAndAuthor();
-            request.setAttribute("BookAndAuthors",list);
-        } catch (SQLException e) {
-            e.printStackTrace();
+        String page ;
+        if(User.Role.ADMIN == user.getRole()){
+            page=new AdminTakenBooksCommand().execute(request,response);
+        }else{
+            page=new UserMyBooksCommand().execute(request,response);
         }
-        return "/jsp" + page + "/book-list.jsp";
+        return page;
     }
 }

@@ -3,7 +3,7 @@ package model.entity;
 public class User {
     private int id;
     private String email;
-    private String phone_number;
+    private String phoneNumber;
     private String password;
     private String name;
     private String surname;
@@ -16,10 +16,10 @@ public class User {
     public User() {
     }
 
-    public User(int id, String email, String phone_number, String password, String name, String surname, Role role) {
+    public User(int id, String email, String phoneNumber, String password, String name, String surname, Role role) {
         this.id = id;
         this.email = email;
-        this.phone_number = phone_number;
+        this.phoneNumber = phoneNumber;
         this.password = password;
         this.name = name;
         this.surname = surname;
@@ -42,12 +42,12 @@ public class User {
         this.email = email;
     }
 
-    public String getPhone_number() {
-        return phone_number;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public void setPhone_number(String phone_number) {
-        this.phone_number = phone_number;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     public String getPassword() {
@@ -87,7 +87,7 @@ public class User {
         return "User{" +
                 "id=" + id +
                 ", email='" + email + '\'' +
-                ", phone_number='" + phone_number + '\'' +
+                ", phone_number='" + phoneNumber + '\'' +
                 ", password='" + password + '\'' +
                 ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +

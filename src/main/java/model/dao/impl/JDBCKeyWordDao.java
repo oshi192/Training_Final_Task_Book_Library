@@ -2,7 +2,6 @@ package model.dao.impl;
 
 import model.dao.KeyWordDao;
 import model.entity.KeyWord;
-import model.entity.User;
 
 import java.sql.Connection;
 import java.util.List;
@@ -26,7 +25,7 @@ public class JDBCKeyWordDao implements KeyWordDao {
     }
 
     @Override
-    public Optional<User> findById(int id) {
+    public KeyWord findById(int id) {
         return null;
     }
 

@@ -7,7 +7,7 @@ import java.util.Optional;
 
 public interface GenericDao<T> extends AutoCloseable {
     void create (T entity);
-    Optional<User> findById(int id);
+    T findById(int id);
     List<T> findAll(int shift);
     void update(T entity);
     void delete(int id);

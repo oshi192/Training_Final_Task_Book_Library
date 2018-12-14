@@ -30,7 +30,7 @@ public class LoginSubmitCommand implements Command {
         boolean loggedIn = session != null && session.getAttribute("user") != null;
         boolean loginRequest = request.getRequestURI().equals(loginURI);
         System.out.println("\tloggedIn "+loggedIn+" loginRequest "+"  session != null "+( session != null));
-        System.out.println("------- ending login filter -------");
+        System.out.println("------- ending login submit -------");
         String page;
         String username = request.getParameter(EMAIL_HEADER);
         String passwordRaw = request.getParameter(PASSWORD_HEADER);

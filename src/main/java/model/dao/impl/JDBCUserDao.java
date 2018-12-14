@@ -3,7 +3,6 @@ package model.dao.impl;
 import model.dao.UserDao;
 import model.dao.mapper.UserMapper;
 import model.entity.User;
-import util.Md5;
 
 import java.sql.*;
 import java.util.*;
@@ -38,7 +37,7 @@ public class JDBCUserDao implements UserDao {
         try(PreparedStatement ps = connection.prepareStatement
                 ("insert into library.users values(DEFAULT, ?,?, ?, ?, ?, ?);")){
             ps.setString(1, user.getEmail());
-            ps.setString( 2, user.getPhone_number());
+            ps.setString( 2, user.getPhoneNumber());
             ps.setString( 3, user.getName());
             ps.setString( 4, user.getSurname());
             ps.setString( 5, user.getPassword());
@@ -50,7 +49,7 @@ public class JDBCUserDao implements UserDao {
     }
 
     @Override
-    public Optional<User> findById(int id) {
+    public User findById(int id) {
         Optional<User> result = Optional.empty();
         try(PreparedStatement ps = connection.prepareCall("SELECT * FROM users WHERE user_id = ?")){
             ps.setInt( 1, id);
@@ -64,7 +63,7 @@ public class JDBCUserDao implements UserDao {
             //todo my exception
             throw new RuntimeException(ex);
         }
-        return result;
+        return result.get();
     }
 
     @Override

@@ -1,19 +1,20 @@
 create schema if not exists library;
 
-CREATE TABLE IF NOT EXISTS `library`.`users` (
-  `user_id` INT NOT NULL AUTO_INCREMENT,
+CREATE TABLE IF NOT EXISTS `mydb`.`users` (
+  `user_id` INT NOT NULL,
   `email` VARCHAR(64) NOT NULL,
   `phone_number` VARCHAR(15) NOT NULL,
-  `name` VARCHAR(255) NULL,
+  `user_name` VARCHAR(255) NULL,
   `surname` VARCHAR(255) NULL,
   `password` VARCHAR(45) NOT NULL,
   `role` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`user_id`))
+  PRIMARY KEY (`user_id`),
+  UNIQUE INDEX `email_UNIQUE` (`email` ASC))
 ENGINE = InnoDB AUTO_INCREMENT = 1 DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `library`.`books` (
   `book_id` INT NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(255) NOT NULL,
+  `book_name` VARCHAR(255) NOT NULL,
   `section` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`book_id`))
 ENGINE = InnoDB AUTO_INCREMENT = 1 DEFAULT CHARSET=utf8;

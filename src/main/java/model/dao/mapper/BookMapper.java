@@ -13,7 +13,7 @@ public class BookMapper implements ObjectMapper<Book> {
     public Book extractFromResultSet(ResultSet rs) throws SQLException {
         Book book = new Book();
         book.setId(rs.getInt("book_id"));
-        book.setName(rs.getString("name"));
+        book.setName(rs.getString("book_name"));
         book.setSection(rs.getString("section"));
         return book;
     }
