@@ -8,19 +8,13 @@
 <body>
 
 <ul>
- <li><a href="${pageContext.request.contextPath}/registration" class="w3-btn w3-hover-light-blue w3-round-large">${msg:getMessage("admin-taken-book")}</a></li>
- <li><a href="${pageContext.request.contextPath}/registration" class="w3-btn w3-hover-light-blue w3-round-large">${msg:getMessage("admin-all-book")}</a></li>
- <li><a href="${pageContext.request.contextPath}/registration" class="w3-btn w3-hover-light-blue w3-round-large">${msg:getMessage("admin-all-users")}</a></li>
+ <li><a href="${pageContext.request.contextPath}/taken-books" class="w3-btn w3-hover-light-blue w3-round-large">${msg:getMessage("admin-taken-book")}</a></li>
+ <li><a href="${pageContext.request.contextPath}/all-books" class="w3-btn w3-hover-light-blue w3-round-large">${msg:getMessage("admin-all-book")}</a></li>
+ <li><a href="${pageContext.request.contextPath}/all-users" class="w3-btn w3-hover-light-blue w3-round-large">${msg:getMessage("admin-all-users")}</a></li>
 </ul>
 <form method="post" action="">
     <h2>admin book list</h2>
     <table>
-        <tr>
-          <td><input type="submit" value="go" name="button"></td>
-          <td></td>
-          <td><input class="filter" type="number" name="filter_prcntInOneMonthUAH_start"><input class="filter" type="number" name="filter_prcntInOneMonthUAH_end"></td>
-          <td><input class="filter" type="number" name="filter_prcntInSixMonthUAH_start"><input class="filter" type="number" name="filter_prcntInSixMonthUAH_end"></td>
-        </tr>
         <tr>
           <td>${msg:getMessage("book-taken-name")}</td>
           <td>${msg:getMessage("book-taken-authors")}</td>

@@ -2,7 +2,10 @@ package model.dao.impl;
 
 import model.dao.UserDao;
 import model.dao.mapper.UserMapper;
+import model.dao.mapper.UserTakenBookMapper;
+import model.entity.TakenBook;
 import model.entity.User;
+import util.ResourceBundleManager;
 
 import java.sql.*;
 import java.util.*;
@@ -68,34 +71,28 @@ public class JDBCUserDao implements UserDao {
 
     @Override
     public List<User> findAll(int offset) {
-//        Map<Integer, User> students = new HashMap<>();
-//        Map<Integer, Teacher> teachers = new HashMap<>();
-//
-//        final String query = "" +
-//                " select * from studen" +
-//                " left join studen_has_teacher using (idstuden)" +
-//                " left join teacher using (idteacher)";
-//        try (Statement st = connection.createStatement()) {
-//            ResultSet rs = st.executeQuery(query);
-//
-//            ua.training.model.dao.mapper.TeacherMapper teacherMapper = new ua.training.model.dao.mapper.TeacherMapper();
-//            ua.training.model.dao.mapper.StudentMapper studentMapper = new ua.training.model.dao.mapper.StudentMapper();
-//
+
+        return null;
+    }
+
+    public List<User> findAllUsersWithBook(int offset) {
+//        String sqlRequest = ResourceBundleManager.getSqlString("all-users-with-book");
+//        System.out.println("sqlRequest " + sqlRequest);
+//        List<TakenBook> result = new ArrayList<>();
+//        try (PreparedStatement ps = connection.prepareCall(sqlRequest)) {
+//            ResultSet rs;
+//            ps.setInt(1, id);
+//            ps.setInt(2, 10);
+//            ps.setInt(3, shift);
+//            rs = ps.executeQuery();
+//            UserTakenBookMapper mapper = new UserTakenBookMapper();
 //            while (rs.next()) {
-//                Student student = studentMapper
-//                        .extractFromResultSet(rs);
-//                Teacher teacher = teacherMapper
-//                        .extractFromResultSet(rs);
-//                student = studentMapper
-//                        .makeUnique(students, student);
-//                teacher = teacherMapper
-//                        .makeUnique(teachers, teacher);
-//                student.getTeachers().add(teacher);
+//                TakenBook takenBook = mapper.extractFromResultSet(rs);
+//                result.add(takenBook);
 //            }
-//            return new ArrayList<>(students.values());
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//            return null;
+//        } catch (Exception ex) {
+//            //todo my exception
+//            throw new RuntimeException(ex);
 //        }
         return null;
     }

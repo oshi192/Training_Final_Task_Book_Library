@@ -37,7 +37,7 @@ public class LoginSubmitCommand implements Command {
         System.out.println(username+" |"+passwordRaw+"|"+Md5.md5Password(passwordRaw));
         User user = checkUser(username, passwordRaw, request);
         if (Objects.nonNull(user)) {
-
+            user.setPassword("");
             request.getSession().setAttribute("user", user);
             System.out.println("\tset user in session: ");
             page = new CabinetCommand().execute(request,response);

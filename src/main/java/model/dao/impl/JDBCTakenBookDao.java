@@ -38,20 +38,20 @@ public class JDBCTakenBookDao implements TakenBookDao {
 //        int maxBookon = ResourceBundleManager.getSqlString(GET_ALL_PAGINATE);
 //        String sqlRequest = ResourceBundleManager.getSqlString(GET_ALL_PAGINATE);
         List<TakenBook> result = new ArrayList<>();
-        try(PreparedStatement ps = connection.prepareCall(sqlRequest)){
+        try (PreparedStatement ps = connection.prepareCall(sqlRequest)) {
             ResultSet rs;
-            ps.setInt(1,10);
-            ps.setInt(2,shift);
+            ps.setInt(1, 10);
+            ps.setInt(2, shift);
             rs = ps.executeQuery();
             TakenBookMapper mapper = new TakenBookMapper();
-            while (rs.next()){
+            while (rs.next()) {
                 TakenBook takenBook = mapper.extractFromResultSet(rs);
                 result.add(takenBook);
 //                List<Author> authors = new JDBCAuthorDao(connection)
 //                        .findAllAuthorsByBookId(takenBook.getBook().getId());
 //                takenBook.setAuthors(authors);
             }
-        }catch (Exception ex){
+        } catch (Exception ex) {
             //todo my exception
             throw new RuntimeException(ex);
         }
@@ -75,26 +75,29 @@ public class JDBCTakenBookDao implements TakenBookDao {
 
     public List<TakenBook> findAllByUserId(int shift, int id) {
         String sqlRequest = ResourceBundleManager.getSqlString("user-my-book");
-        System.out.println("sqlRequest "+sqlRequest);
+        System.out.println("sqlRequest " + sqlRequest);
         List<TakenBook> result = new ArrayList<>();
-        try(PreparedStatement ps = connection.prepareCall(sqlRequest)){
+        try (PreparedStatement ps = connection.prepareCall(sqlRequest)) {
             ResultSet rs;
-            ps.setInt(1,id);
-            ps.setInt(2,10);
-            ps.setInt(3,shift);
+            ps.setInt(1, id);
+            ps.setInt(2, 10);
+            ps.setInt(3, shift);
             rs = ps.executeQuery();
             UserTakenBookMapper mapper = new UserTakenBookMapper();
-            while (rs.next()){
+            while (rs.next()) {
                 TakenBook takenBook = mapper.extractFromResultSet(rs);
                 result.add(takenBook);
-//                List<Author> authors = new JDBCAuthorDao(connection)
-//                        .findAllAuthorsByBookId(takenBook.getBook().getId());
-//                takenBook.setAuthors(authors);
             }
-        }catch (Exception ex){
+        } catch (Exception ex) {
             //todo my exception
             throw new RuntimeException(ex);
         }
-        return null;
+//        for (TakenBook tb : result) {
+//            List<Author> authors = new JDBCAuthorDao(connection)
+//                    .findAllAuthorsByBookId(tb.getBook().getId());
+//            tb.setAuthors(authors);
+//            tb.setAuthors(authors);
+//        }
+        return result;
     }
 }
