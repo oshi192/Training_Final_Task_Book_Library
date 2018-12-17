@@ -42,7 +42,7 @@ public class RegistrationSubmitCommand implements Command {
                     page = "redirect:login";
                     System.out.println("msg-registration-successful");
                 } else {
-                    request.setAttribute("error-message", ResourceBundleManager.getMessage("error-already-register"));
+                    request.setAttribute("errorMessage", ResourceBundleManager.getMessage("error-already-register"));
                     page = Configuration.getProperty(Configuration.REGISTRATION_PAGE_PATH);
                 }
             } catch (SQLException e) {
@@ -52,6 +52,7 @@ public class RegistrationSubmitCommand implements Command {
 
         } else {
             request.setAttribute("newUser", user);
+            request.setAttribute("errorMessage", ResourceBundleManager.getMessage("error-not-equals-passwords"));
             page = Configuration.getProperty(Configuration.REGISTRATION_PAGE_PATH);
             System.out.println("msg-registration-fail");
         }

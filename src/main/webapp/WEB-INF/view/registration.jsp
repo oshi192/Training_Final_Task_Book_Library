@@ -16,9 +16,20 @@
         <div class="row">
             <div class="col-md-4 col-sm-4 col-xs-12"></div>
             <div class="col-md-4 col-sm-4 col-xs-12">
+
                 <div id="log">
                     <form  method="POST" action="${pageContext.request.contextPath}/submit-registration">
                         <h1>${msg:getMessage("registration-please-register")}</h1>
+                        <div id="errormessagesbox">
+                            <c:if test='${errorMessage!=""}'>
+                                <c:out value="${errorMessage}"/>
+                            </c:if>
+                        </div>
+                        <div id="messagesbox">
+                            <c:if test='${message!=""}'>
+                                <c:out value="${message}"/>
+                            </c:if>
+                        </div>
                         <img class="img img-responsive img-circle" src="<c:url value="/resources/image/user1r.png" />"/>
                             <div class="form-group">
                                 <label>${msg:getMessage("login-label-email")}</label>

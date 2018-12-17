@@ -51,7 +51,7 @@ public class AddServlet extends HttpServlet {
             System.out.println("redirect to page: "+page);
             response.sendRedirect(page);
         }else {
-            if(!response.isCommitted())
+//            if(!response.isCommitted())
                 request.getRequestDispatcher(page).forward(request, response);
         }
     }

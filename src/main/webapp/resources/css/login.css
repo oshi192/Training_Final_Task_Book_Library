@@ -12,6 +12,12 @@ box-shadow: -5px 2px 62px 8px rgba(0,0,0,0.75);
 img{ width:150px;
 	margin:auto;
 }
+#errormessagesbox{
+font-size:20px; color:#aa0000;
+}
+#messagesbox{
+font-size:20px; color:#00aa00;
+}
 h1{
 color:white;
 text-align:center;

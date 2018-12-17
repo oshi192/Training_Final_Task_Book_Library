@@ -19,6 +19,16 @@
                 <div id="log">
                     <form  method="POST" action="${pageContext.request.contextPath}/submit-login">
                     <h1>${msg:getMessage("login-please-login")}</h1>
+                    <div id="errormessagesbox">
+                        <c:if test='${errorMessage!=""}'>
+                            <c:out value="${errorMessage}"/>
+                        </c:if>
+                    </div>
+                    <div id="messagesbox">
+                        <c:if test='${message!=""}'>
+                            <c:out value="${message}"/>
+                        </c:if>
+                    </div>
                     <img class="img img-responsive img-circle" src="<c:url value="/resources/image/user1.png" />"/>
                         <div class="form-group">
                             <label>${msg:getMessage("login-label-email")}</label>
