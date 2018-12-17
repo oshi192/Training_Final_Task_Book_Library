@@ -10,7 +10,7 @@ public class Md5 {
 
     }
     public static String md5Password(String password) {
-
+        if("".equals(password))return "";
         try {
             MessageDigest digest = MessageDigest.getInstance("md5");
             byte[] result = digest.digest(password.getBytes());

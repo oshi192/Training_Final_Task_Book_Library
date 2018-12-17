@@ -3,6 +3,7 @@ package controller.command;
 import model.dao.impl.JDBCTakenBookDao;
 import model.entity.TakenBook;
 import model.entity.User;
+import util.Configuration;
 import util.ConnectionPoolHolder;
 
 import javax.servlet.http.HttpServletRequest;
@@ -23,7 +24,7 @@ public class UserMyBooksCommand implements Command {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return "/jsp/user/mybooks.jsp";
+        return Configuration.getProperty(Configuration.USER_MYBOOK_PATH);
     }
 
 
