@@ -3,17 +3,17 @@
 <%@ taglib prefix="msg" uri="msg" %>
 
 
-    <link href="css/flags.css" rel=stylesheet type="text/css">
-    <link href="css/mainStyle.css" rel=stylesheet type="text/css">
+    <link href="<c:url value="/resources/css/flags.css" />" rel=stylesheet type="text/css">
+    <link href="<c:url value="/resources/css/mainStyle.css" />" rel=stylesheet type="text/css">
 
     <div class="header">
 
         <div class="element-panel">
             <div class="lang lang-ua">
-                <a href="?lang=ua"><img src="${pageContext.request.contextPath}/images/blank.gif" class="flag img-ua" alt="Ukr"/></a>
+                <a href="?lang=ua"><img src="<c:url value="/resources/images/blank.gif" />" class="flag img-ua" />Ukr</a>
             </div>
             <div class="lang lang-en">
-                <a href="?lang=en"><img src="${pageContext.request.contextPath}/images/blank.gif" class="flag img-en" alt="En"/></a>
+                <a href="?lang=en"><img src="<c:url value="/resources/images/blank.gif" />" class="flag img-en" />En</a>
             </div>
         </div>
 
@@ -34,13 +34,10 @@
                 <c:otherwise>
                     ${msg:getMessage("logged")}
                     <a href="${pageContext.request.contextPath}/cabinet">
-                            ${user.email}" "
+                            ${user.email}
                     </a>
-
                     <a href="${pageContext.request.contextPath}/logout"> ${msg:getMessage("logout")}</a>
-
                 </c:otherwise>
-
             </c:choose>
         </div>
 

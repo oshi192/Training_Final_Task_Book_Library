@@ -14,9 +14,13 @@ img{ width:150px;
 }
 #errormessagesbox{
 font-size:20px; color:#aa0000;
+text-align: center;
+align: center;
 }
 #messagesbox{
 font-size:20px; color:#00aa00;
+text-align: center;
+align: center;
 }
 h1{
 color:white;

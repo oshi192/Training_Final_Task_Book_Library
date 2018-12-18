@@ -7,8 +7,7 @@
     <meta charset="UTF-8">
     <title>Some Books example</title>
     <link rel="viewport" >
-    <link rel="stylesheet" >
-    <link rel="stylesheet" href="css/mainStyle.css">
+    <link rel="stylesheet" href="<c:url value="/resources/css/mainStyle.css" />">
 </head>
 
 <body class="w3-light-grey">

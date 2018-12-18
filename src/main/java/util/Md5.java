@@ -10,6 +10,7 @@ public class Md5 {
 
     }
     public static String md5Password(String password) {
+        System.out.println("password->"+password);
         if("".equals(password))return "";
         try {
             MessageDigest digest = MessageDigest.getInstance("md5");
@@ -27,7 +28,7 @@ public class Md5 {
             }
             return buffer.toString();
 
-        } catch (NoSuchAlgorithmException e) {
+        } catch (Exception e) {
             e.printStackTrace();
             return "";
         }

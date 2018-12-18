@@ -17,6 +17,7 @@ public class CommandMannager {
         commands.put("login-submit", new LoginSubmitCommand());
         commands.put("submit-login", new LoginSubmitCommand());
         commands.put("submit-registration", new RegistrationSubmitCommand());
+        commands.put("cabinet", new CabinetCommand());
     }
 
     private CommandMannager() {

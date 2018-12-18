@@ -40,7 +40,7 @@ public class LoginSubmitCommand implements Command {
             user.setPassword("");
             request.getSession().setAttribute("user", user);
             System.out.println("\tset user in session: ");
-            page = new CabinetCommand().execute(request,response);
+            page = new HomepageCommand().execute(request,response);
             System.out.println("\tgo to page "+page);
             request.setAttribute(ATTR_NAME_ERROR_MESSAGE, "");
         } else {
