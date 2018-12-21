@@ -30,9 +30,11 @@ public class JDBCKeyWordDao implements KeyWordDao {
     }
 
     @Override
-    public List<KeyWord> findAll(int offset) {
+    public List<KeyWord> findAll(int offset, int limit) {
         return null;
     }
+
+
 
     @Override
     public void update(KeyWord entity) {

@@ -4,6 +4,10 @@
 <html>
 <head>
     <title>Title</title>
+    <link href="<c:url value="/resources/bootstrap/css/bootstrap.min.css" />" rel="stylesheet">
+    <link href="<c:url value="/resources/bootstrap/css/bootstrap.css" />" rel="stylesheet">
+    <script src="<c:url value="/resources/bootstrap/js/jquery-3.2.1.min.js" />"></script>
+    <script src="<c:url value="/resources/bootstrap/js/bootstrap.js" />"></script>
 </head>
 <body>
 
@@ -18,18 +22,15 @@
         <tr>
           <td></td>
           <td>${msg:getMessage("book-name")}</td>
-          <td>${msg:getMessage("book-authors")}</td>
-          <td>${msg:getMessage("book-location")}</td>
         </tr>
-        <c:forEach var="book" items="${requestScope.allBooks}">
+        <c:forEach var="book" items="${requestScope.bookList}">
             <tr>
-                <td><button type="submit" name="delete-book" value="${TakenBook.book.id}">${msg:getMessage("delete-book")}</button></td>
                 <td><c:out value="${book.name}"/></td>
-                <td><c:out value="${book.authors}"/></td>
-                <td><c:out value="${book.location}"/></td>
             </tr>
         </c:forEach>
     </table>
     </form>
+    <jsp:include page="../parts/pagination.jsp"/>
+
 </body>
 </html>

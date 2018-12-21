@@ -45,16 +45,13 @@ public class LogInCommand implements Command {
         System.out.println(request.getParameterNames().toString());
         System.out.println("email = "+email);
         System.out.println("pass = "+pass);
-        Map<String, String> messages = new HashMap<String, String>();
-
+        Map<String, String> messages = new HashMap<>();
         if (email == null || email.isEmpty()) {
             messages.put("email", "Please enter email");
         }
-
         if (pass == null || pass.isEmpty()) {
             messages.put("password", "Please enter password");
         }
-
         if (messages.isEmpty()) {
             User user = null;
             try {
@@ -64,10 +61,9 @@ public class LogInCommand implements Command {
             } catch (SQLException e) {
                 System.out.println("cannot connect to db:");
             }
-
             if (user != null) {
                 request.getSession().setAttribute("user", user);
-                return request.getContextPath();
+                return "redirect:homepage";
             } else {
                 messages.put("email", "Unknown email, please try again");
             }

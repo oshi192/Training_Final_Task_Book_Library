@@ -18,6 +18,8 @@ public class CommandMannager {
         commands.put("submit-login", new LoginSubmitCommand());
         commands.put("submit-registration", new RegistrationSubmitCommand());
         commands.put("cabinet", new CabinetCommand());
+        commands.put("manage-books", new AdminAllBookCommand());
+        commands.put("taken-books", new AdminTakenBooksCommand());
     }
 
     private CommandMannager() {

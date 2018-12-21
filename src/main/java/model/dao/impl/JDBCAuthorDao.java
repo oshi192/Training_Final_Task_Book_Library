@@ -62,7 +62,7 @@ public class JDBCAuthorDao implements AuthorDao {
     }
 
     @Override
-    public List<Author> findAll(int offset) {
+    public List<Author> findAll(int offset, int limit) {
         return null;
     }
 

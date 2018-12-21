@@ -31,8 +31,13 @@ public class JDBCTakenBookDao implements TakenBookDao {
         return null;
     }
 
-
     @Override
+    public List<TakenBook> findAll(int offset, int limit) {
+        return null;
+    }
+
+
+
     public List<TakenBook> findAll(int shift) {
         String sqlRequest = ResourceBundleManager.getSqlString(GET_ALL_PAGINATE);
 //        int maxBookon = ResourceBundleManager.getSqlString(GET_ALL_PAGINATE);

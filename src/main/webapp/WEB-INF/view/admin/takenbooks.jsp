@@ -9,7 +9,7 @@
 
 <ul>
  <li><a href="${pageContext.request.contextPath}/taken-books" class="w3-btn w3-hover-light-blue w3-round-large">${msg:getMessage("admin-taken-book")}</a></li>
- <li><a href="${pageContext.request.contextPath}/all-books" class="w3-btn w3-hover-light-blue w3-round-large">${msg:getMessage("admin-all-book")}</a></li>
+ <li><a href="${pageContext.request.contextPath}/manage-books" class="w3-btn w3-hover-light-blue w3-round-large">${msg:getMessage("admin-all-book")}</a></li>
  <li><a href="${pageContext.request.contextPath}/all-users" class="w3-btn w3-hover-light-blue w3-round-large">${msg:getMessage("admin-all-users")}</a></li>
 </ul>
 <form method="post" action="">

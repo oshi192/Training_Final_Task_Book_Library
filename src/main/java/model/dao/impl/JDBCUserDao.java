@@ -70,10 +70,10 @@ public class JDBCUserDao implements UserDao {
     }
 
     @Override
-    public List<User> findAll(int offset) {
-
+    public List<User> findAll(int offset, int limit) {
         return null;
     }
+
 
     public List<User> findAllUsersWithBook(int offset) {
 //        String sqlRequest = ResourceBundleManager.getSqlString("all-users-with-book");

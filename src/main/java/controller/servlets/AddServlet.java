@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -16,11 +17,14 @@ import java.util.HashSet;
 //@WebServlet(urlPatterns = "/library/*" )
 
 public class AddServlet extends HttpServlet {
-    //    private Map<String, Command> commands = new HashMap<>();
+    private static ServletContext context;
+    public static ServletContext getContext() {
+        return context;
+    }
     private static Logger logger =  LoggerFactory.getLogger(AddServlet.class);
 
     public void init(ServletConfig servletConfig) {
-
+        context = servletConfig.getServletContext();
         servletConfig.getServletContext()
                 .setAttribute("loggedUsers", new HashSet<String>());
     }
