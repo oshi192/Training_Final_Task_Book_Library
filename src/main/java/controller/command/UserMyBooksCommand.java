@@ -1,10 +1,10 @@
 package controller.command;
 
+import model.connectionpool.ConnectionPoolHolder;
 import model.dao.impl.JDBCTakenBookDao;
 import model.entity.TakenBook;
 import model.entity.User;
 import util.Configuration;
-import util.ConnectionPoolHolder;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

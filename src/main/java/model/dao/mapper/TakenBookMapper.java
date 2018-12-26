@@ -1,21 +1,17 @@
 package model.dao.mapper;
 
-import model.dao.impl.JDBCAuthorDao;
-import model.entity.Author;
 import model.entity.Book;
 import model.entity.TakenBook;
 import model.entity.User;
-import util.ConnectionPoolHolder;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.List;
 import java.util.Map;
 
 public class TakenBookMapper implements ObjectMapper<TakenBook>{
 
     @Override
-    public TakenBook extractFromResultSet(ResultSet rs) throws SQLException {
+    public TakenBook mapGet(ResultSet rs) throws SQLException {
         TakenBook takenBook = new TakenBook();
         Book book = new Book();
         User user = new User();

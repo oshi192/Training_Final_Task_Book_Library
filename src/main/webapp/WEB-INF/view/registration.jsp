@@ -30,7 +30,7 @@
                                 <c:out value="${message}"/>
                             </c:if>
                         </div>
-                        <img class="img img-responsive img-circle" src="<c:url value="/resources/image/user1r.png" />"/>
+                        <img class="rounded mx-auto d-block img img-responsive img-circle" src="<c:url value="/resources/image/user1r.png" />"/>
                             <div class="form-group">
                                 <label>${msg:getMessage("login-label-email")}</label>
                                 <input name="email" type="email" class="form-control"

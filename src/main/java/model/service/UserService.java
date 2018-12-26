@@ -1,8 +1,7 @@
 package model.service;
 
 import model.dao.DaoFactory;
-import model.dao.UserDao;
-import model.dao.impl.JDBCUserDao;
+import model.dao.mysql.MySqlUserDao;
 import model.entity.User;
 
 import java.sql.SQLException;
@@ -15,9 +14,7 @@ public class UserService {
 
     }
     public List<User> getAllUser() throws SQLException, ClassNotFoundException {
-        try (UserDao dao = daoFactory.createUserDao()) {
-            return dao.findAll(0,0);//todo
-        }
+        return null;
     }
 
     public User getUser(String email) throws SQLException, ClassNotFoundException {

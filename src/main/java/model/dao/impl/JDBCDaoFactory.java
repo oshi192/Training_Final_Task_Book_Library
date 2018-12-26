@@ -1,8 +1,8 @@
 package model.dao.impl;
 
+import model.connectionpool.ConnectionPoolHolder;
 import model.dao.*;
-import util.ConnectionPoolHolder;
-
+import model.dao.mysql.MySqlUserDao;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -32,11 +32,11 @@ public class JDBCDaoFactory extends DaoFactory {
 
     @Override
     public KeyWordDao createKeyWordDao() {
-        return new JDBCKeyWordDao(getConnection());
+        return new JDBCKeyWordDao();
     }
 
     @Override
     public UserDao createUserDao() {
-        return new JDBCUserDao(getConnection());
+        return new MySqlUserDao();
     }
 }

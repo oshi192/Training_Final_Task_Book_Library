@@ -1,27 +1,24 @@
 package controller.servlets;
 
-import controller.command.*;
+import controller.command.Command;
 import controller.manager.CommandMannager;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.log4j.Logger;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.HashSet;
-//@WebServlet(urlPatterns = "/library/*" )
 
 public class AddServlet extends HttpServlet {
     private static ServletContext context;
     public static ServletContext getContext() {
         return context;
     }
-    private static Logger logger =  LoggerFactory.getLogger(AddServlet.class);
+    private static Logger logger =  Logger.getLogger(AddServlet.class);
 
     public void init(ServletConfig servletConfig) {
         context = servletConfig.getServletContext();

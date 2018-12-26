@@ -1,20 +1,17 @@
 package controller.command;
 
-import model.dao.impl.JDBCUserDao;
+import model.dao.mysql.MySqlUserDao;
 import model.entity.User;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.log4j.Logger;
 import util.Configuration;
-import util.ConnectionPoolHolder;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
 public class LogInCommand implements Command {
-    private static Logger logger = LoggerFactory.getLogger(LogInCommand.class);
+    private static Logger logger = Logger.getLogger(LogInCommand.class);
 //  /  @Override
 //    public String execute(HttpServletRequest request) {
 //        return Configuration.getProperty(
@@ -54,13 +51,9 @@ public class LogInCommand implements Command {
         }
         if (messages.isEmpty()) {
             User user = null;
-            try {
-                user = new JDBCUserDao(ConnectionPoolHolder.getDataSource().getConnection())
-                        .findByEmail(email);
-                System.out.println("user"+user);
-            } catch (SQLException e) {
-                System.out.println("cannot connect to db:");
-            }
+            user = new MySqlUserDao()
+                    .findByEmail(email);
+            System.out.println("user"+user);
             if (user != null) {
                 request.getSession().setAttribute("user", user);
                 return "redirect:homepage";

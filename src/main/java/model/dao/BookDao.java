@@ -8,7 +8,5 @@ import java.util.List;
 import java.util.Optional;
 
 public interface BookDao extends GenericDao<Book> {
-    Optional<Author> findByAuthor(String authorName);
-    Optional<Author> findByName(String name);
 
 }

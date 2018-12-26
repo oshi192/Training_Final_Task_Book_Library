@@ -8,7 +8,7 @@ import java.util.Map;
 
 public class AuthorMapper implements ObjectMapper<Author> {
     @Override
-    public Author extractFromResultSet(ResultSet rs) throws SQLException {
+    public Author mapGet(ResultSet rs) throws SQLException {
         Author author = new Author();
         author.setId(rs.getInt("author_id"));
         author.setFirstName(rs.getString("first_name"));

@@ -1,4 +1,4 @@
-package util;
+package model.connectionpool;
 
 import org.apache.commons.dbcp.BasicDataSource;
 

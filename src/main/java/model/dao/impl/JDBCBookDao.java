@@ -1,10 +1,10 @@
 package model.dao.impl;
 
+import config.ResourceBundleManager;
 import model.dao.BookDao;
 import model.dao.mapper.BookMapper;
 import model.entity.Author;
 import model.entity.Book;
-import util.ResourceBundleManager;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -23,27 +23,6 @@ public class JDBCBookDao implements BookDao {
 this.connection=connection;
     }
 
-    @Override
-    public Optional<Author> findByAuthor(String authorName) {
-        return Optional.empty();
-    }
-
-    @Override
-    public Optional<Author> findByName(String name) {
-        return Optional.empty();
-    }
-
-    @Override
-    public void create(Book entity) {
-
-    }
-
-    @Override
-    public Book findById(int id) {
-        return null;
-    }
-
-    @Override
     public List<Book> findAll(int offset, int limit) {
         List<Book> result = new ArrayList<>();
         String query = ResourceBundleManager.getSqlString(BOOKS_FIND_ALL_PAGINATE);
@@ -56,7 +35,7 @@ this.connection=connection;
             rs = ps.executeQuery();
             BookMapper mapper = new BookMapper();
             while (rs.next()){
-                result.add(mapper.extractFromResultSet(rs));
+                result.add(mapper.mapGet(rs));
             }
         }catch (Exception ex){
             //todo my exception
@@ -64,16 +43,6 @@ this.connection=connection;
         }
         close();
         return result;
-    }
-
-    @Override
-    public void update(Book entity) {
-
-    }
-
-    @Override
-    public void delete(int id) {
-
     }
 
     @Override
@@ -96,5 +65,30 @@ this.connection=connection;
             e.printStackTrace();
         }
         return 0;
+    }
+
+    @Override
+    public Optional<Book> get(int id) {
+        return Optional.empty();
+    }
+
+    @Override
+    public List<Book> getAll() {
+        return null;
+    }
+
+    @Override
+    public void save(Book book) {
+
+    }
+
+    @Override
+    public void update(Book book, String[] params) {
+
+    }
+
+    @Override
+    public void delete(Book book) {
+
     }
 }

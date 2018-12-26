@@ -20,6 +20,7 @@ public class CommandMannager {
         commands.put("cabinet", new CabinetCommand());
         commands.put("manage-books", new AdminAllBookCommand());
         commands.put("taken-books", new AdminTakenBooksCommand());
+        commands.put("all-books", new AllBooksCommand());
     }
 
     private CommandMannager() {
