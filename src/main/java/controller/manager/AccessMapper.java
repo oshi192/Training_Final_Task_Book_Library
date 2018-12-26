@@ -34,6 +34,7 @@ public class AccessMapper {
         rights.put("book-list-admin", Arrays.asList(Role.ADMIN));
         rights.put("taken-books-admin", Arrays.asList(Role.ADMIN));
         rights.put("all-books", Arrays.asList(Role.GUEST, Role.USER, Role.ADMIN));
+        rights.put("manage-books", Arrays.asList(Role.GUEST, Role.USER, Role.ADMIN));
         return rights;
     }
 

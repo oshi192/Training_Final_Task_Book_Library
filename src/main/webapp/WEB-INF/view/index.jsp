@@ -22,10 +22,10 @@
 
                     <div class="jumbotron">
                         <h2>
-                            Hello, world!
+                            ${msg:getMessage("index-theme")}
                         </h2>
                         <p>
-                            This is a template for a simple marketing or informational website. It includes a large callout called the hero unit and three supporting pieces of content. Use it as a starting point to create something more unique.
+                            ${msg:getMessage("index-text")}
                         </p>
                         <p>
                             <a class="btn btn-primary btn-large" href="#">Learn more</a>

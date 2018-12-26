@@ -11,6 +11,9 @@
                 <li class="nav-item active">
                      <a class="nav-link" href="${pageContext.request.contextPath}/all-books"">${msg:getMessage("all-books")} <span class="sr-only">(current)</span></a>
                 </li>
+                <li class="nav-item active">
+                     <a class="nav-link" href="${pageContext.request.contextPath}/manage-books"">${msg:getMessage("manage-books")} <span class="sr-only">(current)</span></a>
+                </li>
             </ul>
             <ul class="navbar-nav ml-md-auto">
                 <c:choose>
@@ -25,8 +28,10 @@
                         <li class="nav-item active"><a class="nav-link" href="${pageContext.request.contextPath}/logout"><span class="glyphicon glyphicon-log-out"></span> ${msg:getMessage("logout")}</a></li>
                     </c:otherwise>
                 </c:choose>
-                <div class="bfh-selectbox bfh-languages" data-language="en_US" data-available="en_US,fr_CA,es_MX" data-flags="true">
-                </div>
+                <ul class="lang">
+                <li class=""><a href="?lang=En">En</a></li>
+                <li class=""><a href="?lang=Ua">Ua</a></li>
+                </ul>
 
             </ul>
         </div>

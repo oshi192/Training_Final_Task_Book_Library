@@ -7,12 +7,14 @@
         <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no"/>
         <link href="<c:url value="/resources/bootstrap/css/bootstrap.min.css" />" rel="stylesheet">
         <link href="<c:url value="/resources/bootstrap/css/bootstrap.css" />" rel="stylesheet">
-        <link href="<c:url value="/resources/css/login.css" />" rel="stylesheet">
+        <link href="<c:url value="/resources/css/login5.css" />" rel="stylesheet">
+        <link href="<c:url value="/resources/css/flags.css" />" rel="stylesheet">
         <script src="<c:url value="/resources/bootstrap/js/jquery-3.2.1.min.js" />"></script>
         <script src="<c:url value="/resources/bootstrap/js/bootstrap.js" />"></script>
     </head>
     <body>
     <div class="container-fluid bg">
+     <jsp:include page="parts/navbar.jsp"/>
         <div class="row">
             <div class="col-md-4 col-sm-4 col-xs-12"></div>
             <div class="col-md-4 col-sm-4 col-xs-12">

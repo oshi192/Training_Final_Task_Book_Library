@@ -11,6 +11,7 @@
         <link href="<c:url value="/resources/bootstrap/css/bootstrap.css" />" rel="stylesheet">
         <link href="<c:url value="/resources/bootstrap/css/bootstrap-theme.css" />" rel="stylesheet">
         <script src="<c:url value="/resources/bootstrap/js/jquery-3.2.1.min.js" />"></script>
+        <link href="<c:url value="/resources/css/flags.css" />" rel="stylesheet">
         <script src="<c:url value="/resources/bootstrap/js/bootstrap.min.js" />"></script>
     </head>
 
