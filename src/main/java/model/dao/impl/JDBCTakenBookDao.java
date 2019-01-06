@@ -1,17 +1,18 @@
 package model.dao.impl;
 
+import config.ResourceBundleManager;
 import model.dao.TakenBookDao;
 import model.dao.mapper.TakenBookMapper;
 import model.dao.mapper.UserTakenBookMapper;
 import model.entity.Author;
 import model.entity.TakenBook;
-import util.ResourceBundleManager;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class JDBCTakenBookDao implements TakenBookDao {
     private static final String GET_ALL_PAGINATE = "takenBooks-getAll";
@@ -22,17 +23,33 @@ public class JDBCTakenBookDao implements TakenBookDao {
     }
 
     @Override
-    public void create(TakenBook entity) {
+    public void save(TakenBook entity) {
 
     }
 
     @Override
-    public TakenBook findById(int id) {
+    public void update(TakenBook takenBook, String[] params) {
+
+    }
+
+    @Override
+    public void delete(TakenBook takenBook) {
+
+    }
+
+
+    @Override
+    public Optional<TakenBook> get(int id) {
+        return Optional.empty();
+    }
+
+    @Override
+    public List<TakenBook> getAll() {
         return null;
     }
 
 
-    @Override
+
     public List<TakenBook> findAll(int shift) {
         String sqlRequest = ResourceBundleManager.getSqlString(GET_ALL_PAGINATE);
 //        int maxBookon = ResourceBundleManager.getSqlString(GET_ALL_PAGINATE);
@@ -45,12 +62,19 @@ public class JDBCTakenBookDao implements TakenBookDao {
             rs = ps.executeQuery();
             TakenBookMapper mapper = new TakenBookMapper();
             while (rs.next()) {
-                TakenBook takenBook = mapper.extractFromResultSet(rs);
+                TakenBook takenBook = mapper.mapGet(rs);
                 result.add(takenBook);
 //                List<Author> authors = new JDBCAuthorDao(connection)
 //                        .findAllAuthorsByBookId(takenBook.getBook().getId());
 //                takenBook.setAuthors(authors);
             }
+            close();
+            JDBCAuthorDao authorDao = new JDBCAuthorDao(connection);
+            for(TakenBook takenBook : result) {
+                List<Author> authors = authorDao.findAllAuthorsByBookId(takenBook.getBook().getId());
+                takenBook.setAuthors(authors);
+            }
+            authorDao.close();
         } catch (Exception ex) {
             //todo my exception
             throw new RuntimeException(ex);
@@ -58,15 +82,6 @@ public class JDBCTakenBookDao implements TakenBookDao {
         return result;
     }
 
-    @Override
-    public void update(TakenBook entity) {
-
-    }
-
-    @Override
-    public void delete(int id) {
-
-    }
 
     @Override
     public void close() {
@@ -85,7 +100,7 @@ public class JDBCTakenBookDao implements TakenBookDao {
             rs = ps.executeQuery();
             UserTakenBookMapper mapper = new UserTakenBookMapper();
             while (rs.next()) {
-                TakenBook takenBook = mapper.extractFromResultSet(rs);
+                TakenBook takenBook = mapper.mapGet(rs);
                 result.add(takenBook);
             }
         } catch (Exception ex) {

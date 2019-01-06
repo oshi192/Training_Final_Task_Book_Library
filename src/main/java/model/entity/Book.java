@@ -1,10 +1,13 @@
 package model.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Book {
     private int id;
     private String name;
     private String section;
-
+    private String authors="-";
     public Book() {
     }
 
@@ -12,6 +15,14 @@ public class Book {
         this.id = id;
         this.name = name;
         this.section = section;
+    }
+
+    public String getAuthors() {
+        return authors;
+    }
+
+    public void setAuthors(String authors) {
+        this.authors = authors;
     }
 
     public int getId() {
@@ -36,5 +47,15 @@ public class Book {
 
     public void setSection(String section) {
         this.section = section;
+    }
+
+    @Override
+    public String toString() {
+        return "Book{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", section='" + section + '\'' +
+                ", authors='" + authors + '\'' +
+                '}';
     }
 }

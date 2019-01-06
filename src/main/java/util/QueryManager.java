@@ -1,15 +1,13 @@
 package util;
 
 import model.dao.ConsumerRT;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.log4j.Logger;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 
 public class QueryManager {
-    private static final Logger logger = LoggerFactory.getLogger(QueryManager.class);
-
+    private static final Logger logger = Logger.getLogger(QueryManager.class);
     public static void executeQuery(Connection connection, String query, ConsumerRT<PreparedStatement> preparedStatementConsumer) {
         PreparedStatement preparedStatement = null;
         try {

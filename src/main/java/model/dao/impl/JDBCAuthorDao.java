@@ -47,7 +47,17 @@ public class JDBCAuthorDao implements AuthorDao {
     }
 
     @Override
-    public void create(Author author) {
+    public Optional<Author> get(int id) {
+        return Optional.empty();
+    }
+
+    @Override
+    public List<Author> getAll() {
+        return null;
+    }
+
+    @Override
+    public void save(Author author) {
         //todo  check this
         executeQuery(connection, ADD_AUTHOR_QUERY, preparedStatement -> {
             preparedStatement.setString(1, author.getFirstName());
@@ -57,30 +67,13 @@ public class JDBCAuthorDao implements AuthorDao {
     }
 
     @Override
-    public Author findById(int id) {
-        return null;
+    public void update(Author author, String[] params) {
+
     }
 
     @Override
-    public List<Author> findAll(int offset) {
-        return null;
-    }
+    public void delete(Author author) {
 
-    @Override
-    public void update(Author author) {
-        executeQuery(connection, UPDATE_AUTHOR_QUERY, preparedStatement -> {
-            preparedStatement.setString(1, author.getFirstName());
-            preparedStatement.setString(2, author.getSecondName());
-            preparedStatement.setString(3, author.getPatronymicName());
-            preparedStatement.setInt(4, author.getId());
-        });
-    }
-
-    @Override
-    public void delete(int id) {
-        executeQuery(connection, DELETE_AUTHOR_QUERY, preparedStatement -> {
-            preparedStatement.setInt(1, id);
-        });
     }
 
     @Override
@@ -96,7 +89,7 @@ public class JDBCAuthorDao implements AuthorDao {
             rs = ps.executeQuery();
             AuthorMapper mapper = new AuthorMapper();
             while (rs.next()) {
-                result.add(mapper.extractFromResultSet(rs));
+                result.add(mapper.mapGet(rs));
             }
             System.out.println("resultlist"+result);
         } catch (Exception ex) {

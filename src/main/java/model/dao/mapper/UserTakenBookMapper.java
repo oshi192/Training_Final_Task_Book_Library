@@ -11,7 +11,7 @@ import java.util.Map;
 public class UserTakenBookMapper implements ObjectMapper<TakenBook> {
 
     @Override
-    public TakenBook extractFromResultSet(ResultSet rs) throws SQLException {
+    public TakenBook mapGet(ResultSet rs) throws SQLException {
         TakenBook takenBook = new TakenBook();
         Book book = new Book();
         book.setId(rs.getInt("book_id"));

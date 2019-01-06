@@ -45,12 +45,16 @@ public class Author {
     }
 
     public void setPatronymicName(String patronymicName) {
-        this.patronymicName = patronymicName;
+        if(patronymicName==null){
+            this.patronymicName = "";
+        }else {
+            this.patronymicName = patronymicName;
+        }
     }
 
     @Override
     public String toString() {
-        return firstName + ((patronymicName.equalsIgnoreCase("null"))?"":(" " + patronymicName ))+
+        return firstName +  patronymicName +
                 " " +secondName ;
     }
 }

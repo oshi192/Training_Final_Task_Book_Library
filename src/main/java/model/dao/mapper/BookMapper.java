@@ -10,7 +10,7 @@ import java.util.Map;
 public class BookMapper implements ObjectMapper<Book> {
 
     @Override
-    public Book extractFromResultSet(ResultSet rs) throws SQLException {
+    public Book mapGet(ResultSet rs) throws SQLException {
         Book book = new Book();
         book.setId(rs.getInt("book_id"));
         book.setName(rs.getString("book_name"));

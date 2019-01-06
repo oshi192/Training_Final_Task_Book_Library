@@ -13,7 +13,7 @@
     <uri>msg</uri>
     <function>
         <name>getMessage</name>
-        <function-class>util.ResourceBundleManager</function-class>
+        <function-class>config.ResourceBundleManager</function-class>
         <function-signature>java.lang.String getMessage(java.lang.String)</function-signature>
     </function>
 </taglib>

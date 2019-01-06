@@ -1,7 +1,7 @@
 package controller.filter;
 
+import config.ResourceBundleManager;
 import org.apache.commons.lang3.StringUtils;
-import util.ResourceBundleManager;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;

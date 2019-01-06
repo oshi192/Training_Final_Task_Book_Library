@@ -1,17 +1,15 @@
 package controller.command;
 
 
-import model.dao.impl.JDBCUserDao;
+import model.dao.mysql.MySqlUserDao;
 import model.entity.User;
 import util.Configuration;
-import util.ConnectionPoolHolder;
 import util.Md5;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.sql.Connection;
-import java.sql.SQLException;
 import java.util.Objects;
 
 
@@ -51,28 +49,22 @@ public class LoginSubmitCommand implements Command {
 
     public User checkUser(String email, String insertedPassword, HttpServletRequest request) {
         Connection connection = null;
-        try {
-            connection = ConnectionPoolHolder.getDataSource().getConnection();
-            User user = new JDBCUserDao(connection).findByEmail(email);
-            if (Objects.isNull(user)) {
-                request.setAttribute(ATTR_NAME_ERROR_MESSAGE, "No user found");
-                return user;
-            }
-            String savedPassword = user.getPassword();
-            System.out.println("\tsavedPassword: "+savedPassword);
-            if (savedPassword.equals(insertedPassword)) {
-                //todo md5
-                System.out.println("\tequals password :"+Md5.md5Password(insertedPassword));
-                return user;
-            } else {
-                System.out.println("\tnot equals password "+Md5.md5Password(insertedPassword));
-                request.setAttribute(ATTR_NAME_ERROR_MESSAGE, "Wrong password");
-                return null;
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
+        User user = new MySqlUserDao().findByEmail(email);
+        if (Objects.isNull(user)) {
+            request.setAttribute(ATTR_NAME_ERROR_MESSAGE, "No user found");
+            return user;
         }
-        return null;
+        String savedPassword = user.getPassword();
+        System.out.println("\tsavedPassword: "+savedPassword);
+        if (savedPassword.equals(insertedPassword)) {
+            //todo md5
+            System.out.println("\tequals password :"+Md5.md5Password(insertedPassword));
+            return user;
+        } else {
+            System.out.println("\tnot equals password "+Md5.md5Password(insertedPassword));
+            request.setAttribute(ATTR_NAME_ERROR_MESSAGE, "Wrong password");
+            return null;
+        }
     }
 
 }

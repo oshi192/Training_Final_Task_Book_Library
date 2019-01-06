@@ -10,42 +10,38 @@ import java.util.Optional;
 public class JDBCKeyWordDao implements KeyWordDao {
     private Connection connection;
 
-    public JDBCKeyWordDao(Connection connection) {
-        this.connection = connection;
-    }
-
     @Override
     public Optional<KeyWord> findByValue(String value) {
         return Optional.empty();
     }
 
     @Override
-    public void create(KeyWord entity) {
-
+    public Optional<KeyWord> get(int id) {
+        return Optional.empty();
     }
 
     @Override
-    public KeyWord findById(int id) {
+    public List<KeyWord> getAll() {
         return null;
     }
 
     @Override
-    public List<KeyWord> findAll(int offset) {
-        return null;
-    }
-
-    @Override
-    public void update(KeyWord entity) {
+    public void save(KeyWord keyWord) {
 
     }
 
     @Override
-    public void delete(int id) {
+    public void update(KeyWord keyWord, String[] params) {
 
     }
 
     @Override
-    public void close() {
+    public void delete(KeyWord keyWord) {
+
+    }
+
+    @Override
+    public void close() throws Exception {
 
     }
 }

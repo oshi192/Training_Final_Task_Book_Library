@@ -18,6 +18,12 @@ public class CommandMannager {
         commands.put("submit-login", new LoginSubmitCommand());
         commands.put("submit-registration", new RegistrationSubmitCommand());
         commands.put("cabinet", new CabinetCommand());
+<<<<<<< HEAD
+=======
+        commands.put("manage-books", new AdminAllBookCommand());
+        commands.put("taken-books", new AdminTakenBooksCommand());
+        commands.put("all-books", new AllBooksCommand());
+>>>>>>> edfd3089b9d81b68c9a8db558a42af5700b5ef02
     }
 
     private CommandMannager() {

@@ -7,7 +7,11 @@
         <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no"/>
         <link href="<c:url value="/resources/bootstrap/css/bootstrap.min.css" />" rel="stylesheet">
         <link href="<c:url value="/resources/bootstrap/css/bootstrap.css" />" rel="stylesheet">
+<<<<<<< HEAD
         <link href="<c:url value="/resources/css/login.css" />" rel="stylesheet">
+=======
+        <link href="<c:url value="/resources/css/login5.css" />" rel="stylesheet">
+>>>>>>> edfd3089b9d81b68c9a8db558a42af5700b5ef02
         <script src="<c:url value="/resources/bootstrap/js/jquery-3.2.1.min.js" />"></script>
         <script src="<c:url value="/resources/bootstrap/js/bootstrap.js" />"></script>
     </head>
@@ -30,7 +34,11 @@
                                 <c:out value="${message}"/>
                             </c:if>
                         </div>
+<<<<<<< HEAD
                         <img class="img img-responsive img-circle" src="<c:url value="/resources/image/user1r.png" />"/>
+=======
+                        <img class="rounded mx-auto d-block img img-responsive img-circle" src="<c:url value="/resources/image/user1r.png" />"/>
+>>>>>>> edfd3089b9d81b68c9a8db558a42af5700b5ef02
                             <div class="form-group">
                                 <label>${msg:getMessage("login-label-email")}</label>
                                 <input name="email" type="email" class="form-control"

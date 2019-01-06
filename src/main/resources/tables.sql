@@ -19,6 +19,13 @@ CREATE TABLE IF NOT EXISTS `library`.`books` (
   PRIMARY KEY (`book_id`))
 ENGINE = InnoDB AUTO_INCREMENT = 1 DEFAULT CHARSET=utf8;
 
+CREATE TABLE IF NOT EXISTS `library`.`books_ua` (
+  `book_id` INT NOT NULL AUTO_INCREMENT,
+  `book_name` VARCHAR(255) NOT NULL,
+  `section` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`book_id`))
+ENGINE = InnoDB AUTO_INCREMENT = 1 DEFAULT CHARSET=utf8;
+
 CREATE TABLE IF NOT EXISTS `library`.`author` (
   `author_id` INT NOT NULL AUTO_INCREMENT,
   `first_name` VARCHAR(45) NOT NULL,
@@ -27,7 +34,21 @@ CREATE TABLE IF NOT EXISTS `library`.`author` (
   PRIMARY KEY (`author_id`))
 ENGINE = InnoDB AUTO_INCREMENT = 1 DEFAULT CHARSET=utf8;
 
+CREATE TABLE IF NOT EXISTS `library`.`author_ua` (
+  `author_id` INT NOT NULL AUTO_INCREMENT,
+  `first_name` VARCHAR(45) NOT NULL,
+  `second_name` VARCHAR(45) NOT NULL,
+  `patronymic_name` VARCHAR(45) NULL,
+  PRIMARY KEY (`author_id`))
+ENGINE = InnoDB AUTO_INCREMENT = 1 DEFAULT CHARSET=utf8;
+
 CREATE TABLE IF NOT EXISTS `library`.`book_key_words` (
+  `key_word_id` INT NOT NULL AUTO_INCREMENT,
+  `value` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`key_word_id`))
+ENGINE = InnoDB AUTO_INCREMENT = 1 DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `library`.`book_key_words_ua` (
   `key_word_id` INT NOT NULL AUTO_INCREMENT,
   `value` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`key_word_id`))
