@@ -18,8 +18,8 @@ public class QueryBuilder {
     private static final String OFFSET = "offset";
     private String query;
     private String clean;
-    private String pagination;
-    private String condition;
+    private String pagination = "";
+    private String condition = "";
 
     public QueryBuilder(String clean) {
         this.query = clean;
@@ -40,10 +40,10 @@ public class QueryBuilder {
         query += ";";
         Connection connection = ConnectionPoolHolder.getDataSource().getConnection();
         PreparedStatement ps = connection.prepareCall(query);
-        {
+        logger.info("executing query:"+query);
             ResultSet rs = ps.executeQuery();
             return rs;
-        }
+
     }
 
     public String getQuery() {

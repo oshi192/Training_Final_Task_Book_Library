@@ -14,11 +14,11 @@ public class CommandMannager {
         commands.put("exception", new ExceptionCommand());
         commands.put("registration", new RegistrationCommand());
         commands.put("", new HomepageCommand());
-        commands.put("submit-registration", new RegistrationSubmitCommand());
-        commands.put("cabinet", new CabinetCommand());
-        commands.put("manage-books", new AdminAllBookCommand());
-        commands.put("taken-books", new AdminTakenBooksCommand());
         commands.put("all-books", new AllBooksCommand());
+        commands.put("all-users", new TakenBooksCommand());
+        commands.put("books-requests", new BooksRequestsCommand());
+        commands.put("my-books", new MyBooksCommand());
+        commands.put("my-requests", new MyRequestsCommand());
     }
 
     private CommandMannager() {

@@ -4,25 +4,24 @@
 
     <nav class="navbar navbar-expand-lg navbar-light bg-light static-top navbar-dark bg-dark">
 
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"><span class="navbar-toggler-icon"></span></button>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="navbar-toggler-icon"></span>
+        </button>
         <a class="navbar-brand" href="${pageContext.request.contextPath}/">${msg:getMessage("library")}</a>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="navbar-nav">
                 <li class="nav-item active">
                      <a class="nav-link" href="${pageContext.request.contextPath}/all-books">${msg:getMessage("all-books")} <span class="sr-only">(current)</span></a>
                 </li>
-                <li class="nav-item active">
-                     <a class="nav-link" href="${pageContext.request.contextPath}/manage-books">A${msg:getMessage("manage-books")} <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item active">
-                     <a class="nav-link" href="${pageContext.request.contextPath}/manage-books">A all users with books<span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item active">
-                     <a class="nav-link" href="${pageContext.request.contextPath}/manage-books">U my books <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item active">
-                     <a class="nav-link" href="${pageContext.request.contextPath}/manage-books">U take book <span class="sr-only">(current)</span></a>
-                </li>
+                    <c:if test="${user.role == 'ADMIN'}">
+                        <jsp:include page="admin-menu.jsp"/>
+                    </c:if>
+                    <c:if test="${user.role == 'USER'}">
+                        <jsp:include page="usermenu.jsp"/>
+                    </c:if>
+                    <c:if test="${user eq Nan}">
+
+                    </c:if>
             </ul>
             <ul class="navbar-nav ml-md-auto">
                 <c:choose>

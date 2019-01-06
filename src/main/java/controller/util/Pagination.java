@@ -1,4 +1,4 @@
-package controller.manager;
+package controller.util;
 
 import model.dao.mysql.MySqlBookDao;
 import model.entity.Book;

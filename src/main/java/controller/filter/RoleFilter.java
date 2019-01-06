@@ -1,13 +1,12 @@
 package controller.filter;
 
-import controller.manager.AccessMapper;
+import controller.util.AccessMapper;
 import model.entity.User;
 import util.Configuration;
 
 import javax.servlet.*;
 import java.io.IOException;
 import java.util.Objects;
-import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 //@WebFilter(urlPatterns = {"/library/"})

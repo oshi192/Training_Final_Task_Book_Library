@@ -1,5 +1,6 @@
 package controller.command;
 
+import config.ResourceBundleManager;
 import controller.util.LogInOutUtils;
 import model.dao.mysql.MySqlUserDao;
 import model.entity.User;
@@ -15,6 +16,12 @@ import java.util.Map;
 public class LogInCommand implements Command {
     private static Logger logger = Logger.getLogger(LogInCommand.class);
     private static LogInOutUtils utils = new LogInOutUtils();
+    private final static String ENTER_EMAIL= "login-please-enter-email";
+    private final static String ENTER_PASSWORD= "login-please-enter-password";
+    private final static String REGEX_EMAIL= "regex-email";
+    private final static String HINT_EMAIL= "hint-email";
+    private final static String REGEX_PASSWORD= "regex-password";
+    private final static String HINT_PASSWORD= "hint-password";
 
     @Override
     public String executeGet(HttpServletRequest request, HttpServletResponse response) {
@@ -30,13 +37,8 @@ public class LogInCommand implements Command {
         logger.info(request.getParameterNames().toString());
         logger.info("email = " + email + " pass = " + pass);
         Map<String, String> messages = new HashMap<>();
-        if (email == null || email.isEmpty()) {
-            messages.put("email", "Please enter email");
-        }
-        if (pass == null || pass.isEmpty()) {
-            messages.put("password", "Please enter password");
-        }
-        if (messages.isEmpty()) {
+
+        if (checkEmailAndPasword(request,messages,email,pass)) {
             User user = new MySqlUserDao()
                     .findByEmail(email);
             logger.info("found user:" + user);
@@ -44,7 +46,6 @@ public class LogInCommand implements Command {
                 if (user.getPassword().equals(pass)) {
                     user.setPassword("");
                     logIn(request, user);
-                    //request.getSession().setAttribute("user", user);
                     page = "redirect:";
                 } else {
                     messages.put("password", "Wrong password! please try again");
@@ -54,11 +55,33 @@ public class LogInCommand implements Command {
                 messages.put("email", "Unknown email, please try again");
                 page = Configuration.getProperty(Configuration.LOGIN_PAGE_PATH);
             }
+        }else{
+            page = Configuration.getProperty(Configuration.LOGIN_PAGE_PATH);
         }
 
         request.setAttribute("messages", messages);
         logger.info("errorMessages: " + messages.toString());
+        logger.info("toPage: " + page);
         return page;
+    }
+    boolean checkEmailAndPasword(HttpServletRequest request,Map<String, String> messages,String email,String pass){
+        if (email == null || email.isEmpty()) {
+            messages.put("email", ResourceBundleManager.getMessage(ENTER_EMAIL));
+        }else{
+            if(!email.matches(ResourceBundleManager.getMessage(REGEX_EMAIL))){
+                messages.put("email",  ResourceBundleManager.getMessage(HINT_EMAIL));
+            }else{
+                request.setAttribute("userEmail",email);
+            }
+        }
+        if (pass == null || pass.isEmpty()) {
+            messages.put("password", ResourceBundleManager.getMessage(ENTER_PASSWORD));
+        }else{
+            if(!pass.matches(ResourceBundleManager.getMessage(REGEX_PASSWORD))){
+                messages.put("password", ResourceBundleManager.getMessage(HINT_PASSWORD));
+            }
+        }
+        return messages.isEmpty();
     }
 
     //todo rename or remove

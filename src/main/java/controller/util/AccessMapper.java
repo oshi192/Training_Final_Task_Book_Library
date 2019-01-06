@@ -1,9 +1,8 @@
-package controller.manager;
+package controller.util;
 
 import model.entity.User;
 import model.entity.User.Role;
 
-import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -21,9 +20,29 @@ public class AccessMapper {
     private HashMap<User.Role, List<String>> setRights() {
 
         rights = new HashMap<>();
-        rights.put(Role.GUEST,Arrays.asList("","login","registration","submit-login","submit-registration","all-books"));
-        rights.put(Role.USER,Arrays.asList("","logout","all-books"));
-        rights.put(Role.ADMIN,Arrays.asList("","logout","all-books","manage-books"));
+        rights.put(Role.GUEST,Arrays.asList(
+                "",
+                "login",
+                "registration",
+                "submit-login",
+                "submit-registration",
+                "all-books"
+        ));
+        rights.put(Role.USER,Arrays.asList(
+                "",
+                "logout",
+                "all-books",
+                "my-books",
+                "my-requests"
+        ));
+        rights.put(Role.ADMIN,Arrays.asList(
+                "",
+                "logout",
+                "all-books",
+                //"manage-books",
+                "all-users",
+                "books-requests"
+        ));
         return rights;
     }
 

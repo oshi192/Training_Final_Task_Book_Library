@@ -1,7 +1,7 @@
 package controller.command;
 
 import config.ResourceBundleManager;
-import controller.manager.Pagination;
+import controller.util.Pagination;
 import controller.util.QueryBuilder;
 import model.dao.mysql.MySqlBookDao;
 import model.entity.Book;

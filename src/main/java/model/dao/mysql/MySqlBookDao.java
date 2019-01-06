@@ -144,10 +144,9 @@ public class MySqlBookDao implements BookDao {
             if(rs.next()){
                 count = rs.getInt("count");
             }
-            logger.info("success!...count" + books);
+            logger.info("success!...count" +count);
         } catch (SQLException ex) {
             logger.error("fail..." + ex);
-            return 0;
         }
         return count;
     }

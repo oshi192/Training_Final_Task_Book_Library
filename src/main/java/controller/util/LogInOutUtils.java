@@ -19,7 +19,8 @@ public class LogInOutUtils {
     private static ServletContext context = AddServlet.getContext();
 
     private Integer getUserId(HttpSession session) {
-        return Optional.ofNullable(((User)session.getAttribute("user")).getId()).orElse(0);
+        User user = (User)session.getAttribute("user");
+        return user==null?0:user.getId();
     }
     public void setLoggedUsers(Map<Integer, HttpSession> loggedUsers) {
         context.setAttribute("loggedUsers", loggedUsers);

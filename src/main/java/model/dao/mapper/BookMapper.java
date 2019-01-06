@@ -24,3 +24,4 @@ public class BookMapper implements ObjectMapper<Book> {
         return cache.get(book.getId());
     }
 }
+

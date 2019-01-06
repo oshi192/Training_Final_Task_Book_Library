@@ -33,12 +33,23 @@
                     </div>
                     <img class="rounded mx-auto d-block img img-responsive img-circle" src="<c:url value="/resources/image/user1.png" />"/>
                         <div class="form-group">
-                            <label>${msg:getMessage("login-label-email")}</label>
-                            <input name="email" type="email" class="form-control" placeholder="Email">
+                            ${requestScope.messages.email}
+                        <div>
+                        <div class="form-group">
+                            <input name="email"
+                            type="email"
+                            class="form-control"
+                            placeholder=${msg:getMessage("login-label-email-placeholder")}
+                            value="${requestScope.userEmail}">
                         </div>
                         <div class="form-group">
-                            <label>${msg:getMessage("login-label-password")}</label>
-                            <input name="password" type="password" class="form-control" placeholder="Password">
+                            ${requestScope.messages.password}
+                        <div>
+                        <div class="form-group">
+                            <input name="password"
+                            type="password"
+                            class="form-control"
+                            placeholder=${msg:getMessage("login-label-password-placeholder")}>
                         </div>
                         <button type="submit" class="btn btn-success btn-block ">${msg:getMessage("login-button-login")}</button>
                          </form>

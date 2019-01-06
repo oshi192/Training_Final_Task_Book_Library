@@ -1,13 +1,10 @@
 package model.entity;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Book {
-    private int id;
-    private String name;
-    private String section;
-    private String authors="-";
+    protected int id;
+    protected String name;
+    protected String section;
+    protected String authors;
     public Book() {
     }
 
