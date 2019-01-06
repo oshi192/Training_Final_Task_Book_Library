@@ -2,6 +2,7 @@ package controller.command;
 
 import model.dao.impl.JDBCUserDao;
 import model.entity.User;
+import util.Configuration;
 import util.ConnectionPoolHolder;
 import util.ResourceBundleManager;
 
@@ -41,17 +42,18 @@ public class RegistrationSubmitCommand implements Command {
                     page = "redirect:login";
                     System.out.println("msg-registration-successful");
                 } else {
-                    request.setAttribute("error-message", ResourceBundleManager.getMessage("error-already-register"));
-                    page = "/jsp/registration.jsp";
+                    request.setAttribute("errorMessage", ResourceBundleManager.getMessage("error-already-register"));
+                    page = Configuration.getProperty(Configuration.REGISTRATION_PAGE_PATH);
                 }
             } catch (SQLException e) {
-                page = "/jsp/registration.jsp";
+                page = Configuration.getProperty(Configuration.REGISTRATION_PAGE_PATH);
                 e.printStackTrace();
             }
 
         } else {
             request.setAttribute("newUser", user);
-            page = "/jsp/registration.jsp";
+            request.setAttribute("errorMessage", ResourceBundleManager.getMessage("error-not-equals-passwords"));
+            page = Configuration.getProperty(Configuration.REGISTRATION_PAGE_PATH);
             System.out.println("msg-registration-fail");
         }
         System.out.println("******* end RegistrationSubmitCommand *******");

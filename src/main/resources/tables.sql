@@ -1,7 +1,7 @@
 create schema if not exists library;
 
-CREATE TABLE IF NOT EXISTS `mydb`.`users` (
-  `user_id` INT NOT NULL,
+CREATE TABLE IF NOT EXISTS `library`.`users` (
+  `user_id` INT AUTO_INCREMENT,
   `email` VARCHAR(64) NOT NULL,
   `phone_number` VARCHAR(15) NOT NULL,
   `user_name` VARCHAR(255) NULL,

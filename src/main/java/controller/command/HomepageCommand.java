@@ -9,7 +9,6 @@ public class HomepageCommand implements Command{
 
     @Override
     public String execute(HttpServletRequest request,HttpServletResponse response) {
-        String page = Configuration.getProperty(Configuration.INDEX_PAGE_PATH);
-        return page;
+        return Configuration.getProperty(Configuration.INDEX_PAGE_PATH);
     }
 }

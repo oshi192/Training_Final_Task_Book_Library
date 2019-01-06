@@ -26,7 +26,7 @@ public class AdminTakenBooksCommand implements Command {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return "/jsp/admin/takenbooks.jsp";
+        return Configuration.getProperty(Configuration.ADMIN_TAKENBOOKS_PATH);
     }
 //    JDBCBookDao bookdao = null;
 //        try {

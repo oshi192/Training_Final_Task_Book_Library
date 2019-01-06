@@ -75,6 +75,6 @@ public class LogInCommand implements Command {
 
         request.setAttribute("messages", messages);
         System.out.println(messages.toString());
-        return "/jsp/login.jsp";
+        return Configuration.getProperty(Configuration.LOGIN_PAGE_PATH);
     }
 }
