@@ -1,53 +1,35 @@
-<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="msg" uri="msg" %>
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>Some Books example</title>
-        <link rel="viewport" >
-        <link href="<c:url value="/resources/bootstrap/css/bootstrap.min.css" />" rel="stylesheet">
-        <link href="<c:url value="/resources/bootstrap/css/bootstrap.css" />" rel="stylesheet">
-        <link href="<c:url value="/resources/bootstrap/css/bootstrap-theme.css" />" rel="stylesheet">
-        <script src="<c:url value="/resources/bootstrap/js/jquery-3.2.1.min.js" />"></script>
-        <script src="<c:url value="/resources/bootstrap/js/bootstrap.min.js" />"></script>
-        <link rel="stylesheet" href="<c:url value="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" />">
+<html>
+<head>
+    <title>Title</title>
+</head>
+<body>
 
-    </head>
-
-    <body>
-<div class="container-fluid">
-	<div class="row">
-		<div class="col-md-12">
-		<jsp:include page="../parts/navbar.jsp"/>
-
-			<table class="table">
-				<thead>
-					<tr>
-						<th>#</th>
-						<td>${msg:getMessage("book-taken-name")}</th>
-						<td>${msg:getMessage("book-taken-authors")}</th>
-						<td>${msg:getMessage("book-taken-section")}</th>
-						<td>${msg:getMessage("book-taken-edit")}</th>
-						<td>${msg:getMessage("book-taken-remove")}</th>
-					</tr>
-				</thead>
-				<tbody>
-                    <c:forEach var="Book" items="${requestScope.Books}">
-                        <tr class="table-active">
-                            <td></td>
-                            <td><c:out value="${Book.name}"/></td>
-                            <td><c:out value="${Book.authors}"/></td>
-                            <td><c:out value="${Book.section}"/></td>
-                             <td><p data-placement="top" data-toggle="tooltip" title="Edit"><button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit" ><span class="glyphicon glyphicon-pencil"></span></button></p></td>
-                             <td><p data-placement="top" data-toggle="tooltip" title="Delete"><button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete" ><span class="glyphicon glyphicon-trash"></span></button></p></td>
-                        </tr>
-                    </c:forEach>
-				</tbody>
-			</table>
-			<jsp:include page="../parts/pagination.jsp"/>
-		</div>
-	</div>
-</div>
-
+<ul>
+ <li><a href="${pageContext.request.contextPath}/taken-books" class="w3-btn w3-hover-light-blue w3-round-large">${msg:getMessage("admin-taken-book")}</a></li>
+ <li><a href="${pageContext.request.contextPath}/all-books" class="w3-btn w3-hover-light-blue w3-round-large">${msg:getMessage("admin-all-book")}</a></li>
+ <li><a href="${pageContext.request.contextPath}/all-users" class="w3-btn w3-hover-light-blue w3-round-large">${msg:getMessage("admin-all-users")}</a></li>
+</ul>
+<form method="post" action="">
+    <h2>admin book list</h2>
+    <table>
+        <tr>
+          <td></td>
+          <td>${msg:getMessage("book-name")}</td>
+          <td>${msg:getMessage("book-authors")}</td>
+          <td>${msg:getMessage("book-location")}</td>
+        </tr>
+        <c:forEach var="book" items="${requestScope.allBooks}">
+            <tr>
+                <td><button type="submit" name="delete-book" value="${TakenBook.book.id}">${msg:getMessage("delete-book")}</button></td>
+                <td><c:out value="${book.name}"/></td>
+                <td><c:out value="${book.authors}"/></td>
+                <td><c:out value="${book.location}"/></td>
+            </tr>
+        </c:forEach>
+    </table>
+    </form>
+</body>
+</html>

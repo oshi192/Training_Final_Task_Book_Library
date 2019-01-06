@@ -4,49 +4,39 @@
 <html>
 <head>
     <title>Title</title>
-        <link href="<c:url value="/resources/bootstrap/css/bootstrap.min.css" />" rel="stylesheet">
-        <link href="<c:url value="/resources/bootstrap/css/bootstrap.css" />" rel="stylesheet">
-        <link href="<c:url value="/resources/bootstrap/css/bootstrap-theme.css" />" rel="stylesheet">
-        <script src="<c:url value="/resources/bootstrap/js/jquery-3.2.1.min.js" />"></script>
-        <script src="<c:url value="/resources/bootstrap/js/bootstrap.min.js" />"></script>
-
 </head>
 <body>
 
 <ul>
  <li><a href="${pageContext.request.contextPath}/taken-books" class="w3-btn w3-hover-light-blue w3-round-large">${msg:getMessage("admin-taken-book")}</a></li>
- <li><a href="${pageContext.request.contextPath}/manage-books" class="w3-btn w3-hover-light-blue w3-round-large">${msg:getMessage("admin-all-book")}</a></li>
+ <li><a href="${pageContext.request.contextPath}/all-books" class="w3-btn w3-hover-light-blue w3-round-large">${msg:getMessage("admin-all-book")}</a></li>
  <li><a href="${pageContext.request.contextPath}/all-users" class="w3-btn w3-hover-light-blue w3-round-large">${msg:getMessage("admin-all-users")}</a></li>
 </ul>
 <form method="post" action="">
     <h2>admin book list</h2>
-    <table class="table">
-        <thead class="thead-dark">
+    <table>
+        <tr>
+          <td>${msg:getMessage("book-taken-name")}</td>
+          <td>${msg:getMessage("book-taken-authors")}</td>
+          <td>${msg:getMessage("book-taken-date")}</td>
+          <td>${msg:getMessage("book-taken-end-date")}</td>
+          <td>${msg:getMessage("book-taken-user-name")}</td>
+          <td>${msg:getMessage("book-taken-user-surname")}</td>
+          <td>${msg:getMessage("book-taken-user-email")}</td>
+          <td>${msg:getMessage("book-taken-user-phone")}</td>
+        </tr>
+        <c:forEach var="TakenBook" items="${requestScope.TakenBooks}">
             <tr>
-              <th scope="col">${msg:getMessage("book-taken-name")}</td>
-              <th scope="col">${msg:getMessage("book-taken-authors")}</td>
-              <th scope="col">${msg:getMessage("book-taken-date")}</td>
-              <th scope="col">${msg:getMessage("book-taken-end-date")}</td>
-              <th scope="col">${msg:getMessage("book-taken-user-name")}</td>
-              <th scope="col">${msg:getMessage("book-taken-user-surname")}</td>
-              <th scope="col">${msg:getMessage("book-taken-user-email")}</td>
-              <th scope="col">${msg:getMessage("book-taken-user-phone")}</td>
+                <td><c:out value="${TakenBook.book.name}"/></td>
+                <td><c:out value="${TakenBook.authors}"/></td>
+                <td><c:out value="${TakenBook.takenDate}"/></td>
+                <td><c:out value="${TakenBook.wilReturnDate}"/></td>
+                <td><c:out value="${TakenBook.user.name}"/></td>
+                <td><c:out value="${TakenBook.user.surname}"/></td>
+                <td><c:out value="${TakenBook.user.email}"/></td>
+                <td><c:out value="${TakenBook.user.phoneNumber}"/></td>
             </tr>
-        </thead>
-        <tbody>
-            <c:forEach var="TakenBook" items="${requestScope.TakenBooks}">
-                <tr>
-                    <th scope="row"><c:out value="${TakenBook.book.name}"/></td>
-                    <td><c:out value="${TakenBook.authors}"/></td>
-                    <td><c:out value="${TakenBook.takenDate}"/></td>
-                    <td><c:out value="${TakenBook.wilReturnDate}"/></td>
-                    <td><c:out value="${TakenBook.user.name}"/></td>
-                    <td><c:out value="${TakenBook.user.surname}"/></td>
-                    <td><c:out value="${TakenBook.user.email}"/></td>
-                    <td><c:out value="${TakenBook.user.phoneNumber}"/></td>
-                </tr>
-            </c:forEach>
-        </tbody>
+        </c:forEach>
     </table>
     </form>
 </body>

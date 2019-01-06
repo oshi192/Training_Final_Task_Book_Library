@@ -4,12 +4,13 @@ import config.ResourceBundleManager;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.servlet.*;
+import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Locale;
 import java.util.Objects;
-
+//@WebFilter(urlPatterns = {"/library/"})
 public class LangFilter implements Filter {
     private static final String USER_LOCALE_ATTR = "userLocale";
     private static final String ENCODING = "UTF-8";

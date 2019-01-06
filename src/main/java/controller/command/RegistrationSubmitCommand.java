@@ -4,6 +4,11 @@ import config.ResourceBundleManager;
 import model.dao.mysql.MySqlUserDao;
 import model.entity.User;
 import util.Configuration;
+<<<<<<< HEAD
+import util.ConnectionPoolHolder;
+import util.ResourceBundleManager;
+=======
+>>>>>>> edfd3089b9d81b68c9a8db558a42af5700b5ef02
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -30,6 +35,23 @@ public class RegistrationSubmitCommand implements Command {
         user.setPhoneNumber(phone);
         System.out.println("user from registration page: " + user.toString());
         if (Objects.nonNull(password) && password.equals(confirmPassword)) {
+<<<<<<< HEAD
+            try {
+                JDBCUserDao userDao = new JDBCUserDao(ConnectionPoolHolder.getDataSource().getConnection());
+                User userTmp = userDao.findByEmail(user.getEmail());
+                if (Objects.isNull(userTmp)) {
+                    userDao.create(user);
+                    request.setAttribute("message", ResourceBundleManager.getMessage("msg-registration-successful"));
+                    page = "redirect:login";
+                    System.out.println("msg-registration-successful");
+                } else {
+                    request.setAttribute("errorMessage", ResourceBundleManager.getMessage("error-already-register"));
+                    page = Configuration.getProperty(Configuration.REGISTRATION_PAGE_PATH);
+                }
+            } catch (SQLException e) {
+                page = Configuration.getProperty(Configuration.REGISTRATION_PAGE_PATH);
+                e.printStackTrace();
+=======
             MySqlUserDao userDao = new MySqlUserDao();
             User userTmp = userDao.findByEmail(user.getEmail());
             if (Objects.isNull(userTmp)) {
@@ -40,6 +62,7 @@ public class RegistrationSubmitCommand implements Command {
             } else {
                 request.setAttribute("errorMessage", ResourceBundleManager.getMessage("error-already-register"));
                 page = Configuration.getProperty(Configuration.REGISTRATION_PAGE_PATH);
+>>>>>>> edfd3089b9d81b68c9a8db558a42af5700b5ef02
             }
 
         } else {
