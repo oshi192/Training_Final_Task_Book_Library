@@ -64,9 +64,8 @@ public class LogInCommand implements Command {
     //todo rename or remove
     private void logIn(HttpServletRequest request, User user) {
         Map<Integer, HttpSession> loggedUsers = utils.getLoggedUsers();
-        int userId = user.getId();
-        destroyPreviousSession(loggedUsers, userId);
-        loggedUsers.put(userId, request.getSession());
+        destroyPreviousSession(loggedUsers, user.getId());
+        loggedUsers.put(user.getId(), request.getSession());
         utils.setLoggedUsers(loggedUsers);
         sessionSetup(request, user);
     }

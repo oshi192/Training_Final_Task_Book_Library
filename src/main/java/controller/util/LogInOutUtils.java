@@ -1,6 +1,7 @@
 package controller.util;
 
 import controller.servlets.AddServlet;
+import model.entity.User;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
@@ -13,12 +14,12 @@ public class LogInOutUtils {
         Map<Integer, HttpSession> loggedUsers = getLoggedUsers();
         loggedUsers.remove(getUserId(session));
         setLoggedUsers(loggedUsers);
-        session.removeAttribute("userId");
+        session.removeAttribute("user");
     }
     private static ServletContext context = AddServlet.getContext();
 
     private Integer getUserId(HttpSession session) {
-        return (int) Optional.ofNullable(session.getAttribute("userId")).orElse(0);
+        return Optional.ofNullable(((User)session.getAttribute("user")).getId()).orElse(0);
     }
     public void setLoggedUsers(Map<Integer, HttpSession> loggedUsers) {
         context.setAttribute("loggedUsers", loggedUsers);
