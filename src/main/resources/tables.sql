@@ -59,7 +59,7 @@ CREATE TABLE IF NOT EXISTS `library`.`taken_books` (
   `users_admin_id` INT NOT NULL,
   `book_id` INT NOT NULL,
   `taken_date` DATETIME NOT NULL,
-  `end_date` VARCHAR(45) NOT NULL,
+  `end_date` DATETIME NOT NULL,
   INDEX `fk_taken_books_users2_idx` (`users_user_id` ASC),
   INDEX `fk_taken_books_users3_idx` (`users_admin_id` ASC),
   INDEX `fk_taken_books_books2_idx` (`book_id` ASC),

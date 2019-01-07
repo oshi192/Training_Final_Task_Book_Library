@@ -13,6 +13,7 @@
     </head>
     <body>
     <div class="container-fluid bg">
+    <jsp:include page="parts/navbar.jsp"/>
         <div class="row">
             <div class="col-md-4 col-sm-4 col-xs-12"></div>
             <div class="col-md-4 col-sm-4 col-xs-12">
@@ -32,52 +33,84 @@
                         </div>
                         <img class="rounded mx-auto d-block img img-responsive img-circle" src="<c:url value="/resources/image/user1r.png" />"/>
                             <div class="form-group">
-                                <label>${msg:getMessage("login-label-email")}</label>
-                                <input name="email" type="email" class="form-control"
-                                       pattern="${msg:getMessage("regex-email")}"
-                                       title="${msg:getMessage("hint-email")}"
-                                       value="${requestScope.newUser.getEmail()}"
-                                       required>
+                                ${requestScope.messages.email}
+                            <div>
+                            <div class="form-group">
+                                <input
+                                    name="email"
+                                    type="email"
+                                    class="form-control"
+                                    placeholder=${msg:getMessage("login-label-email")}
+                                    pattern="${msg:getMessage("regex-email")}"
+                                    title="${msg:getMessage("hint-email")}"
+                                    value="${requestScope.newUser.getEmail()}"
+                                    required>
                             </div>
                             <div class="form-group">
-                                <label>${msg:getMessage("registration-label-phone-number")}</label>
-                                <input name="phone-number" type="text" class="form-control"
-                                       pattern="${msg:getMessage("regex-phone")}"
-                                       title="${msg:getMessage("hint-phone")}"
-                                       value="${requestScope.newUser.getPhoneNumber()}"
-                                       required>
+                                ${requestScope.messages.phoneNumber}
+                            <div>
+                            <div class="form-group">
+                                <input
+                                    name="phone-number"
+                                    type="text"
+                                    class="form-control"
+                                    placeholder=${msg:getMessage("registration-label-phone-number")}
+                                    pattern="${msg:getMessage("regex-phone")}"
+                                    title="${msg:getMessage("hint-phone")}"
+                                    value="${requestScope.newUser.getPhoneNumber()}"
+                                    required>
                             </div>
                             <div class="form-group">
-                                <label>${msg:getMessage("registration-label-password")}</label>
-                                <input name="password" type="password" class="form-control"
-                                       pattern="${msg:getMessage("regex-password")}"
-                                       title="${msg:getMessage("hint-password")}"
-                                       value="${requestScope.newUser.getPassword()}"
-                                       required>
+                                ${requestScope.messages.password}
+                            <div>
+                            <div class="form-group">
+                                <input
+                                    name="password"
+                                    type="password"
+                                    class="form-control"
+                                    placeholder=${msg:getMessage("registration-label-password")}
+                                    pattern="${msg:getMessage("regex-password")}"
+                                    title="${msg:getMessage("hint-password")}"
+                                    value="${requestScope.newUser.getPassword()}"
+                                    required>
                             </div>
                             <div class="form-group">
-                                <label>${msg:getMessage("registration-label-confirm-password")}</label>
-                                <input name="confirm-password" type="password" class="form-control"
-                                       pattern="${msg:getMessage("regex-password")}"
-                                       title="${msg:getMessage("hint-password")}"
-                                       required>
+                                <input
+                                    name="confirm-password"
+                                    type="password"
+                                    class="form-control"
+                                    placeholder=${msg:getMessage("registration-label-confirm-password")}
+                                    pattern="${msg:getMessage("regex-password")}"
+                                    title="${msg:getMessage("hint-password")}"
+                                    required>
                             </div>
                             <div class="form-group">
-                                <label>${msg:getMessage("registration-label-first-name")}</label>
-                                <input name="first-name" type="text" placeholder="First name"
-                                       class="form-control"
-                                       pattern="${msg:getMessage("regex-name")}"
-                                       title="${msg:getMessage("hint-name")}"
-                                       value="${requestScope.newUser.getName()}"
-                                       required>
+                                ${requestScope.messages.name}
+                            <div>
+                            <div class="form-group">
+                                <input
+                                    name="first-name"
+                                    type="text"
+                                    placeholder=${msg:getMessage("registration-label-first-name")}
+                                    class="form-control"
+                                    pattern="${msg:getMessage("regex-name")}"
+                                    title="${msg:getMessage("hint-name")}"
+                                    value="${requestScope.newUser.getName()}"
+                                    required>
                             </div>
                             <div class="form-group">
-                                <label>${msg:getMessage("registration-label-surname")}</label>
-                                <input name="surname" type="text" class="form-control"
-                                       pattern="${msg:getMessage("regex-surname")}"
-                                       title="${msg:getMessage("hint-surname")}"
-                                       value="${requestScope.newUser.getSurname()}"
-                                       required>
+                                ${requestScope.messages.surname}
+                            <div>
+                            <div class="form-group">
+                                <input
+                                    name="surname"
+                                    type="text"
+                                    placeholder=${msg:getMessage("registration-label-surname")}
+                                    class="form-control"
+                                    pattern="${msg:getMessage("regex-surname")}"
+                                    title="${msg:getMessage("hint-surname")}"
+                                    value="${requestScope.newUser.getSurname()}"
+                                    required>
                             </div>
                             <button type="submit" class="btn btn-success btn-block ">${msg:getMessage("login-button-register")}</button>
                     </form>

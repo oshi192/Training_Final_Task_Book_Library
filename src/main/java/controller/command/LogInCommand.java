@@ -16,6 +16,8 @@ import java.util.Map;
 public class LogInCommand implements Command {
     private static Logger logger = Logger.getLogger(LogInCommand.class);
     private static LogInOutUtils utils = new LogInOutUtils();
+    private final static String WRONG_EMAIL= "login-wrong-email";
+    private final static String WRONG_PASSWORD= "login-wrong-password";
     private final static String ENTER_EMAIL= "login-please-enter-email";
     private final static String ENTER_PASSWORD= "login-please-enter-password";
     private final static String REGEX_EMAIL= "regex-email";
@@ -48,11 +50,11 @@ public class LogInCommand implements Command {
                     logIn(request, user);
                     page = "redirect:";
                 } else {
-                    messages.put("password", "Wrong password! please try again");
+                    messages.put("password",ResourceBundleManager.getMessage(WRONG_PASSWORD) );
                     page = Configuration.getProperty(Configuration.LOGIN_PAGE_PATH);
                 }
             } else {
-                messages.put("email", "Unknown email, please try again");
+                messages.put("email", ResourceBundleManager.getMessage(WRONG_EMAIL));
                 page = Configuration.getProperty(Configuration.LOGIN_PAGE_PATH);
             }
         }else{
@@ -64,7 +66,7 @@ public class LogInCommand implements Command {
         logger.info("toPage: " + page);
         return page;
     }
-    boolean checkEmailAndPasword(HttpServletRequest request,Map<String, String> messages,String email,String pass){
+    public boolean checkEmailAndPasword(HttpServletRequest request,Map<String, String> messages,String email,String pass){
         if (email == null || email.isEmpty()) {
             messages.put("email", ResourceBundleManager.getMessage(ENTER_EMAIL));
         }else{

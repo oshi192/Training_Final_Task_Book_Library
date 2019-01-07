@@ -1,6 +1,7 @@
 package model.dao.mysql;
 
 import config.ResourceBundleManager;
+import controller.util.QueryBuilder;
 import model.connectionpool.ConnectionPoolHolder;
 import model.dao.UserDao;
 import model.dao.mapper.UserMapper;
@@ -30,12 +31,11 @@ public class MySqlUserDao implements UserDao {
     @Override
     public User findByEmail(String email) {
         User user = null;
-        String query = ResourceBundleManager.getSqlString(FIND_BY_EMAIL);
+        String query = ResourceBundleManager.getSqlString(FIND_BY_EMAIL).replace("?",email);
         logger.info("searching ny email....." + query);
-        try (Connection connection = ConnectionPoolHolder.getDataSource().getConnection();
-             PreparedStatement ps = connection.prepareCall(query);) {
-            ps.setString(1, email);
-            ResultSet rs = ps.executeQuery();
+        QueryBuilder queryBuilder = new QueryBuilder(query);
+        try  {
+            ResultSet rs = queryBuilder.execute();
             if (rs.next()) {
                 user = mapper.mapGet(rs);
             }

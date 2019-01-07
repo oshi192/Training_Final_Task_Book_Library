@@ -5,14 +5,6 @@ public class Book {
     protected String name;
     protected String section;
     protected String authors;
-    public Book() {
-    }
-
-    public Book(int id, String name, String section) {
-        this.id = id;
-        this.name = name;
-        this.section = section;
-    }
 
     public String getAuthors() {
         return authors;

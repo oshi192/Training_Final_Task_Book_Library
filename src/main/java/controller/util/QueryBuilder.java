@@ -36,7 +36,7 @@ public class QueryBuilder {
 
     public ResultSet execute() throws SQLException {
         query+=" "+condition+" "+pagination;
-        query.replace(";", "");
+        query=query.replace(";", "");
         query += ";";
         Connection connection = ConnectionPoolHolder.getDataSource().getConnection();
         PreparedStatement ps = connection.prepareCall(query);
