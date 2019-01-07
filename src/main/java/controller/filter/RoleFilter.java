@@ -2,6 +2,7 @@ package controller.filter;
 
 import controller.util.AccessMapper;
 import model.entity.User;
+import org.apache.log4j.Logger;
 import util.Configuration;
 
 import javax.servlet.*;
@@ -12,7 +13,7 @@ import javax.servlet.http.HttpSession;
 //@WebFilter(urlPatterns = {"/library/"})
 public class RoleFilter implements Filter {
     private static final String USER_ATTR = "user";
-//    private static final String ROLE_PARAM = "role";
+    private final static Logger logger = Logger.getLogger(RoleFilter.class);
 
     public RoleFilter() {
     }
@@ -23,7 +24,7 @@ public class RoleFilter implements Filter {
 
     public void doFilter(ServletRequest request, ServletResponse response,
                          FilterChain chain) throws IOException, ServletException{
-        System.out.println("------- starting Role filtering -------");
+        logger.info("------- starting Role filtering -------");
         HttpServletRequest req = (HttpServletRequest) request;
         HttpSession session = req.getSession();
         User user = (User) session.getAttribute(USER_ATTR);
@@ -35,10 +36,10 @@ public class RoleFilter implements Filter {
         }
         AccessMapper mapper = AccessMapper.getInstance();
         boolean enoughRights = mapper.checkRights(req, role);
-        System.out.println("\trole: " + role + " enoughRights: " + enoughRights);
+        logger.info("\trole: " + role + " enoughRights: " + enoughRights);
          if (!enoughRights) {
             String page = Configuration.getProperty(Configuration.INDEX_PAGE_PATH);
-            System.out.println("\tgo back: " + page);
+            logger.info("\tgo back: " + page);
             RequestDispatcher dispatcher = request.getRequestDispatcher(page);
             try {
                 dispatcher.forward(request, response);
@@ -46,7 +47,7 @@ public class RoleFilter implements Filter {
                 e.printStackTrace();
             }
         }
-        System.out.println("------- ending Role filtering -------");
+        logger.info("------- ending Role filtering -------");
         chain.doFilter(request, response);
     }
 

@@ -2,7 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="msg" uri="msg" %>
 
-<nav class="navbar navbar-inverse ">
+<nav class="navbar navbar-inverse navbar-fixed-top">
   <div class="container-fluid">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
@@ -27,7 +27,10 @@
         </c:if>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-
+              <ul class="lang">
+              <li><a href="?lang=En">En</a></li>
+              <li><a href="?lang=Ua">Ua</a></li>
+              </ul>
             <c:choose>
                   <c:when test="${user eq Nan}">
                       <li>
@@ -57,12 +60,6 @@
                       </li>
                   </c:otherwise>
               </c:choose>
-              <li>
-              <ul class="lang">
-                <li><a href="?lang=En">En   .</a></li>
-                <li><a href="?lang=Ua">Ua   .</a></li>
-                </ul>
-                </li>
       </ul>
     </div>
   </div>

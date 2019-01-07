@@ -7,10 +7,7 @@ import model.dao.BooksRequestDao;
 import model.dao.mapper.AuthorMapper;
 import model.dao.mapper.BookMapper;
 import model.dao.mapper.UserMapper;
-import model.entity.Author;
-import model.entity.BooksRequest;
-import model.entity.TakenBooks;
-import model.entity.User;
+import model.entity.*;
 import org.apache.log4j.Logger;
 
 import java.sql.Connection;
@@ -28,9 +25,9 @@ public class MySqlBooksRequestDao implements BooksRequestDao {
     private static UserMapper userMapper = new UserMapper();
 
     private static final String ADMIN_BOKS_REQUEST_CLEAR = "adim-books-request";
+    private static final String BOKS_REQUEST_BY_USER_ID_CLEAR = "user-books-requests";
     private static final String TAKEN_BOKS_REQUEST = "adim-taken-books-create";
     private static final String BOKS_REQUEST_REMOVE = "adim-books-request-remove";
-    private static final String ADMIN_BOKS_REQUEST_COUNT = "adim-books-request-count";
 
     @Override
     public Optional<BooksRequest> get(int id) {
@@ -40,6 +37,32 @@ public class MySqlBooksRequestDao implements BooksRequestDao {
     @Override
     public List<BooksRequest> getAll() {
         return null;
+    }
+
+    public List<Book> getAllbyUserId(int userId,int limit, int offset) {
+        QueryBuilder qb = new QueryBuilder(ResourceBundleManager.getSqlString(BOKS_REQUEST_BY_USER_ID_CLEAR).replace("?",""+userId));
+        qb.addPagination(limit, offset);
+        Map<Integer,Book> books = new HashMap<>();
+        try {
+            logger.info("executing query: "+qb.getQuery());
+            ResultSet resultSet = qb.execute();
+            while(resultSet.next()){
+                Book book = bookMapper.mapGet(resultSet);
+                Author author = authorMapper.mapGet(resultSet);
+                if(books.get(book.getId())!=null){
+                    book = books.get(book.getId());
+                    book.setAuthors(book.getAuthors()+", "+author.toString());
+                }else{
+                    book.setAuthors(author.toString());
+                    books.put(book.getId(),book);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        List<Book> booksList = new ArrayList<>(books.values());
+        logger.info("found taken books: "+booksList.size());
+        return booksList;
     }
 
     @Override
@@ -87,7 +110,8 @@ public class MySqlBooksRequestDao implements BooksRequestDao {
             PreparedStatement deleteStatement=connection.prepareStatement(ResourceBundleManager.getSqlString(BOKS_REQUEST_REMOVE));) {
             deleteStatement.setInt(1,booksRequest.getUser().getId());
             deleteStatement.setInt(2,booksRequest.getId());
-            deleteStatement.executeQuery();
+            logger.info("executing query: "+deleteStatement.toString());
+            deleteStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
             logger.error("error while deleting...");
@@ -107,11 +131,13 @@ public class MySqlBooksRequestDao implements BooksRequestDao {
             addTakenBooksStatement.setInt(3,bookId);
             addTakenBooksStatement.setDate(4, Date.valueOf(LocalDate.now()));
             addTakenBooksStatement.setDate(5, Date.valueOf(LocalDate.now().plusMonths(1)));
-            addTakenBooksStatement.executeQuery();
+            logger.info("executing query add to takenBooks: "+addTakenBooksStatement.toString());
+            addTakenBooksStatement.executeUpdate();
             deleteStatement=connection.prepareStatement(ResourceBundleManager.getSqlString(BOKS_REQUEST_REMOVE));
             deleteStatement.setInt(1,userId);
             deleteStatement.setInt(2,bookId);
-            deleteStatement.executeQuery();
+            logger.info("executing query delete from books requests: "+deleteStatement.toString());
+            deleteStatement.executeUpdate();
             connection.commit();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -138,12 +164,11 @@ public class MySqlBooksRequestDao implements BooksRequestDao {
     public void close() throws Exception {
 
     }
-    public int getCount() {
+    public int getCount(String countQuery) {
         int count=0;
-        String query = ResourceBundleManager.getSqlString(ADMIN_BOKS_REQUEST_COUNT);
-        logger.info("booksRequests count....." + query);
+        logger.info("booksRequests count....." + countQuery);
         try (Connection connection = ConnectionPoolHolder.getDataSource().getConnection();
-             PreparedStatement ps = connection.prepareCall(query)) {
+             PreparedStatement ps = connection.prepareCall(countQuery)) {
             ResultSet rs = ps.executeQuery();
             if(rs.next()){
                 count = rs.getInt("count");

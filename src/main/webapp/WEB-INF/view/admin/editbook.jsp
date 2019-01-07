@@ -6,30 +6,20 @@
     <head>
         <meta charset="UTF-8">
         <title>Some Books example</title>
-
-
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <script src="<c:url value="/resources/bootstrap/js/jquery.min.js" />"></script>
         <script src="<c:url value="/resources/bootstrap/js/bootstrap.min.js" />"></script>
     </head>
 
     <body>
-    <div class="container-fluid">
-        	<div class="row">
-        		<div class="col-md-12">
-                    <jsp:include page="parts/navbar.jsp"/>
-
-                    <div class="jumbotron">
-                        <h2>
-                            ${msg:getMessage("index-theme")}
-                        </h2>
-                        <p>
-                            ${msg:getMessage("index-text")}
-                        </p>
-                    </div>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                <jsp:include page="parts/navbar.jsp"/>
                 </div>
             </div>
         </div>
     </body>
 </html>
+

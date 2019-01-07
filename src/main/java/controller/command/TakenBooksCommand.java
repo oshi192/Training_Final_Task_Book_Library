@@ -12,9 +12,11 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 public class TakenBooksCommand implements Command {
+    private static final String ADMIN_TAKEN_BOOKS_COUNT = "adim-taken-books-count";
+
     @Override
     public String executeGet(HttpServletRequest request, HttpServletResponse response) {
-        int count = new MySqlTakenBooksDao().getCount();
+        int count = new MySqlTakenBooksDao().getCount(ADMIN_TAKEN_BOOKS_COUNT);
         Pagination.addPagination(count,request,response);
         int limit = request.getParameter("recordsOnPage")==null?10:Integer.parseInt(request.getParameter("recordsOnPage"));
         int offset = request.getParameter("currentPage")==null?0:(Integer.parseInt(request.getParameter("currentPage"))-1)*limit;

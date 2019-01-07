@@ -4,6 +4,7 @@ import config.ResourceBundleManager;
 import controller.util.Pagination;
 import controller.util.QueryBuilder;
 import model.dao.mysql.MySqlBookDao;
+import model.dao.mysql.MySqlTakenBooksDao;
 import model.entity.Book;
 import org.apache.log4j.Logger;
 import util.Configuration;
@@ -18,47 +19,42 @@ import java.util.Map;
 
 public class AllBooksCommand implements Command {
     private static final Logger logger = Logger.getLogger(AllBooksCommand.class);
-private final  static  String BOOKS_WITH_AUTHORS_CLEAN="BOOKS_WITH_AUTHORS_CLEAN";
+    private final static String BOOKS_WITH_AUTHORS_CLEAN = "BOOKS_WITH_AUTHORS_CLEAN";
+
     @Override
     public String executeGet(HttpServletRequest request, HttpServletResponse response) {
 
         int count = new MySqlBookDao().getCount();
-        Pagination.addPagination(count,request,response);
-        int limit = request.getParameter("recordsOnPage")==null?10:Integer.parseInt(request.getParameter("recordsOnPage"));
-        int offset = request.getParameter("currentPage")==null?0:(Integer.parseInt(request.getParameter("currentPage"))-1)*limit;
-        List<Book> books = new MySqlBookDao().getAllPaginate(
-                //Integer.parseInt(request.getParameter("recordsOnPage")),
-                //(Integer.parseInt(request.getParameter("currentPage"))- 1) * Integer.parseInt(request.getParameter("recordsOnPage"))
-                limit,offset);//todo remove
-        request.setAttribute("Books",books);
+        Pagination.addPagination(count, request, response);
+        int limit = request.getParameter("recordsOnPage") == null ? 10 : Integer.parseInt(request.getParameter("recordsOnPage"));
+        int offset = request.getParameter("currentPage") == null ? 0 : (Integer.parseInt(request.getParameter("currentPage")) - 1) * limit;
+        List<Book> books = new MySqlBookDao().getAllPaginate(limit, offset);//todo remove
+        request.setAttribute("Books", books);
 
         return Configuration.getProperty(Configuration.ALLBOOKS_PATH);
     }
 
 
-       @Override
+    @Override
     public String executePost(HttpServletRequest request, HttpServletResponse response) {
-        int count = new MySqlBookDao().getCount();
-        Pagination.addPagination(count,request,response);
-        QueryBuilder qm=new QueryBuilder(ResourceBundleManager.getSqlString(BOOKS_WITH_AUTHORS_CLEAN));
-        String condition;
-        Map<String,String> properties = new HashMap<>();
-        properties.put("book_name",request.getParameter("book_name"));
-        properties.put("second_name",request.getParameter("second_name"));
-        properties.put("tags",request.getParameter("tags"));
-        try {
-            qm.addSearchBooksProperties(properties);
-            int p=Integer.parseInt((request.getParameter("recordsOnPage"))==null?"10":(request.getParameter("recordsOnPage")));
-            int offset=(request.getParameter("currentPage")==null?0:((Integer.parseInt(request.getParameter("currentPage"))- 1) * p));
-            qm.addPagination(p,offset);
-            System.out.println(">>>>>>query"+qm.getQuery());
-            ResultSet rs = qm.execute();
-            List<Book> books = new MySqlBookDao().getAllFromResultSet(rs);
-            System.out.println(">>>>>>booksSize()"+books.size());
-            request.setAttribute("Books",books);
-        } catch (SQLException e) {
-            e.printStackTrace();
+        int bookId;
+        if (request.getParameter("edit") != null) {
+            bookId=Integer.parseInt(request.getParameter("edit"));
+            logger.info("edit book: "+bookId);
+            //new MySqlBookDao().update();
         }
-        return Configuration.getProperty(Configuration.ALLBOOKS_PATH);
+        if (request.getParameter("remove") != null) {
+            bookId=Integer.parseInt(request.getParameter("remove"));
+            Book book=new Book();
+            book.setId(bookId);
+            logger.info("remove book: "+bookId);
+            new MySqlBookDao().delete(book);
+        }
+        if (request.getParameter("take") != null) {
+            bookId=Integer.parseInt(request.getParameter("take"));
+            logger.info("take book: "+bookId);
+            // todo new MySqlTakenBooksDao().take(bookId);
+        }
+        return executeGet(request,response);
     }
 }

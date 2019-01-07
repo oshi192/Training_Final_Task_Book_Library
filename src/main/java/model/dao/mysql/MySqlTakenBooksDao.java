@@ -5,7 +5,6 @@ import controller.util.QueryBuilder;
 import model.connectionpool.ConnectionPoolHolder;
 import model.dao.TakenBooksDao;
 import model.dao.mapper.AuthorMapper;
-import model.dao.mapper.BookMapper;
 import model.dao.mapper.TakenBooksMapper;
 import model.entity.Author;
 import model.entity.Book;
@@ -22,8 +21,8 @@ public class MySqlTakenBooksDao implements TakenBooksDao {
     private static final Logger logger = Logger.getLogger(MySqlTakenBooksDao.class);
     private static TakenBooksMapper mapper = new TakenBooksMapper();
     private static AuthorMapper authorMapper = new AuthorMapper();
-    private static final String ADMIN_TAKEN_BOOKS_COUNT = "adim-taken-books-count";
     private static final String ADMIN_TAKEN_BOOKS_CLEAR = "adim-taken-books";
+    private static final String TAKEN_BOOKS_BY_USER_ID_CLEAR = "taken-books-by-user-id";
 
     @Override
     public Optional<TakenBooks> get(int id) {
@@ -80,12 +79,11 @@ public class MySqlTakenBooksDao implements TakenBooksDao {
     public void close() throws Exception {
 
     }
-    public int getCount() {
+    public int getCount(String queryCount) {
         int count=0;
-        String query = ResourceBundleManager.getSqlString(ADMIN_TAKEN_BOOKS_COUNT);
-        logger.info("takenBooks count....." + query);
+        logger.info("takenBooks count....." + queryCount);
         try (Connection connection = ConnectionPoolHolder.getDataSource().getConnection();
-             PreparedStatement ps = connection.prepareCall(query)) {
+             PreparedStatement ps = connection.prepareCall(queryCount)) {
             ResultSet rs = ps.executeQuery();
             if(rs.next()){
                 count = rs.getInt("count");
@@ -95,5 +93,32 @@ public class MySqlTakenBooksDao implements TakenBooksDao {
             logger.error("fail..." + ex);
         }
         return count;
+    }
+
+    public List<TakenBooks> getAllPaginateByUserId(int userId, int limit, int offset) {
+        QueryBuilder qb = new QueryBuilder(ResourceBundleManager.getSqlString(TAKEN_BOOKS_BY_USER_ID_CLEAR)
+                .replace("?",""+userId));
+        qb.addPagination(limit, offset);
+        Map<Integer,TakenBooks> books = new HashMap<>();
+        try {
+            logger.info("executing query: "+qb.getQuery());
+            ResultSet resultSet = qb.execute();
+            while(resultSet.next()){
+                TakenBooks takenBooks = mapper.mapGet(resultSet);
+                Author author = authorMapper.mapGet(resultSet);
+                if(books.get(takenBooks.getId())!=null){
+                    takenBooks = books.get(takenBooks.getId());
+                    takenBooks.setAuthors(takenBooks.getAuthors()+", "+author.toString());
+                }else{
+                    takenBooks.setAuthors(author.toString());
+                    books.put(takenBooks.getId(),takenBooks);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        List<TakenBooks> takenBooks = new ArrayList<>(books.values());
+        logger.info("found taken books: "+takenBooks.size());
+        return takenBooks;
     }
 }

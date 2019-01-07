@@ -16,21 +16,12 @@ public class Pagination {
         int lastPage = 10;
         int pages = 1;
 
-        if (request.getParameter("firstPage") != null) {
-            firstPage = Integer.parseInt(request.getParameter("firstPage"));
-        }
-        if (request.getParameter("lastPage") != null) {
-            lastPage = Integer.parseInt(request.getParameter("lastPage"));
-        }
         if (request.getParameter("currentPage") != null) {
             currentPage = Integer.parseInt(request.getParameter("currentPage"));
         }
         if (request.getParameter("recordsOnPage") != null) {
             recordsOnPage = Integer.parseInt(request.getParameter("recordsOnPage"));
         }
-//        int count = new MySqlBookDao().getCount();
-//        List<Book> books = new MySqlBookDao().getAll(recordsOnPage,(currentPage-1)*recordsOnPage);
-
         pages=count/recordsOnPage+1;
         firstPage=(currentPage)>=3?currentPage-2:1;
         lastPage=(pages-currentPage)>0?((pages-currentPage)>1?currentPage+2:currentPage+1):currentPage;//todo remove kostul`

@@ -6,14 +6,10 @@
     <head>
         <meta charset="UTF-8">
         <title>Some Books example</title>
-        <link rel="viewport" >
-        <link href="<c:url value="/resources/bootstrap/css/bootstrap.min.css" />" rel="stylesheet">
-        <link href="<c:url value="/resources/bootstrap/css/bootstrap.css" />" rel="stylesheet">
-        <link href="<c:url value="/resources/bootstrap/css/bootstrap-theme.css" />" rel="stylesheet">
-        <script src="<c:url value="/resources/bootstrap/js/jquery-3.2.1.min.js" />"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="<c:url value="/resources/bootstrap/js/jquery.min.js" />"></script>
         <script src="<c:url value="/resources/bootstrap/js/bootstrap.min.js" />"></script>
-        <link rel="stylesheet" href="<c:url value="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" />">
-
     </head>
 
     <body>
@@ -26,21 +22,21 @@
 				<thead>
 					<tr>
 						<th>#</th>
-						<td>${msg:getMessage("book-taken-user-email")}</th>
-						<td>${msg:getMessage("book-taken-user-phone")}</th>
-						<td>${msg:getMessage("book-taken-user-name")}</th>
-						<td>${msg:getMessage("book-taken-user-surname")}</th>
-						<td>${msg:getMessage("book-taken-takenDate")}</th>
-						<td>${msg:getMessage("book-taken-wilReturnDate")}</th>
-						<td>${msg:getMessage("book-taken-name")}</th>
-						<td>${msg:getMessage("book-taken-authors")}</th>
-						<td>${msg:getMessage("book-taken-section")}</th>
+						<th>${msg:getMessage("book-taken-user-email")}</th>
+						<th>${msg:getMessage("book-taken-user-phone")}</th>
+						<th>${msg:getMessage("book-taken-user-name")}</th>
+						<th>${msg:getMessage("book-taken-user-surname")}</th>
+						<th>${msg:getMessage("book-taken-takenDate")}</th>
+						<th>${msg:getMessage("book-taken-wilReturnDate")}</th>
+						<th>${msg:getMessage("book-taken-name")}</th>
+						<th>${msg:getMessage("book-taken-authors")}</th>
+						<th>${msg:getMessage("book-taken-section")}</th>
 					</tr>
 				</thead>
 				<tbody>
-                    <c:forEach var="TakenBook" items="${requestScope.TakenBooks}">
+                    <c:forEach var="TakenBook" items="${requestScope.TakenBooks}"  varStatus="status">
                         <tr class="table-active">
-                            <td></td>
+                            <td>${status.count+recordsOnPage*(currentPage-1)}.</td>
                             <td><c:out value="${TakenBook.user.email}"/></td>
                             <td><c:out value="${TakenBook.user.phoneNumber}"/></td>
                             <td><c:out value="${TakenBook.user.name}"/></td>

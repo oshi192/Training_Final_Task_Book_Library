@@ -23,9 +23,6 @@
         <url-pattern>/resources/*</url-pattern>
     </servlet-mapping>
 
-
-
-
     <filter>
         <filter-name>RoleFilter</filter-name>
         <filter-class>controller.filter.RoleFilter</filter-class>
