@@ -33,12 +33,11 @@
                                type="button"
                                data-toggle="modal"
                                data-target="#myModal"
-                               type="submit"
                                name="create"
                                class="btn btn-success"
                                data-title="new Record"
                            >
-                               <span class="glyphicon glyphicon-pencil"></span>
+                               <span class="glyphicon glyphicon-plus"></span>
                                ${msg:getMessage("edit-book-button-create")}
                            </button>
                            <div id="myModal" class="modal fade">
@@ -51,14 +50,13 @@
                                            <h4 class="modal-title">${msg:getMessage("edit-book-header")}</h4>
                                        </div>
                                        <div class="modal-body">
-                                           <form class="form-horizontal"  method='POST'>
-
+                                           <form class="form-horizontal" >
                                             <div class="form-group">
                                              <label for="pass" class="col-sm-2 control-label">
-                                               ${msg:getMessage("book-taken-name")}[]
+                                               ${msg:getMessage("book-taken-name")}
                                              </label>
                                              <div class="col-sm-10">
-                                              <input type="text" name="book-name" class="form-control" id="pass" placeholder="${Book.name}">
+                                              <input type="text" name="book-name" class="form-control" id="pass">
                                              </div>
                                             </div>
 
@@ -71,7 +69,9 @@
                                                 <c:forEach var="item" items="${requestScope.Sections}" varStatus="status">
                                                    <option
                                                         <c:if test="${Book.section eq item}">selected="selected"</c:if>
-                                                   >${status.count+recordsOnPage*(currentPage-1)}.${item}</option>
+                                                   >
+                                                        ${status.count+recordsOnPage*(currentPage-1)}.${item}
+                                                   </option>
                                                 </c:forEach>
                                               </select>
                                              </div>
@@ -80,7 +80,7 @@
                                            </form>
                                        </div>
                                        <div class="modal-footer">
-                                           <button class="btn btn-default" type="submit" name="create" value="${Book.id}" data-dismiss="modal">
+                                           <button class="btn btn-default" type="submit" name="create" >
                                                ${msg:getMessage("edit-book-button-create")}
                                            </button>
                                            <button class="btn btn-default" type="button" data-dismiss="modal">
@@ -110,8 +110,8 @@
                                    <button
                                        class="btn btn-info"
                                        type="button"
-                                       data-toggle="modal"
-                                       data-target="#myModal"
+                                       data-toggle="modal2"
+                                       data-target="#myModal2"
                                        type="submit"
                                        name="edit"
                                        value="${Book.id}"
@@ -121,17 +121,17 @@
                                        <span class="glyphicon glyphicon-pencil"></span>
                                        ${msg:getMessage("button-edit")}
                                    </button>
-                                   <div id="myModal" class="modal fade">
+                                   <div id="myModal2" class="modal fade">
                                        <div class="modal-dialog">
                                            <div class="modal-content">
                                                <div class="modal-header">
-                                                   <button class="close" type="button" data-dismiss="modal">
+                                                   <button class="close" type="button" data-dismiss="modal2">
                                                        ×
                                                    </button>
                                                    <h4 class="modal-title">${msg:getMessage("edit-book-header")}</h4>
                                                </div>
                                                <div class="modal-body">
-                                                   <form class="form-horizontal" method='POST'>
+                                                   <form class="form-horizontal">
 
                                                     <div class="form-group">
                                                      <label for="pass" class="col-sm-2 control-label">
@@ -160,10 +160,10 @@
                                                    </form>
                                                </div>
                                                <div class="modal-footer">
-                                                   <button class="btn btn-default" type="submit" name="submit" value="${Book.id}" data-dismiss="modal">
+                                                   <button class="btn btn-default" type="submit" name="edit" value="${Book.id}">
                                                        ${msg:getMessage("edit-book-button-save")}
                                                    </button>
-                                                   <button class="btn btn-success" type="button" data-dismiss="modal">
+                                                   <button class="btn btn-success" type="button" data-dismiss="modal2">
                                                        ${msg:getMessage("edit-book-button-close")}
                                                    </button>
                                                </div>
@@ -178,9 +178,9 @@
                                             name="remove"
                                             value="${Book.id}"
                                             class="btn btn-danger"
-                                            data-title="Edit" data-toggle="modal"
-                                            data-target="#edit" >
-                                            <span class="glyphicon glyphicon-pencil"></span>
+                                            data-title="Edit" data-toggle="edit2"
+                                            data-target="#edit2" >
+                                            <span class="glyphicon glyphicon-trash"></span>
                                             ${msg:getMessage("button-remove")}
                                         </button>
                                     </td>
@@ -193,9 +193,9 @@
                                             type="submit"
                                             name="take"
                                             value="${Book.id}"
-                                            class="btn btn-warning btn-xs"
-                                            data-title="Edit" data-toggle="modal"
-                                            data-target="#edit" >
+                                            class="btn btn-warning btn"
+                                            data-title="Edit" data-toggle="edit2"
+                                            data-target="#edit2" >
                                             <span class="glyphicon glyphicon-pencil"></span>
                                             ${msg:getMessage("button-take")}
                                         </button>

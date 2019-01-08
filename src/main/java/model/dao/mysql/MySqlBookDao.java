@@ -64,9 +64,9 @@ public class MySqlBookDao implements BookDao {
                 Author author = authorMapper.mapGet(rs);
                 if (books.get(book.getId()) != null) {
                     book = books.get(book.getId());
-                    book.setAuthors(book.getAuthors() + ", " + author.toString());
+                    book.setAuthors(" "+book.getAuthors() + ", " + author.toString());
                 } else {
-                    book.setAuthors(author.toString());
+                    book.setAuthors(" "+author.toString());
                     books.put(book.getId(), book);
                 }
             }
@@ -94,9 +94,9 @@ public class MySqlBookDao implements BookDao {
                 Author author = authorMapper.mapGet(rs);
                 if (books.get(book.getId()) != null) {
                     book = books.get(book.getId());
-                    book.setAuthors(book.getAuthors() + ", " + author.toString());
+                    book.setAuthors(" "+book.getAuthors() + ", " + author.toString());
                 } else {
-                    book.setAuthors(author.toString());
+                    book.setAuthors(" "+author.toString());
                     books.put(book.getId(), book);
                 }
             }
@@ -197,10 +197,10 @@ public class MySqlBookDao implements BookDao {
                 User user = userMapper.mapGet(rs);
                 if (books.get(book.getId()) != null) {
                     book = books.get(book.getId());
-                    book.setAuthors(book.getAuthors() + ", " + author.toString());
+                    book.setAuthors(" "+book.getAuthors() + ", " + author.toString());
                 } else {
                     book.setUser(user);
-                    book.setAuthors(author.toString());
+                    book.setAuthors(" "+author.toString());
                     books.put(book.getId(), book);
                 }
             }
@@ -229,9 +229,9 @@ public class MySqlBookDao implements BookDao {
                 Author author = authorMapper.mapGet(rs);
                 if (books.get(book.getId()) != null) {
                     book = books.get(book.getId());
-                    book.setAuthors(book.getAuthors() + ", " + author.toString());
+                    book.setAuthors(" "+book.getAuthors() + ", " + author.toString());
                 } else {
-                    book.setAuthors(author.toString());
+                    book.setAuthors(" "+author.toString());
                     books.put(book.getId(), book);
                 }
             }
