@@ -1,7 +1,8 @@
 package model.dao.mysql;
 
 import config.ResourceBundleManager;
-import controller.util.QueryBuilder;
+import controller.util.SearchUtil;
+import exception.RecordChangeException;
 import model.connectionpool.ConnectionPoolHolder;
 import model.dao.BookDao;
 import model.dao.mapper.AuthorMapper;
@@ -12,11 +13,15 @@ import model.entity.Book;
 import model.entity.User;
 import org.apache.log4j.Logger;
 
+import javax.servlet.http.HttpServletRequest;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class MySqlBookDao implements BookDao {
     private static final Logger logger = Logger.getLogger(MySqlBookDao.class);
@@ -49,6 +54,7 @@ public class MySqlBookDao implements BookDao {
     public List<Book> getAll() {
         return null;
     }
+
     public List<Book> getAllByUserId(int userId,int limit, int offset) {
         Map<Integer, Book> books = new HashMap<>();
         try (Connection connection = ConnectionPoolHolder.getDataSource().getConnection();
@@ -108,6 +114,35 @@ public class MySqlBookDao implements BookDao {
         logger.info("found books: " + booksList.size());
         return booksList;
     }
+    public List<Book> getAll(String s, int limit, int offset) {
+        Map<Integer, Book> books = new HashMap<>();
+        String query=ResourceBundleManager.getSqlString(ResourceBundleManager.BOOK_FIND_ALL_CLEAN);
+        query=query.replaceFirst("[?]",s);
+        try (Connection connection = ConnectionPoolHolder.getDataSource().getConnection();
+             PreparedStatement ps = connection.prepareCall(query)) {
+            ps.setInt(1, limit);
+            ps.setInt(2, offset);
+            logger.info("searching all books....." + ps.toString());
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Book book = bookMapper.mapGet(rs);
+                Author author = authorMapper.mapGet(rs);
+                if (books.get(book.getId()) != null) {
+                    book = books.get(book.getId());
+                    book.setAuthors(" "+book.getAuthors() + ", " + author.toString());
+                } else {
+                    book.setAuthors(" "+author.toString());
+                    books.put(book.getId(), book);
+                }
+            }
+        } catch (SQLException e) {
+            logger.error("fail..." + e);
+            e.printStackTrace();
+        }
+        List<Book> booksList = new ArrayList<>(books.values());
+        logger.info("found books: " + booksList.size());
+        return booksList;
+    }
 
     @Override
     public void save(Book book) {
@@ -140,12 +175,15 @@ public class MySqlBookDao implements BookDao {
     }
 
     @Override
-    public void delete(Book book) {
+    public void delete(Book book) throws RecordChangeException {
         logger.info("try delete book: "+ book);
         try (Connection connection = ConnectionPoolHolder.getDataSource().getConnection();
              PreparedStatement ps = connection.prepareCall(
                      ResourceBundleManager.getSqlString(ResourceBundleManager.BOOK_DELETE))) {
             ps.setInt(1,book.getId());
+            if(get(book.getId()).getStatus()!=0) {
+                throw new RecordChangeException("cannot update/delete record had been changed!"+book);
+            }
             logger.info("query: "+ ps);
             ps.executeUpdate();
             logger.info("success! ");

@@ -2,6 +2,7 @@ package model.dao.mapper;
 
 import model.entity.Book;
 import model.entity.User;
+import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import java.sql.PreparedStatement;
@@ -10,7 +11,7 @@ import java.sql.SQLException;
 import java.util.Map;
 
 public class BookMapper implements ObjectMapper<Book> {
-
+private static final Logger logger = Logger.getLogger(BookMapper.class);
     @Override
     public Book mapGet(ResultSet rs) throws SQLException {
         Book book = new Book();
@@ -44,6 +45,7 @@ public class BookMapper implements ObjectMapper<Book> {
     }
     public Book mapGetFromRequest(HttpServletRequest request) {
         Book book = new Book();
+        logger.info("book-name["+request.getParameter("book-name")+"] book-section["+request.getParameter("book-section")+"]");
         book.setName(request.getParameter("book-name"));
         book.setSection(request.getParameter("book-section"));
         return book;

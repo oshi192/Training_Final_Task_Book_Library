@@ -18,6 +18,7 @@
 		<div class="col-md-12">
 		<jsp:include page="parts/navbar.jsp"/>
 		<jsp:include page="parts/searchpanel.jsp"/>
+		<p>${requestScope.errorMessage}</p>
 <form method='POST'>
 			<table class="table">
 				<thead>
@@ -37,6 +38,8 @@
                                class="btn btn-success"
                                data-title="new Record"
                            >
+
+
                                <span class="glyphicon glyphicon-plus"></span>
                                ${msg:getMessage("edit-book-button-create")}
                            </button>
@@ -105,12 +108,18 @@
                             <td><c:out value="${Book.name}"/></td>
                             <td><c:out value="${Book.authors}"/></td>
                             <td><c:out value="${Book.section}"/></td>
+
+
+
                             <c:if test="${user.role == 'ADMIN'}">
                                 <td>
+
+
+
                                    <button
                                        class="btn btn-info"
                                        type="button"
-                                       data-toggle="modal2"
+                                       data-toggle="modal"
                                        data-target="#myModal2"
                                        type="submit"
                                        name="edit"
@@ -125,7 +134,7 @@
                                        <div class="modal-dialog">
                                            <div class="modal-content">
                                                <div class="modal-header">
-                                                   <button class="close" type="button" data-dismiss="modal2">
+                                                   <button class="close" type="button" data-dismiss="modal">
                                                        ×
                                                    </button>
                                                    <h4 class="modal-title">${msg:getMessage("edit-book-header")}</h4>
@@ -135,16 +144,16 @@
 
                                                     <div class="form-group">
                                                      <label for="pass" class="col-sm-2 control-label">
-                                                       ${msg:getMessage("book-taken-name")}
+                                                       ${msg:getMessage("book-taken-name")}<c:out value="${Book.name}"/>
                                                      </label>
                                                      <div class="col-sm-10">
-                                                      <input type="text" name="book-name" class="form-control" id="pass" placeholder="${Book.name}">
+                                                      <input type="text" name="book-name" class="form-control" placeholder="<c:out value="${Book.name}"/>">
                                                      </div>
                                                     </div>
 
                                                     <div class="form-group">
                                                      <label for="pass" class="col-sm-2 control-label">
-                                                      ${msg:getMessage("book-taken-section")}
+                                                      ${msg:getMessage("book-taken-section")}${Book.section}
                                                      </label>
                                                      <div class="col-sm-10">
                                                       <select class="form-control" name="book-section">
@@ -163,16 +172,19 @@
                                                    <button class="btn btn-default" type="submit" name="edit" value="${Book.id}">
                                                        ${msg:getMessage("edit-book-button-save")}
                                                    </button>
-                                                   <button class="btn btn-success" type="button" data-dismiss="modal2">
+                                                   <button class="btn btn-success" type="button" data-dismiss="modal">
                                                        ${msg:getMessage("edit-book-button-close")}
                                                    </button>
                                                </div>
                                            </div>
                                        </div>
                                    </div>
+
+
+
                                 </td>
-                                <c:if test="${Book.status != 2}">
                                     <td>
+                                    <c:if test="${Book.status != 2}">
                                         <button
                                             type="submit"
                                             name="remove"
@@ -183,12 +195,15 @@
                                             <span class="glyphicon glyphicon-trash"></span>
                                             ${msg:getMessage("button-remove")}
                                         </button>
+                                        </c:if>
                                     </td>
-                                </c:if>
                             </c:if>
+
+
+
                             <c:if test="${user.role == 'USER'}">
+                                <td>
                                 <c:if test="${Book.status == 0}">
-                                    <td>
                                         <button
                                             type="submit"
                                             name="take"
@@ -199,8 +214,9 @@
                                             <span class="glyphicon glyphicon-pencil"></span>
                                             ${msg:getMessage("button-take")}
                                         </button>
-                                    </td>
+
                                 </c:if>
+                                </td>
                             </c:if>
                         </tr>
                     </c:forEach>

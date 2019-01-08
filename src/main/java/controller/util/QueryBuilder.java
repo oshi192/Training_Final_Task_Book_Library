@@ -1,6 +1,5 @@
 package controller.util;
 
-import exception.QueryManagerException;
 import model.connectionpool.ConnectionPoolHolder;
 import org.apache.log4j.Logger;
 
@@ -9,8 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Map;
-import java.util.Objects;
-
+@Deprecated
 public class QueryBuilder {
     private static final Logger logger = Logger.getLogger(QueryBuilder.class);
     private static final String PAGINATE_QUERY_PART = " LIMIT %d OFFSET %d";
@@ -26,13 +24,6 @@ public class QueryBuilder {
         this.clean = clean;
     }
 
-    public void addPagination(int limit, int offset) {
-        pagination= String.format(PAGINATE_QUERY_PART, limit, offset);
-    }
-
-    public void addCondition(String condition) throws QueryManagerException {
-        this.condition = condition;
-    }
 
     public ResultSet execute() throws SQLException {
         query+=" "+condition+" "+pagination;

@@ -1,7 +1,6 @@
 package model.dao.mysql;
 
 import config.ResourceBundleManager;
-import controller.util.QueryBuilder;
 import model.connectionpool.ConnectionPoolHolder;
 import model.dao.UserDao;
 import model.dao.mapper.UserMapper;
@@ -13,13 +12,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Optional;
 
 public class MySqlUserDao implements UserDao {
     final static Logger logger = Logger.getLogger(MySqlUserDao.class);
-    private String FIND_BY_EMAIL = "user-find-by-email";
-    private String FIND_BY_ID = "user-find-by-id";
-    private String SAVE = "user-insert";
+
     private static UserMapper mapper = new UserMapper();
 
     public MySqlUserDao() {
@@ -29,11 +25,12 @@ public class MySqlUserDao implements UserDao {
     @Override
     public User findByEmail(String email) {
         User user = null;
-        String query = ResourceBundleManager.getSqlString(FIND_BY_EMAIL).replace("?",email);
-        logger.info("searching ny email....." + query);
-        QueryBuilder queryBuilder = new QueryBuilder(query);
-        try  {
-            ResultSet rs = queryBuilder.execute();
+        try (Connection connection = ConnectionPoolHolder.getDataSource().getConnection();
+             PreparedStatement ps = connection.prepareCall(
+                     ResourceBundleManager.getSqlString(ResourceBundleManager.FIND_BY_EMAIL))) {
+            ps.setString(1, email);
+            logger.info("search user by email:"+ps.toString());
+            ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 user = mapper.mapGet(rs);
             }
@@ -44,7 +41,6 @@ public class MySqlUserDao implements UserDao {
             ex.printStackTrace();
             return null;
         }
-
         return user;
     }
 
@@ -66,9 +62,8 @@ public class MySqlUserDao implements UserDao {
 
     @Override
     public void save(User user) {
-        String query = ResourceBundleManager.getSqlString(SAVE);
         try (Connection connection = ConnectionPoolHolder.getDataSource().getConnection();
-             PreparedStatement ps = connection.prepareCall(query);) {
+             PreparedStatement ps = connection.prepareCall(ResourceBundleManager.getSqlString(ResourceBundleManager.SAVE))) {
             mapper.mapCreate(ps, user);
             ps.execute();
         } catch (SQLException ex) {
@@ -77,9 +72,8 @@ public class MySqlUserDao implements UserDao {
     }
     public User findById(int id) {
         User result=null;
-        String query = ResourceBundleManager.getSqlString(FIND_BY_ID);
         try(Connection connection = ConnectionPoolHolder.getDataSource().getConnection();
-            PreparedStatement ps = connection.prepareCall(query);){
+            PreparedStatement ps = connection.prepareCall(ResourceBundleManager.getSqlString(ResourceBundleManager.FIND_BY_ID));){
             ps.setInt( 1, id);
             ResultSet rs;
             rs = ps.executeQuery();
@@ -106,37 +100,5 @@ public class MySqlUserDao implements UserDao {
     public void close() throws Exception {
 
     }
-
-
-//    @Override
-//    protected void prepareStatementForInsert(PreparedStatement statement, User object) throws PersistException {
-//        try {
-////            statement.setInt(1, object.getId());
-//            statement.setString(6, object.getEmail());
-//            statement.setString(1, object.getPhoneNumber());
-//            statement.setString(2, object.getPassword());
-//            statement.setString(3, object.getName());
-//            statement.setString(4, object.getSurname());
-//            statement.setString(5, object.getRole());
-//        } catch (Exception e) {
-//            throw new PersistException(e);
-//        }
-//    }
-//
-//    @Override
-//    protected void prepareStatementForUpdate(PreparedStatement statement, User object) throws PersistException {
-//        try {
-//            statement.setInt(1, object.getId());
-//            statement.setString(2, object.getEmail());
-//            statement.setString(3, object.getPhoneNumber());
-//            statement.setString(4, object.getPassword());
-//            statement.setString(5, object.getName());
-//            statement.setString(5, object.getSurname());
-//            statement.setString(5, object.getRole());
-//        } catch (Exception e) {
-//            throw new PersistException(e);
-//        }
-//    }
-
 
 }
