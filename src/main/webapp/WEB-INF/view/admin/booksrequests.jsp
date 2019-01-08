@@ -49,7 +49,7 @@
                                 <button
                                     type="submit"
                                     name="submit"
-                                    value="${BookRequest.user.id}${","}${BookRequest.id}"
+                                    value="${BookRequest.id}"
                                     class="btn btn-success btn-xs"
                                     data-title="Edit" data-toggle="modal"
                                     data-target="#edit" >
@@ -61,7 +61,7 @@
                                 <button
                                     type="submit"
                                     name="denied"
-                                    value="${BookRequest.user.id}${','}${BookRequest.id}"
+                                    value="${BookRequest.id}"
                                     class="btn btn-xs btn-danger"
                                     data-title="Edit" data-toggle="modal"
                                     data-target="#edit" >

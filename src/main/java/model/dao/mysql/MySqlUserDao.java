@@ -17,8 +17,6 @@ import java.util.Optional;
 
 public class MySqlUserDao implements UserDao {
     final static Logger logger = Logger.getLogger(MySqlUserDao.class);
-    //private List<User> users = new ArrayList<>();
-    //private Connection connection;
     private String FIND_BY_EMAIL = "user-find-by-email";
     private String FIND_BY_ID = "user-find-by-id";
     private String SAVE = "user-insert";
@@ -52,8 +50,8 @@ public class MySqlUserDao implements UserDao {
 
 
     @Override
-    public Optional<User> get(int id) {
-        return Optional.empty();
+    public User get(int id) {
+        return null;
     }
 
     @Override
@@ -95,7 +93,7 @@ public class MySqlUserDao implements UserDao {
         return result;
     }
     @Override
-    public void update(User user, String[] params) {
+    public void update(User user) {
 
     }
 

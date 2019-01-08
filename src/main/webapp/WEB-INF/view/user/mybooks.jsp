@@ -37,8 +37,8 @@
                     <c:forEach var="TakenBook" items="${requestScope.TakenBooks}"  varStatus="status">
                         <tr class="table-active">
                             <td>${status.count+recordsOnPage*(currentPage-1)}.</td>
-                            <td><c:out value="${TakenBook.takenDate}"/></td>
-                            <td><c:out value="${TakenBook.wilReturnDate}"/></td>
+                            <td><c:out value="${TakenBook.takeBeginDate}"/></td>
+                            <td><c:out value="${TakenBook.takeEndDate}"/></td>
                             <td><c:out value="${TakenBook.name}"/></td>
                             <td><c:out value="${TakenBook.authors}"/></td>
                             <td><c:out value="${TakenBook.section}"/></td>

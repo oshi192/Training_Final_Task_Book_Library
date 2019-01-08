@@ -16,6 +16,7 @@ import java.util.Map;
 public class LogInCommand implements Command {
     private static Logger logger = Logger.getLogger(LogInCommand.class);
     private static LogInOutUtils utils = new LogInOutUtils();
+
     private final static String WRONG_EMAIL= "login-wrong-email";
     private final static String WRONG_PASSWORD= "login-wrong-password";
     private final static String ENTER_EMAIL= "login-please-enter-email";
@@ -33,16 +34,14 @@ public class LogInCommand implements Command {
 
     @Override
     public String executePost(HttpServletRequest request, HttpServletResponse response) {
-        String page = null;
+        String page;
         String email = request.getParameter("email");
         String pass = request.getParameter("password");
         logger.info(request.getParameterNames().toString());
         logger.info("email = " + email + " pass = " + pass);
         Map<String, String> messages = new HashMap<>();
-
         if (checkEmailAndPasword(request,messages,email,pass)) {
-            User user = new MySqlUserDao()
-                    .findByEmail(email);
+            User user = new MySqlUserDao().findByEmail(email);
             logger.info("found user:" + user);
             if (user != null) {
                 if (user.getPassword().equals(pass)) {
@@ -66,6 +65,8 @@ public class LogInCommand implements Command {
         logger.info("toPage: " + page);
         return page;
     }
+
+
     public boolean checkEmailAndPasword(HttpServletRequest request,Map<String, String> messages,String email,String pass){
         if (email == null || email.isEmpty()) {
             messages.put("email", ResourceBundleManager.getMessage(ENTER_EMAIL));

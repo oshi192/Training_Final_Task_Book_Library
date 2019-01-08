@@ -39,7 +39,6 @@ public class AccessMapper {
                 "",
                 "logout",
                 "all-books",
-                //"manage-books",
                 "all-users",
                 "books-requests"
         ));

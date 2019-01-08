@@ -41,8 +41,8 @@
                             <td><c:out value="${TakenBook.user.phoneNumber}"/></td>
                             <td><c:out value="${TakenBook.user.name}"/></td>
                             <td><c:out value="${TakenBook.user.surname}"/></td>
-                            <td><c:out value="${TakenBook.takenDate}"/></td>
-                            <td><c:out value="${TakenBook.wilReturnDate}"/></td>
+                            <td><c:out value="${TakenBook.takeBeginDate}"/></td>
+                            <td><c:out value="${TakenBook.takeEndDate}"/></td>
                             <td><c:out value="${TakenBook.name}"/></td>
                             <td><c:out value="${TakenBook.authors}"/></td>
                             <td><c:out value="${TakenBook.section}"/></td>
