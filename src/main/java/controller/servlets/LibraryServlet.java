@@ -8,14 +8,20 @@ import org.apache.log4j.Logger;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class AddServlet extends HttpServlet {
+@WebServlet(urlPatterns = "/")
+
+public class LibraryServlet extends HttpServlet {
     private static ServletContext context;
-    private static Logger logger = Logger.getLogger(AddServlet.class);
+    private static Logger logger = Logger.getLogger(LibraryServlet.class);
+    private final static String EMPTY = "";
+    private final static String REDIRECT = "redirect:";
+    private final static String SERVLET = ".*/library/";
 
     private enum RequestType {
         GET, POST
@@ -39,9 +45,8 @@ public class AddServlet extends HttpServlet {
 
     private void processRequest(HttpServletRequest request, HttpServletResponse response, RequestType type)
             throws ServletException, IOException {
-
         String path = request.getRequestURI();
-        path = path.replaceAll(".*/library/", "");
+        path = path.replaceAll(".*/library/", EMPTY);
         Command command = CommandMannager.getCommands().getOrDefault(path, new HomepageCommand());
         logger.info(command.getClass().getName());
         String page;
@@ -51,8 +56,8 @@ public class AddServlet extends HttpServlet {
             page = command.executePost(request, response);
         }
         logger.info("path: " + path + " >> page: " + page + " ");
-        if (page.contains("redirect")) {
-            page = page.replaceAll("redirect:", "");
+        if (page.contains(REDIRECT)) {
+            page = page.replaceAll(REDIRECT, EMPTY);
             logger.info("redirect to page: " + page);
             response.sendRedirect(page);
         } else {

@@ -2,6 +2,7 @@ package controller.util;
 
 import model.entity.User;
 import model.entity.User.Role;
+import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;
@@ -10,6 +11,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class AccessMapper {
+    private final static Logger logger = Logger.getLogger(AccessMapper.class);
     private static HashMap<User.Role, List<String>> rights;
     private static AccessMapper instance;
 
@@ -56,8 +58,8 @@ public class AccessMapper {
     public boolean checkRights(HttpServletRequest request, Role role) {
         String page = request.getRequestURI();
         page = page.replaceAll(".*/library/", "");
-        System.out.println(">>>>page:["+page+"]");
-        if (Objects.isNull(page)) {
+        logger.info(">>>>page:["+page+"]");
+        if (page.isEmpty()) {
             return true;
         }
         if(page.contains("resources")){

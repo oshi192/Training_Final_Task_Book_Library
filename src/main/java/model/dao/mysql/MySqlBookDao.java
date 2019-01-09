@@ -1,7 +1,6 @@
 package model.dao.mysql;
 
 import config.ResourceBundleManager;
-import controller.util.SearchUtil;
 import exception.RecordChangeException;
 import model.connectionpool.ConnectionPoolHolder;
 import model.dao.BookDao;
@@ -13,7 +12,6 @@ import model.entity.Book;
 import model.entity.User;
 import org.apache.log4j.Logger;
 
-import javax.servlet.http.HttpServletRequest;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -181,7 +179,8 @@ public class MySqlBookDao implements BookDao {
              PreparedStatement ps = connection.prepareCall(
                      ResourceBundleManager.getSqlString(ResourceBundleManager.BOOK_DELETE))) {
             ps.setInt(1,book.getId());
-            if(get(book.getId()).getStatus()!=0) {
+            Book tmpBook = get(book.getId());
+            if(tmpBook==null || tmpBook.getStatus()!=0) {
                 throw new RecordChangeException("cannot update/delete record had been changed!"+book);
             }
             logger.info("query: "+ ps);

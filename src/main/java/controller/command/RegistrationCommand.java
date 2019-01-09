@@ -4,7 +4,7 @@ import config.ResourceBundleManager;
 import model.dao.mysql.MySqlUserDao;
 import model.entity.User;
 import org.apache.log4j.Logger;
-import util.Configuration;
+import controller.util.Configuration;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

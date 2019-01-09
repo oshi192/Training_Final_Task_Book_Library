@@ -3,14 +3,15 @@ package controller.filter;
 import controller.util.AccessMapper;
 import model.entity.User;
 import org.apache.log4j.Logger;
-import util.Configuration;
+import controller.util.Configuration;
 
 import javax.servlet.*;
 import java.io.IOException;
 import java.util.Objects;
+import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-//@WebFilter(urlPatterns = {"/library/"})
+@WebFilter(filterName = "RoleFilter", urlPatterns = {"/*"})
 public class RoleFilter implements Filter {
     private static final String USER_ATTR = "user";
     private final static Logger logger = Logger.getLogger(RoleFilter.class);

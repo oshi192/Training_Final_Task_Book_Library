@@ -6,6 +6,9 @@ import java.util.ResourceBundle;
 //todo thread locale
 //todo time utime!! for bd
 
+/**
+ *
+ */
 public class ResourceBundleManager {
 
     private static final String BUNDLE_NAME_CONFIG="config";

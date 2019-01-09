@@ -4,7 +4,7 @@ import config.ResourceBundleManager;
 import controller.util.Pagination;
 import model.dao.mysql.MySqlBookDao;
 import model.entity.Book;
-import util.Configuration;
+import controller.util.Configuration;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

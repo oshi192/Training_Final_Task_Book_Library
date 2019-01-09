@@ -5,9 +5,9 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.yurii</groupId>
-    <artifactId>web1</artifactId>
+    <artifactId>library</artifactId>
     <version>1.0-SNAPSHOT</version>
-<packaging>war</packaging>
+    <packaging>war</packaging>
     <dependencies>
         <dependency>
             <groupId>javax.servlet</groupId>
@@ -60,7 +60,7 @@
         </dependency>
     </dependencies>
     <build>
-        <finalName>tmpFilterProject</finalName>
+        <finalName>library</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.tomcat.maven</groupId>
@@ -79,6 +79,7 @@
                     <target>1.8</target>
                 </configuration>
             </plugin>
+
         </plugins>
     </build>
 </project>

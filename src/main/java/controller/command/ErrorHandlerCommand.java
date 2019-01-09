@@ -1,15 +1,13 @@
 package controller.command;
 
-import controller.util.Configuration;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class HomepageCommand implements Command{
-
+public class ErrorHandlerCommand implements Command{
     @Override
-    public String executeGet(HttpServletRequest request,HttpServletResponse response) {
-        return Configuration.getProperty(Configuration.INDEX_PAGE_PATH);
+    public String executeGet(HttpServletRequest request, HttpServletResponse response) {
+        response.setContentType("text/html; charset=utf-8");
+ return "WEB-INF/view/errorpage.jsp";
     }
 
     @Override

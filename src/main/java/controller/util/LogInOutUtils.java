@@ -1,12 +1,11 @@
 package controller.util;
 
-import controller.servlets.AddServlet;
+import controller.servlets.LibraryServlet;
 import model.entity.User;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 import java.util.Map;
-import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class LogInOutUtils {
@@ -16,7 +15,7 @@ public class LogInOutUtils {
         setLoggedUsers(loggedUsers);
         session.removeAttribute("user");
     }
-    private static ServletContext context = AddServlet.getContext();
+    private static ServletContext context = LibraryServlet.getContext();
 
     private Integer getUserId(HttpSession session) {
         User user = (User)session.getAttribute("user");

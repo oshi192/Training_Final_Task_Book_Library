@@ -5,6 +5,9 @@ import controller.command.*;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Class contains Map with (path key -> CommandObject) for servlet
+ */
 public class CommandMannager {
     private static Map<String, Command> commands = new HashMap<>();
 
@@ -19,6 +22,7 @@ public class CommandMannager {
         commands.put("books-requests", new BooksRequestsCommand());
         commands.put("my-books", new MyBooksCommand());
         commands.put("my-requests", new MyRequestsCommand());
+        commands.put("errorHandler", new ErrorHandlerCommand());
     }
 
     private CommandMannager() {

@@ -2,7 +2,7 @@ package controller.command;
 
 
 import controller.util.LogInOutUtils;
-import util.Configuration;
+import controller.util.Configuration;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

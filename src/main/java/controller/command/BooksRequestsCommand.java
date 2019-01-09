@@ -5,12 +5,11 @@ import controller.util.Pagination;
 import model.dao.mysql.MySqlBookDao;
 import model.entity.Book;
 import org.apache.log4j.Logger;
-import util.Configuration;
+import controller.util.Configuration;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 
 public class BooksRequestsCommand implements Command {
