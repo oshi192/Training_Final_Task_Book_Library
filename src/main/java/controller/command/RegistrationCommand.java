@@ -1,6 +1,7 @@
 package controller.command;
 
 import config.ResourceBundleManager;
+import controller.util.Md5;
 import model.dao.mysql.MySqlUserDao;
 import model.entity.User;
 import org.apache.log4j.Logger;
@@ -64,7 +65,7 @@ public class RegistrationCommand implements Command {
     private User createUserFromRequest(HttpServletRequest request) {
         User user = new User();
         user.setRole(User.Role.USER.name());
-        user.setPassword(request.getParameter("password"));
+        user.setPassword(Md5.convertToMd5(request.getParameter("password")));
         user.setName(request.getParameter("first-name"));
         user.setSurname(request.getParameter("surname"));
         user.setEmail(request.getParameter("email"));

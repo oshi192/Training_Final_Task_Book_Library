@@ -7,7 +7,7 @@ import java.util.ResourceBundle;
 //todo time utime!! for bd
 
 /**
- *
+ * Class for work with Resources bundles
  */
 public class ResourceBundleManager {
 

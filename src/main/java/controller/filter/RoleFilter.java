@@ -11,6 +11,10 @@ import java.util.Objects;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+
+/**
+ * This class check access rights to page
+ */
 @WebFilter(filterName = "RoleFilter", urlPatterns = {"/*"})
 public class RoleFilter implements Filter {
     private static final String USER_ATTR = "user";

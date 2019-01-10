@@ -1,36 +1,35 @@
 package controller.util;
 
 
+import org.apache.log4j.Logger;
+
+import java.io.UnsupportedEncodingException;
+import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+/**
+ * class for decrypt from md5
+ * used for hashing and check passwords from/to db
+ */
 public class Md5 {
-    public static void main(String[] args) {
-        System.out.println("SVn".equalsIgnoreCase("Svn"));
+    private final static Logger logger = Logger.getLogger(Md5.class);
 
+    public static boolean matching(String orig, String compare){
+        logger.info("compare:"+compare +" vs "+orig+" result: "+convertToMd5(compare).equals(orig));
+            return convertToMd5(compare).equals(orig);
     }
-    public static String md5Password(String password) {
-        System.out.println("password->"+password);
-        if("".equals(password))return "";
+    public static String convertToMd5(String password) {
+        MessageDigest md = null;
         try {
-            MessageDigest digest = MessageDigest.getInstance("md5");
-            byte[] result = digest.digest(password.getBytes());
-            StringBuffer buffer = new StringBuffer();
-
-            for (byte b : result) {
-
-                int number = b & 0xff;
-                String str = Integer.toHexString(number);
-                if (str.length() == 1) {
-                    buffer.append("0");
-                }
-                buffer.append(str);
-            }
-            return buffer.toString();
-
-        } catch (Exception e) {
+            md = MessageDigest.getInstance("MD5");
+        } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
-            return "";
         }
+        byte[] messageDigest = md.digest(password.getBytes());
+        BigInteger number = new BigInteger(1, messageDigest);
+        String hashtext = number.toString(16);
+        logger.info("password: "+password+" password in Md5:"+hashtext);
+        return hashtext;
     }
 }

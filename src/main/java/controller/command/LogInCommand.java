@@ -2,6 +2,7 @@ package controller.command;
 
 import config.ResourceBundleManager;
 import controller.util.LogInOutUtils;
+import controller.util.Md5;
 import model.dao.mysql.MySqlUserDao;
 import model.entity.User;
 import org.apache.log4j.Logger;
@@ -44,7 +45,7 @@ public class LogInCommand implements Command {
             User user = new MySqlUserDao().findByEmail(email);
             logger.info("found user:" + user);
             if (user != null) {
-                if (user.getPassword().equals(pass)) {
+                if (Md5.matching(user.getPassword(),pass)) {
                     user.setPassword("");
                     logIn(request, user);
                     page = "redirect:";

@@ -15,7 +15,8 @@ ENGINE = InnoDB AUTO_INCREMENT = 1 DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `library`.`books` (
   `book_id` INT NOT NULL AUTO_INCREMENT,
-  `book_name` VARCHAR(255) NOT NULL,
+  `book_name_en` VARCHAR(255) NOT NULL,
+  `book_name_uk` VARCHAR(255) NOT NULL,
   `section` VARCHAR(45) NOT NULL,
   `users_user_id` INT,
   `users_admin_id` INT,
@@ -27,9 +28,12 @@ ENGINE = InnoDB AUTO_INCREMENT = 1 DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `library`.`author` (
   `author_id` INT NOT NULL AUTO_INCREMENT,
-  `first_name` VARCHAR(45) NOT NULL,
-  `second_name` VARCHAR(45) NOT NULL,
-  `patronymic_name` VARCHAR(45) NULL,
+  `first_name_en` VARCHAR(45) NOT NULL,
+  `first_name_uk` VARCHAR(45) NOT NULL,
+  `second_name_en` VARCHAR(45) NOT NULL,
+  `second_name_uk` VARCHAR(45) NOT NULL,
+  `patronymic_name_en` VARCHAR(45) NULL,
+  `patronymic_name_uk` VARCHAR(45) NULL,
   PRIMARY KEY (`author_id`))
 ENGINE = InnoDB AUTO_INCREMENT = 1 DEFAULT CHARSET=utf8;
 
@@ -75,43 +79,43 @@ ENGINE = InnoDB DEFAULT CHARSET=utf8;
 
 start transaction;
 use library;
-insert into `library`.`users` values(1, "johnsnow@gmail.com", "0960969090", "John", "Snow", "password1D", "USER");
-insert into `library`.`users` values(2, "admin@gmail.com", "0961234567", "Василь", "Пупкін", "Admin1234", "ADMIN");
-insert into `library`.`users` values(3, "kornik@gmail.com", "0909876543", "Михаил", "Корников", "qwerty123QWERTY", "ADMIN");
-insert into `library`.`users` values(4, "stepanJ@imail.com", "0443243434", "Степан", "Портак", "12345678Qq", "USER");
-insert into `library`.`users` values(5, "kenya@gmail.com", "0503323434", "Інокентій", "Пастернак", "Password1", "USER");
-insert into `library`.`users` values(6, "gregor@gmail.com", "0930302099", "Грегорій", "Лінус", "Gsdikj213", "USER");
+insert into `library`.`users` values(1, "johnsnow@gmail.com", "0960969090", "John", "Snow", "3cd2436f0dd5a354b7144a3361d19a10", "USER");
+insert into `library`.`users` values(2, "admin@gmail.com", "0961234567", "Василь", "Пупкін", "751cb3f4aa17c36186f4856c8982bf27", "ADMIN");
+insert into `library`.`users` values(3, "kornik@gmail.com", "0909876543", "Михаил", "Корников", "d59a62dc44f354b41469ac42b83ec0a5", "ADMIN");
+insert into `library`.`users` values(4, "stepanJ@imail.com", "0443243434", "Степан", "Портак", "e6c86a8da44ff392dc61c529a545ac9d", "USER");
+insert into `library`.`users` values(5, "kenya@gmail.com", "0503323434", "Інокентій", "Пастернак", "2ac9cb7dc02b3c0083eb70898e549b63", "USER");
+insert into `library`.`users` values(6, "gregor@gmail.com", "0930302099", "Грегорій", "Лінус", "3e2a52b4b58782ea49a866cfdf46ef8b", "USER");
 commit;
 
 start transaction;
 use library;
-insert into `books` values(1, "Dune", "Fantasy-3-K",null,null,null,null,0);
-insert into `books` values(2, "Data Science. Insider Information for Newbies", "IT-2-A",null,null,null,null,0);
-insert into `books` values(3, "The witcher", "Fantasy-3-G",1, 2,'2018-12-01','2019-01-01',2);
-insert into `books` values(4, "Blood elves", "Fantasy-3-G",4, 2,'2018-12-08','2019-01-08',2);
-insert into `books` values(5, "Hour of Contempt", "Fantasy-3-G",null,null,null,null,0);
-insert into `books` values(6, "Java. INDUSTRIAL PROGRAMMING", "IT-1-A",4,null,null,null,1);
-insert into `books` values(7, "I am a robot", "Fantasy-2-I",4,null,null,null,1);
-insert into `books` values(8, "Bicentennial man", "Fantasy-2-I",null,null,null,null,0);
-insert into `books` values(9, "Stars like dust", "Fantasy-2-I",null,null,null,null,0);
-insert into `books` values(10, "SQL - requests for mere mortals.", "IT-1-A",5, 3,'2018-12-11','2019-01-11',2);
-insert into `books` values(11, "Java. Effective programming.", "IT-1-A",null,null,null,null,0);
-insert into `books` values(12, "The Hitchhiker's Guide to the Galaxy", "Fantasy-3-B",null,null,null,null,0);
+insert into `books` values(1, "Dune", "Дюна", "Fantasy-3-K",null,null,null,null,0);
+insert into `books` values(2, "Data Science. Insider Information for Newbies","Наука про дані. Інсайдерська інформація для новачків", "IT-2-A",null,null,null,null,0);
+insert into `books` values(3, "The witcher","Відьмак", "Fantasy-3-G",1, 2,'2018-12-01','2019-01-01',2);
+insert into `books` values(4, "Blood elves","Кровні ельфи", "Fantasy-3-G",4, 2,'2018-12-08','2019-01-08',2);
+insert into `books` values(5, "Hour of Contempt","Година презирства", "Fantasy-3-G",null,null,null,null,0);
+insert into `books` values(6, "Java. INDUSTRIAL PROGRAMMING", "Java. ПРОМИСЛОВЕ ПРОГРАМУВАННЯ", "IT-1-A",4,null,null,null,1);
+insert into `books` values(7, "I am a robot", "Я робот", "Fantasy-2-I",4,null,null,null,1);
+insert into `books` values(8, "Bicentennial man", "Двохсотрічний чоловік", "Fantasy-2-I",null,null,null,null,0);
+insert into `books` values(9, "Stars like dust", "Зорі як пил", "Fantasy-2-I",null,null,null,null,0);
+insert into `books` values(10, "SQL - requests for mere mortals.", "SQL - запити для простих смертних.", "IT-1-A",5, 3,'2018-12-11','2019-01-11',2);
+insert into `books` values(11, "Java. Effective programming.", "Java. Ефективне програмування.", "IT-1-A",null,null,null,null,0);
+insert into `books` values(12, "The Hitchhiker's Guide to the Galaxy", "Автостопом по Галактиці", "Fantasy-3-B",null,null,null,null,0);
 commit;
 
 start transaction;
 use library;
-insert into `library`.`author` values(1, "Frank", "Gebert", NULL);
-insert into `library`.`author` values(2, "Кетті", "Нілл", "О");
-insert into `library`.`author` values(3, "Рейчел", "Шат",NULL);
-insert into `library`.`author` values(4, " Анджей", "Сапковский", NULL);
-insert into `library`.`author` values(5, "Николай", "Блинов", "Иванович");
-insert into `library`.`author` values(6, "Валерий", "Романчик", "Станиславович");
-insert into `library`.`author` values(7, "Айзек", "Азімов", NULL);
-insert into `library`.`author` values(8, "Майкл", "Хернандес", "Дж.");
-insert into `library`.`author` values(9, "Джон", "Вьескас", NULL);
-insert into `library`.`author` values(10, "Джошуа", "Блох", NULL);
-insert into `library`.`author` values(11, "Дуглас", "Адамс", NULL);
+insert into `library`.`author` values(1, "Frank", "Френк", "Gebert", "Геберт", NULL, NULL);
+insert into `library`.`author` values(2, "Ketty", "Кетті", "Nill", "Нілл", "O", "О");
+insert into `library`.`author` values(3, "Rachel", "Рейчел", "Shat", "Шат",NULL,NULL);
+insert into `library`.`author` values(4, " Andrzej", " Анджей", "Sapkowski","Сапковский", NULL, NULL);
+insert into `library`.`author` values(5, "Nikolai", "Николай", "Blinov", "Блинов", "Ivanovich", "Иванович");
+insert into `library`.`author` values(6, "Valery", "Валерий", "Romantic", "Романчик", "Stanislavovich", "Станиславович");
+insert into `library`.`author` values(7, "Isaac", "Айзек", "Azimov", "Азімов", NULL, NULL);
+insert into `library`.`author` values(8, "Michael", "Майкл", "Hernandez", "Хернандес", "J.", "Дж.");
+insert into `library`.`author` values(9, "John", "Джон", "Viaxas", "Вьескас", NULL, NULL);
+insert into `library`.`author` values(10, "Joshua", "Джошуа", "Bloody", "Блох", NULL, NULL);
+insert into `library`.`author` values(11, "Douglas", "Дуглас", "Adams", "Адамс", NULL, NULL);
 commit;
 
 

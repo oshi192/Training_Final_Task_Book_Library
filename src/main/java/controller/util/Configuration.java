@@ -2,6 +2,9 @@ package controller.util;
 
 import java.util.ResourceBundle;
 
+/**
+ * Class for getting pages addresses
+ */
 public class Configuration {
     //todo thread locale для бандля под нескольких юзеров
     public static final String BOOK_SEARCH_PAGE_PATH = "BOOK_SEARCH_PAGE_PATH";

@@ -1,7 +1,6 @@
 package model.dao.mapper;
 
 import model.entity.Book;
-import model.entity.User;
 import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,7 +14,6 @@ public class BookMapper implements ObjectMapper<Book> {
 private static final Logger logger = Logger.getLogger(BookMapper.class);
     @Override
     public Book mapGet(ResultSet rs) throws SQLException {
-        String lang = "_"+Locale.getDefault().getLanguage();
         Book book = new Book();
         book.setId(rs.getInt("book_id"));
         book.setUserId(rs.getInt("users_user_id"));

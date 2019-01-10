@@ -15,6 +15,9 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 
+/**
+ * Class set user locale
+ */
 @WebFilter(filterName = "LangFilter", urlPatterns = {"/*"})
 public class LangFilter implements Filter {
     private final static Logger logger = Logger.getLogger(LangFilter.class);

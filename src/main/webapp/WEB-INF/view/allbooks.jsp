@@ -78,10 +78,8 @@
                                              <div class="col-sm-10">
                                               <select class="form-control" name="book-section">
                                                 <c:forEach var="item" items="${requestScope.Sections}" varStatus="status">
-                                                   <option
-                                                        <c:if test="${Book.section eq item}">selected="selected"</c:if>
-                                                   >
-                                                        ${status.count+recordsOnPage*(currentPage-1)}.${item}
+                                                   <option value="${item}">
+                                                        ${item}
                                                    </option>
                                                 </c:forEach>
                                               </select>
@@ -110,6 +108,7 @@
 					</tr>
 				</thead>
 				<tbody>
+
                     <c:forEach var="Book" items="${requestScope.Books}" varStatus="status">
                         <tr class="table-active">
                             <td>${status.count+recordsOnPage*(currentPage-1)}
@@ -130,7 +129,7 @@
                                        class="btn btn-info"
                                        type="button"
                                        data-toggle="modal"
-                                       data-target="#myModal2${Book.id}"
+                                       data-target="#myModal${Book.id}"
                                        type="submit"
                                        name="edit"
                                        value="${Book.id}"
@@ -141,7 +140,7 @@
                                        ${msg:getMessage("button-edit")}
                                    </button>
 
-                                   <div id="myModal2${Book.id}" class="modal fade">
+                                   <div id="myModal${Book.id}" class="modal fade">
                                        <div class="modal-dialog">
                                            <div class="modal-content">
                                                <div class="modal-header">

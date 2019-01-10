@@ -8,14 +8,18 @@ import javax.servlet.http.HttpSession;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+/**
+ * class for logout user
+ */
 public class LogInOutUtils {
+    private static ServletContext context = LibraryServlet.getContext();
+
     public void logOut(HttpSession session) {
         Map<Integer, HttpSession> loggedUsers = getLoggedUsers();
         loggedUsers.remove(getUserId(session));
         setLoggedUsers(loggedUsers);
         session.removeAttribute("user");
     }
-    private static ServletContext context = LibraryServlet.getContext();
 
     private Integer getUserId(HttpSession session) {
         User user = (User)session.getAttribute("user");

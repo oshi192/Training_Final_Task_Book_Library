@@ -21,6 +21,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ *
+ */
 public class MySqlBookDao implements BookDao {
     private static final Logger logger = Logger.getLogger(MySqlBookDao.class);
     private static UserMapper userMapper = new UserMapper();
@@ -175,20 +178,29 @@ public class MySqlBookDao implements BookDao {
     @Override
     public void delete(Book book) throws RecordChangeException {
         logger.info("try delete book: "+ book);
-        try (Connection connection = ConnectionPoolHolder.getDataSource().getConnection();
-             PreparedStatement ps = connection.prepareCall(
-                     ResourceBundleManager.getSqlString(ResourceBundleManager.BOOK_DELETE))) {
-            ps.setInt(1,book.getId());
-            Book tmpBook = get(book.getId());
-            if(tmpBook==null || tmpBook.getStatus()!=0) {
-                throw new RecordChangeException("cannot update/delete record had been changed!"+book);
+        try (Connection connection = ConnectionPoolHolder.getDataSource().getConnection()) {
+            MySqlTransaction transaction = new MySqlTransaction(connection);
+            transaction.startTransaction();
+            transaction.setLevelSerializable();
+            try {
+                PreparedStatement ps = connection.prepareCall(
+                        ResourceBundleManager.getSqlString(ResourceBundleManager.BOOK_DELETE));
+                ps.setInt(1, book.getId());
+                Book tmpBook = get(book.getId());
+                if (tmpBook == null || tmpBook.getStatus() != 0) {
+                    throw new RecordChangeException("cannot update/delete record had been changed!" + book);
+                }
+                logger.info("query: " + ps);
+                ps.executeUpdate();
+                transaction.commit();
+                logger.info("success! ");
+            } catch (SQLException e) {
+                e.printStackTrace();
+                transaction.rollback();
+                logger.info("fail: " + book);
             }
-            logger.info("query: "+ ps);
-            ps.executeUpdate();
-            logger.info("success! ");
-        } catch (SQLException e) {
-            e.printStackTrace();
-            logger.info("fail: "+ book);
+        }catch (SQLException e){
+            logger.info("fail: create connection");
         }
     }
 

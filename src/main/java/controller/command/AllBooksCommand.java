@@ -13,6 +13,7 @@ import controller.util.Configuration;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Enumeration;
 import java.util.List;
 
 public class AllBooksCommand implements Command {
@@ -34,6 +35,11 @@ public class AllBooksCommand implements Command {
         request.setAttribute("Books", books);
         List<String> sections = new MySqlBookDao().getAllSections();
         request.setAttribute("Sections", sections);
+        Enumeration<String> params = request.getParameterNames();
+        while(params.hasMoreElements()){
+            String paramName = params.nextElement();
+            System.out.println(paramName+"\t\t"+request.getParameter(paramName));
+        }
         return Configuration.getProperty(Configuration.ALLBOOKS_PATH);
     }
 
