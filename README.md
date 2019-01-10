@@ -3,9 +3,9 @@
 
 #### The task:
  Create a directory by which you can search by:
-    • The author (one of the group).
-    • The name of the book or its fragment.
-    • One of the keywords in the book (book attribute).
+ - The author (one of the group).
+ - The name of the book or its fragment.
+ - One of the keywords in the book (book attribute).
 The catalog is filled by the Administrator by adding and modifying / deleting them. Each book must have an address (place on the shelf) or a reader. The reader, in order to take the book, registers, leaving the e-mail and telephone number. The book can be taken from the Administrator in the library for a period of no more than a month,
 only if the book is available in the library. The administrator must have a page where the books and readers who use the book are reflected.
 
@@ -18,7 +18,7 @@ all users: browse books and use them to search
 
 
       to login:
-   - Admin: login [admin@gmail.com] password [Admin1234]
+   - Admin: login \[admin@gmail.com\] password \[Admin1234]
    - User: login [stepanJ@imail.com] password [12345678Qq]
 
 
