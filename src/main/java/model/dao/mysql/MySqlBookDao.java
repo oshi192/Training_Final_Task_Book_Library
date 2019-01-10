@@ -53,7 +53,30 @@ public class MySqlBookDao implements BookDao {
 
     @Override
     public List<Book> getAll() {
-        return null;
+        Map<Integer, Book> books = new HashMap<>();
+        try (Connection connection = ConnectionPoolHolder.getDataSource().getConnection();
+             PreparedStatement ps = connection.prepareCall(
+                     ResourceBundleManager.getSqlString(ResourceBundleManager.BOOK_FIND_ALL))) {
+            logger.info("searching all books....." + ps.toString());
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Book book = bookMapper.mapGet(rs);
+                Author author = authorMapper.mapGet(rs);
+                if (books.get(book.getId()) != null) {
+                    book = books.get(book.getId());
+                    book.setAuthors(" "+book.getAuthors() + ", " + author.toString());
+                } else {
+                    book.setAuthors(" "+author.toString());
+                    books.put(book.getId(), book);
+                }
+            }
+        } catch (SQLException e) {
+            logger.error("fail..." + e);
+            e.printStackTrace();
+        }
+        List<Book> booksList = new ArrayList<>(books.values());
+        logger.info("found books: " + booksList.size());
+        return booksList;
     }
 
     public List<Book> getAllByUserId(int userId,int limit, int offset) {

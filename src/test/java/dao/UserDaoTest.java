@@ -7,10 +7,9 @@ import org.junit.Test;
 
 public class UserDaoTest {
     @Test
-    public void testGetAll() throws Exception {
+    public void testGet() throws Exception {
         MySqlUserDao userDao = new MySqlUserDao();
         User user = userDao.findByEmail("admin@gmail.com");
-        System.out.println(user.toString());
-        Assert.assertTrue(true);
+        Assert.assertTrue(user!=null);
     }
 }

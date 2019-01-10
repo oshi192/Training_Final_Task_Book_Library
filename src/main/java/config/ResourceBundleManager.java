@@ -28,6 +28,7 @@ public class ResourceBundleManager {
     public static final String SAVE = "user-insert";
     public static final String BOOKS_COUNT = "books-count";
     public static final String BOOK_FIND_ALL_CLEAN = "book-find-all-clean";
+    public static final String BOOK_FIND_ALL = "book-find-all";
     public static final String ADMIN_TAKEN_BOOKS_COUNT = "adim-taken-books-count";
     public static final String ADMIN_BOOKS_WITH_STATUS = "adim-books-with-status";
     public static final String ADMIN_BOKS_REQUESTS_COUNT = "admin-books-requests-count";
