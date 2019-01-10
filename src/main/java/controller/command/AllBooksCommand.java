@@ -68,6 +68,9 @@ public class AllBooksCommand implements Command {
     private void createRecord(HttpServletRequest request) {
 //        int bookId = Integer.parseInt(request.getParameter("create"));
         logger.info("create book: ");
+        request.setAttribute("book-section",request.getAttribute("book-section-edit"));
+        request.setAttribute("book-name-en",request.getAttribute("book-name-en-edit"));
+        request.setAttribute("book-name-ek",request.getAttribute("book-name-ek-edit"));
         Book book = new BookMapper().mapGetFromRequest(request);
         //book.setId(bookId);
         new MySqlBookDao().save(book);

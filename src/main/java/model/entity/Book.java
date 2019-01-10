@@ -4,7 +4,8 @@ public class Book {
     private int id;
     private int userId;
     private int adminId;
-    private String name;
+    private String nameUk;
+    private String nameEn;
     private String section;
     private String authors;
     private String takeBeginDate;
@@ -53,12 +54,20 @@ public class Book {
         this.adminId = adminId;
     }
 
-    public String getName() {
-        return name;
+    public String getNameUk() {
+        return nameUk;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNameUk(String nameUk) {
+        this.nameUk = nameUk;
+    }
+
+    public String getNameEn() {
+        return nameEn;
+    }
+
+    public void setNameEn(String nameEn) {
+        this.nameEn = nameEn;
     }
 
     public String getSection() {
@@ -107,12 +116,14 @@ public class Book {
                 "id=" + id +
                 ", userId=" + userId +
                 ", adminId=" + adminId +
-                ", name='" + name + '\'' +
+                ", nameUk='" + nameUk + '\'' +
+                ", nameEn='" + nameEn + '\'' +
                 ", section='" + section + '\'' +
                 ", authors='" + authors + '\'' +
                 ", takeBeginDate='" + takeBeginDate + '\'' +
                 ", takeEndDate='" + takeEndDate + '\'' +
                 ", status=" + status +
+                ", user=" + user +
                 '}';
     }
 }

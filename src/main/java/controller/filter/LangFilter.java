@@ -37,12 +37,10 @@ public class LangFilter implements Filter {
         HttpSession session = req.getSession();
         Locale locale = (Locale) session.getAttribute(USER_LOCALE_ATTR);
         String lang = servletRequest.getParameter(LANG_PARAM);
-
         if (Objects.isNull(locale)) {
             logger.info("\tlocale is null");
             locale = req.getLocale();
         }
-
         if (StringUtils.isNoneBlank(lang)) {
             logger.info("\tlang is none blank");
             if (!lang.equals(locale.getLanguage())) {
@@ -50,9 +48,9 @@ public class LangFilter implements Filter {
                 locale = new Locale(lang);
             }
         }
-
         ResourceBundleManager.setNewLocale(locale);
         session.setAttribute(USER_LOCALE_ATTR, locale);
+        req.setAttribute("locale",locale.getLanguage());
         logger.info("------- ending Lang filter -------");
         //todo remove this
         ServletContext context  = LibraryServlet.getContext();
@@ -60,7 +58,9 @@ public class LangFilter implements Filter {
         for (Map.Entry<Integer, HttpSession> set : logedUsers.entrySet()){
             logger.info("|\t|\t:"+set.getKey()+" | "+set.getValue().getAttribute("user").toString());
         }
-        //todo end remove
+        logger.info("locale:"+locale.getLanguage()+locale.getCountry()+
+                locale.getDisplayName()+">>>>"+locale.toString()+"\t>>default>"+
+                Locale.getDefault().toString()+Locale.getDefault().getLanguage());
         filterChain.doFilter(servletRequest, servletResponse);
     }
 

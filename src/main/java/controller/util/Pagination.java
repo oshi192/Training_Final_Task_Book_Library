@@ -22,6 +22,9 @@ public class Pagination {
         if (request.getParameter("recordsOnPage") != null) {
             recordsOnPage = Integer.parseInt(request.getParameter("recordsOnPage"));
         }
+        if (request.getParameter("currentPage") != null) {
+            currentPage = Integer.parseInt(request.getParameter("currentPage"));
+        }
         pages=count/recordsOnPage+1;
         firstPage=(currentPage)>=3?currentPage-2:1;
         lastPage=(pages-currentPage)>0?((pages-currentPage)>1?currentPage+2:currentPage+1):currentPage;//todo remove kostul`

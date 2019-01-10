@@ -56,10 +56,18 @@
                                            <form class="form-horizontal" >
                                             <div class="form-group">
                                              <label for="pass" class="col-sm-2 control-label">
-                                               ${msg:getMessage("book-taken-name")}
+                                               ${msg:getMessage("book-taken-name")}-en
                                              </label>
                                              <div class="col-sm-10">
-                                              <input type="text" name="book-name" class="form-control" id="pass">
+                                              <input type="text" name="book-name-en" class="form-control">
+                                             </div>
+                                            </div>
+                                            <div class="form-group">
+                                             <label for="pass" class="col-sm-2 control-label">
+                                               ${msg:getMessage("book-taken-name")}-uk
+                                             </label>
+                                             <div class="col-sm-10">
+                                              <input type="text" name="book-name-uk" class="form-control">
                                              </div>
                                             </div>
 
@@ -105,7 +113,10 @@
                     <c:forEach var="Book" items="${requestScope.Books}" varStatus="status">
                         <tr class="table-active">
                             <td>${status.count+recordsOnPage*(currentPage-1)}
-                            <td><c:out value="${Book.name}"/></td>
+                            <td>
+                                <c:if test="${locale =='en'}"> <c:out value="${Book.nameEn}"/></c:if>
+                                <c:if test="${locale =='uk'}"> <c:out value="${Book.nameUk}"/></c:if>
+                            </td>
                             <td><c:out value="${Book.authors}"/></td>
                             <td><c:out value="${Book.section}"/></td>
 
@@ -113,7 +124,6 @@
 
                             <c:if test="${user.role == 'ADMIN'}">
                                 <td>
-
 
 
                                    <button
@@ -130,6 +140,7 @@
                                        <span class="glyphicon glyphicon-pencil"></span>
                                        ${msg:getMessage("button-edit")}
                                    </button>
+
                                    <div id="myModal2" class="modal fade">
                                        <div class="modal-dialog">
                                            <div class="modal-content">
@@ -144,19 +155,27 @@
 
                                                     <div class="form-group">
                                                      <label for="pass" class="col-sm-2 control-label">
-                                                       ${msg:getMessage("book-taken-name")}<c:out value="${Book.name}"/>
+                                                       ${msg:getMessage("book-taken-name")}-en
                                                      </label>
                                                      <div class="col-sm-10">
-                                                      <input type="text" name="book-name" class="form-control" placeholder="<c:out value="${Book.name}"/>">
+                                                      <input type="text" name="book-name-en-edit" class="form-control" placeholder="${Book.nameEn}">
+                                                     </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                     <label for="pass" class="col-sm-2 control-label">
+                                                       ${msg:getMessage("book-taken-name")}-uk
+                                                     </label>
+                                                     <div class="col-sm-10">
+                                                      <input type="text" name="book-name-uk-edit" class="form-control" placeholder="<c:out value="${Book.nameUk}"/>">
                                                      </div>
                                                     </div>
 
                                                     <div class="form-group">
                                                      <label for="pass" class="col-sm-2 control-label">
-                                                      ${msg:getMessage("book-taken-section")}${Book.section}
+                                                      ${msg:getMessage("book-taken-section")}
                                                      </label>
                                                      <div class="col-sm-10">
-                                                      <select class="form-control" name="book-section">
+                                                      <select class="form-control" name="book-section-edit">
                                                         <c:forEach var="item" items="${requestScope.Sections}" varStatus="status">
                                                            <option
                                                                 <c:if test="${Book.section eq item}">selected="selected"</c:if>
@@ -184,17 +203,17 @@
 
                                 </td>
                                     <td>
-                                    <c:if test="${Book.status != 2}">
-                                        <button
-                                            type="submit"
-                                            name="remove"
-                                            value="${Book.id}"
-                                            class="btn btn-danger"
-                                            data-title="Edit" data-toggle="edit2"
-                                            data-target="#edit2" >
-                                            <span class="glyphicon glyphicon-trash"></span>
-                                            ${msg:getMessage("button-remove")}
-                                        </button>
+                                        <c:if test="${Book.status != 2}">
+                                            <button
+                                                type="submit"
+                                                name="remove"
+                                                value="${Book.id}"
+                                                class="btn btn-danger"
+                                                data-title="Edit" data-toggle="edit2"
+                                                data-target="#edit2" >
+                                                <span class="glyphicon glyphicon-trash"></span>
+                                                ${msg:getMessage("button-remove")}
+                                            </button>
                                         </c:if>
                                     </td>
                             </c:if>

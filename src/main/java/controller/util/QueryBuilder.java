@@ -8,7 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Map;
-@Deprecated
+
 public class QueryBuilder {
     private static final Logger logger = Logger.getLogger(QueryBuilder.class);
     private static final String PAGINATE_QUERY_PART = " LIMIT %d OFFSET %d";

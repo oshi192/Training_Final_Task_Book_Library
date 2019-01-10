@@ -3,11 +3,11 @@
 <%@ taglib prefix="msg" uri="msg" %>
                 <li>
                      <a href="${pageContext.request.contextPath}/all-users">
-                          Taken Books
+                          ${msg:getMessage("taken-books")}
                      </a>
                 </li>
                 <li>
                      <a href="${pageContext.request.contextPath}/books-requests">
-                        books requests
+                          ${msg:getMessage("books-requests")}
                      </a>
                 </li>

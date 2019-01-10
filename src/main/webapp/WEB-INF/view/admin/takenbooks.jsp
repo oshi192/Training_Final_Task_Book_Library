@@ -43,7 +43,10 @@
                             <td><c:out value="${TakenBook.user.surname}"/></td>
                             <td><c:out value="${TakenBook.takeBeginDate}"/></td>
                             <td><c:out value="${TakenBook.takeEndDate}"/></td>
-                            <td><c:out value="${TakenBook.name}"/></td>
+                            <td>
+                                <c:if test="${locale =='en'}"> <c:out value="${Book.nameEn}"/></c:if>
+                                <c:if test="${locale =='uk'}"> <c:out value="${Book.nameUk}"/></c:if>
+                            </td>
                             <td><c:out value="${TakenBook.authors}"/></td>
                             <td><c:out value="${TakenBook.section}"/></td>
                         </tr>

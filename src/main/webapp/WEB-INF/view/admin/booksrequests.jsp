@@ -42,7 +42,10 @@
                             <td><c:out value="${BookRequest.user.phoneNumber}"/></td>
                             <td><c:out value="${BookRequest.user.name}"/></td>
                             <td><c:out value="${BookRequest.user.surname}"/></td>
-                            <td><c:out value="${BookRequest.name}"/></td>
+                            <td>
+                                <c:if test="${locale =='en'}"> <c:out value="${Book.nameEn}"/></c:if>
+                                <c:if test="${locale =='uk'}"> <c:out value="${Book.nameUk}"/></c:if>
+                            </td>
                             <td><c:out value="${BookRequest.authors}"/></td>
                             <td><c:out value="${BookRequest.section}"/></td>
                             <td>

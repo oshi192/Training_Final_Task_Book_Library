@@ -33,7 +33,10 @@
                     <c:forEach var="BookRequest" items="${requestScope.BooksRequests}" varStatus="status">
                        <tr class="table-active">
                            <td>${status.count+recordsOnPage*(currentPage-1)}.</td>
-                            <td><c:out value="${BookRequest.name}"/></td>
+                            <td>
+                                <c:if test="${locale =='en'}"> <c:out value="${Book.nameEn}"/></c:if>
+                                <c:if test="${locale =='uk'}"> <c:out value="${Book.nameUk}"/></c:if>
+                            </td>
                             <td><c:out value="${BookRequest.authors}"/></td>
                             <td><c:out value="${BookRequest.section}"/></td>
                             <td>

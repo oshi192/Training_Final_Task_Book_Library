@@ -3,6 +3,7 @@ package controller.util;
 import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Locale;
 
 public class SearchUtil {
     private final static Logger logger = Logger.getLogger(SearchUtil.class);
@@ -18,14 +19,15 @@ public class SearchUtil {
     private final static String AND =" and ";
 
     public boolean checkNotNullSearchAtributes(HttpServletRequest request){
-        return request.getParameter(BOOK_NAME_ATRIBUTE)==null || request.getParameter(BOOK_NAME_ATRIBUTE).isEmpty() ||
-                request.getParameter(TAGS_NAME_ATRIBUTE)!=null || request.getParameter(TAGS_NAME_ATRIBUTE).isEmpty() ||
-                request.getParameter(AUTHOR_NAME_ATRIBUTE)!=null ||request.getParameter(AUTHOR_NAME_ATRIBUTE).isEmpty();
+        return !(request.getParameter(BOOK_NAME_ATRIBUTE)==null || request.getParameter(BOOK_NAME_ATRIBUTE).isEmpty() ||
+                request.getParameter(TAGS_NAME_ATRIBUTE)==null || request.getParameter(TAGS_NAME_ATRIBUTE).isEmpty() ||
+                request.getParameter(AUTHOR_NAME_ATRIBUTE)==null ||request.getParameter(AUTHOR_NAME_ATRIBUTE).isEmpty());
     }
     public String addSearchStatement(HttpServletRequest request,String query){
+        String lang = "_"+Locale.getDefault().getLanguage();
         query+=(query.contains(WHERE_STATEMENT.trim()))?AND:WHERE_STATEMENT;
         query+=(request.getParameter(BOOK_NAME_ATRIBUTE)!=null&& !request.getParameter(BOOK_NAME_ATRIBUTE).isEmpty())?
-                (BOOK_NAME_FIELD+LIKE+"'%"+request.getParameter(BOOK_NAME_ATRIBUTE)+"%'"+AND)
+                (BOOK_NAME_FIELD+lang+LIKE+"'%"+request.getParameter(BOOK_NAME_ATRIBUTE)+"%'"+AND)
                 :
                 "";
         query+=(request.getParameter(TAGS_NAME_ATRIBUTE)!=null&& !request.getParameter(TAGS_NAME_ATRIBUTE).isEmpty())?

@@ -60,7 +60,7 @@
               <li>
               <ul class="lang">
                 <li><a href="?lang=En">En   .</a></li>
-                <li><a href="?lang=Ua">Ua   .</a></li>
+                <li><a href="?lang=Uk">Ua   .</a></li>
                 </ul>
                 </li>
       </ul>
