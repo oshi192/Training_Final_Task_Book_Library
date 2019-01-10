@@ -130,7 +130,7 @@
                                        class="btn btn-info"
                                        type="button"
                                        data-toggle="modal"
-                                       data-target="#myModal2"
+                                       data-target="#myModal2${Book.id}"
                                        type="submit"
                                        name="edit"
                                        value="${Book.id}"
@@ -141,7 +141,7 @@
                                        ${msg:getMessage("button-edit")}
                                    </button>
 
-                                   <div id="myModal2" class="modal fade">
+                                   <div id="myModal2${Book.id}" class="modal fade">
                                        <div class="modal-dialog">
                                            <div class="modal-content">
                                                <div class="modal-header">
@@ -158,7 +158,7 @@
                                                        ${msg:getMessage("book-taken-name")}-en
                                                      </label>
                                                      <div class="col-sm-10">
-                                                      <input type="text" name="book-name-en-edit" class="form-control" placeholder="${Book.nameEn}">
+                                                      <input type="text" name="book-name-en-edit${Book.id}" class="form-control" value="${Book.nameEn}">
                                                      </div>
                                                     </div>
                                                     <div class="form-group">
@@ -166,7 +166,7 @@
                                                        ${msg:getMessage("book-taken-name")}-uk
                                                      </label>
                                                      <div class="col-sm-10">
-                                                      <input type="text" name="book-name-uk-edit" class="form-control" placeholder="<c:out value="${Book.nameUk}"/>">
+                                                      <input type="text" name="book-name-uk-edit${Book.id}" class="form-control" value="${Book.nameUk}">
                                                      </div>
                                                     </div>
 
@@ -175,11 +175,9 @@
                                                       ${msg:getMessage("book-taken-section")}
                                                      </label>
                                                      <div class="col-sm-10">
-                                                      <select class="form-control" name="book-section-edit">
+                                                      <select class="form-control" name="book-section-edit${Book.id}">
                                                         <c:forEach var="item" items="${requestScope.Sections}" varStatus="status">
-                                                           <option
-                                                                <c:if test="${Book.section eq item}">selected="selected"</c:if>
-                                                           >${status.count+recordsOnPage*(currentPage-1)}.${item}</option>
+                                                           <option value="${item}" <c:if test="${Book.section == item}">selected</c:if>>${item}</option>
                                                         </c:forEach>
                                                       </select>
                                                      </div>

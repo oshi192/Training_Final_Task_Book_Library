@@ -49,10 +49,11 @@ private static final Logger logger = Logger.getLogger(BookMapper.class);
     }
     public Book mapGetFromRequest(HttpServletRequest request) {
         Book book = new Book();
-        logger.info("book-name["+request.getParameter("book-name-uk")+request.getParameter("book-name-uk")+"] book-section["+request.getParameter("book-section")+"]");
-        book.setNameUk(request.getParameter("book-name-uk"));
-        book.setNameEn(request.getParameter("book-name-en"));
-        book.setSection(request.getParameter("book-section"));
+        String id =request.getParameter("edit");
+        logger.info(id+"book-name["+request.getParameter("book-name-uk"+id)+request.getParameter("book-name-en"+id)+"] book-section["+request.getParameter("book-section"+id)+"]");
+        book.setNameUk(request.getParameter("book-name-uk"+id));
+        book.setNameEn(request.getParameter("book-name-en"+id));
+        book.setSection(request.getParameter("book-section"+id));
         return book;
     }
 }
